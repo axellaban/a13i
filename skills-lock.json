@@ -20,6 +20,11 @@
       "source": "addyosmani/web-quality-skills",
       "sourceType": "github",
       "computedHash": "f1fed683b76913d26fbf1aa1e008e6932f7771701fc3a79925b042236aa4681a"
+    },
+    "book-to-skill": {
+      "source": "virgiliojr94/book-to-skill",
+      "sourceType": "github",
+      "computedHash": "35459025e8751e99bbf9dab9e35a0fa45757c55eefeb0ab2c7b8e874d973bcd8"
     }
   }
 }
