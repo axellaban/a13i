@@ -682,9 +682,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     </div>
     <div class="cal-body">
       <p class="cal-sub">Trabajo con cuatro operaciones por mes, así puedo garantizar el resultado.</p>
-      <a class="cal-btn" id="calBtn" href="https://calendly.com/axellaban/30min" target="_blank" onclick="trackCalendlyClick()">
-        Agendar Sesión de Mapeo Operativo →
-      </a>
+      <div id="calendly-inline" style="min-width:320px;height:700px;"></div>
     </div>
   </div>
 
@@ -710,7 +708,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     btn.textContent = 'Enviando…';
     errEl.style.display = 'none';
 
-    const wa = new URLSearchParams(window.location.search).get('wa') || '';
+    const wa = sessionStorage.getItem('a13i_wa') || '';
+    const name = sessionStorage.getItem('a13i_name') || '';
     console.log('KONA aplicación:', { q1, q2, q3, wa });
     fbq('trackCustom', 'FormularioEnviado');
 
@@ -740,11 +739,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     document.getElementById('appForm').style.display = 'none';
     document.getElementById('calendly-section').style.display = 'block';
 
-    const calBtn = document.getElementById('calBtn');
-    if (calBtn && wa) {
-      const url = new URL(calBtn.href);
-      url.searchParams.append('a1', wa);
-      calBtn.href = url.toString();
+    // Calendly inline: mismo tab → el listener de event_scheduled SÍ dispara
+    if (window.Calendly) {
+      Calendly.initInlineWidget({
+        url: 'https://calendly.com/axellaban/30min',
+        parentElement: document.getElementById('calendly-inline'),
+        prefill: { name: name, customAnswers: { a1: wa } }
+      });
+      fbq('trackCustom', 'CalendarioMostrado');
     }
 
     document.getElementById('calendly-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -752,7 +754,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   function trackCalendlyClick() {
     fbq('trackCustom', 'ClickCalendly');
-    const wa = new URLSearchParams(window.location.search).get('wa') || '';
+    const wa = sessionStorage.getItem('a13i_wa') || '';
 
     fetch('https://n8n-n8n.fu6abb.easypanel.host/webhook/6032da9b-66c3-41f8-9d2b-c382970e47b5', {
       method: 'POST',
@@ -767,7 +769,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   window.addEventListener('message', function(e) {
     if (e.data.event && e.data.event.indexOf('calendly.event_scheduled') !== -1) {
-      const wa = new URLSearchParams(window.location.search).get('wa') || '';
+      const wa = sessionStorage.getItem('a13i_wa') || '';
+      fbq('trackCustom', 'LlamadaAgendada');
       fetch('https://n8n-n8n.fu6abb.easypanel.host/webhook/6032da9b-66c3-41f8-9d2b-c382970e47b5', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -511,11 +511,13 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       return;
     }
 
+    sessionStorage.setItem('a13i_wa', wa);
+
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('success').style.display = 'block';
 
     setTimeout(() => {
-      window.location.href = 'calculadora.html?wa=' + encodeURIComponent(wa);
+      window.location.href = 'calculadora.html';
     }, 2500);
   }
 </script>

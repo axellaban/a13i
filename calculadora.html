@@ -925,7 +925,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
     <div class="hero-banner">
       <div class="hero-eyebrow">⚠ Costo operativo directo anual</div>
-      <div class="hero-h">Tu operación pierde<br><strong id="r-total">$0</strong> al año.</div>
+      <div class="hero-h">Operar esto a mano<br>te cuesta <strong id="r-total">$0</strong> al año.</div>
     </div>
 
     <!-- MINI CTA — justo después del número -->
@@ -1259,7 +1259,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
     if (errEl) errEl.style.display = 'none';
 
-    const wa = new URLSearchParams(window.location.search).get('wa') || '';
+    const wa = sessionStorage.getItem('a13i_wa') || '';
     fbq('trackCustom', 'CalculadoraCompleta');
 
     try {
@@ -1292,8 +1292,10 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <p class="cta-sub" style="margin-bottom:0">Preparando tu diagnóstico personalizado. Redirigiendo en 2 segundos...</p>
     `;
 
+    sessionStorage.setItem('a13i_name', name);
+
     setTimeout(() => {
-      window.location.href = 'thankyou.html?wa=' + encodeURIComponent(wa) + '&name=' + encodeURIComponent(name);
+      window.location.href = 'thankyou.html';
     }, 2000);
   }
 </script>
