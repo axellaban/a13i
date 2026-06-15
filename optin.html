@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A13I — Calculadora de Deuda Operativa</title>
+<title>A13I — Calculadora de Costo Operativo</title>
 <meta name="description" content="Calculá con tus números cuántas horas y cuánto dinero se va en trabajo manual que un sistema podría estar haciendo. Para operaciones activas en LATAM.">
 <meta property="og:title" content="A13I — Diagnóstico de Automatización">
 <meta property="og:description" content="Calculalo con tus números en 2 minutos. Para operaciones activas en LATAM.">
@@ -432,7 +432,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   <!-- HVCO Card -->
   <div class="hvco">
     <span class="hvco-tag">↓ Recurso gratuito</span>
-    <div class="hvco-title">Calculadora de deuda operativa</div>
+    <div class="hvco-title">Calculadora de Costo Operativo</div>
     <div class="hvco-desc">El costo real de hacerlo a mano, y qué parte recuperás con un sistema. Con tus datos.</div>
   </div>
 
@@ -486,7 +486,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   async function doSubmit() {
     const wa = document.getElementById('wa').value.trim();
     if (!wa) { document.getElementById('wa').focus(); return; }
-    
+
     const btn = document.querySelector('.f-btn');
     const errEl = document.getElementById('optin-err');
     btn.disabled = true;
@@ -517,7 +517,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     document.getElementById('success').style.display = 'block';
 
     setTimeout(() => {
-      window.location.href = 'calculadora.html';
+      window.location.href = '/calculadora';
     }, 2500);
   }
 </script>
