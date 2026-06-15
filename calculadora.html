@@ -11,15 +11,15 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A13I — Calculadora de Deuda Operativa</title>
-<meta name="description" content="Calculá el costo real de operar tu negocio sin automatización. 7 variables, resultado en segundos.">
-<meta property="og:title" content="A13I — Calculadora de Deuda Operativa">
-<meta property="og:description" content="Calculá el costo real de operar tu negocio sin automatización.">
+<title>A13I — Calculadora de Costo Operativo</title>
+<meta name="description" content="Calculá tu costo real de operar a mano. 7 variables, resultado en segundos.">
+<meta property="og:title" content="A13I — Calculadora de Costo Operativo">
+<meta property="og:description" content="Calculá tu costo real de operar a mano, con tus números.">
 <meta property="og:image" content="/assets/axel.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="A13I — Calculadora de Deuda Operativa">
-<meta name="twitter:description" content="Calculá el costo real de operar tu negocio sin automatización.">
+<meta name="twitter:title" content="A13I — Calculadora de Costo Operativo">
+<meta name="twitter:description" content="Calculá tu costo real de operar a mano, con tus números.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -793,14 +793,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   <div class="page-header">
     <div class="eyebrow">
       <span class="dot"></span>
-      Diagnóstico de deuda operativa
+      Tu costo operativo real
     </div>
     <h1>
-      ¿Cuánto te cuesta
-      <span class="accent">no automatizar?</span>
+      Cuánto te cuesta hoy
+      <span class="accent">hacer esto a mano.</span>
     </h1>
     <p class="page-sub">
-      Completá los 5 campos. El sistema calcula el costo real de operar manualmente
+      Completá los 5 campos. El sistema calcula tu costo real de operar a mano
       <strong>— tiempo, errores y costo de oportunidad incluidos.</strong>
     </p>
   </div>
@@ -819,15 +819,18 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <div class="block-body">
         <div class="tags" id="tags1">
           <div class="tag" onclick="selTag(this,'Atención al cliente')">Atención al cliente</div>
-          <div class="tag" onclick="selTag(this,'Calificación de leads')">Calificación de leads</div>
+          <div class="tag" onclick="selTag(this,'Calificación de leads 24/7')">Calificación de leads 24/7</div>
           <div class="tag" onclick="selTag(this,'Facturación y cobranzas')">Facturación y cobranzas</div>
-          <div class="tag" onclick="selTag(this,'Reportes')">Reportes</div>
           <div class="tag" onclick="selTag(this,'Onboarding')">Onboarding</div>
-          <div class="tag" onclick="selTag(this,'Carga de datos')">Carga de datos</div>
           <div class="tag" onclick="selTag(this,'Agendamiento')">Agendamiento</div>
           <div class="tag" onclick="selTag(this,'Soporte interno')">Soporte interno</div>
-          <div class="tag" onclick="selTag(this,'Gestión de emails')">Gestión de emails</div>
           <div class="tag" onclick="selTag(this,'Conciliación de datos')">Conciliación de datos</div>
+          <div class="tag" onclick="selTag(this,'Contenido para redes')">Contenido para redes</div>
+          <div class="tag" onclick="selTag(this,'Propuestas comerciales')">Propuestas comerciales</div>
+          <div class="tag" onclick="selTag(this,'Análisis de llamadas')">Análisis de llamadas</div>
+          <div class="tag" onclick="selTag(this,'Informes ejecutivos')">Informes ejecutivos</div>
+          <div class="tag" onclick="selTag(this,'Recupero de carritos')">Recupero de carritos</div>
+          <div class="tag" onclick="selTag(this,'Enriquecimiento de CRM')">Enriquecimiento de CRM</div>
         </div>
         <input type="text" id="proc1" placeholder="O describí tu proceso específico..." oninput="p1=this.value;clearTags()">
       </div>
@@ -918,14 +921,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     </div>
   </div>
 
-  <button class="calc-btn" onclick="run()">Calcular mi deuda operativa →</button>
+  <button class="calc-btn" onclick="run()">Calcular mi costo →</button>
 
   <!-- RESULTS -->
   <div id="results">
 
     <div class="hero-banner">
-      <div class="hero-eyebrow">⚠ Costo operativo directo anual</div>
-      <div class="hero-h">Operar esto a mano<br>te cuesta <strong id="r-total">$0</strong> al año.</div>
+      <div class="hero-eyebrow">Costo anual de operar esto a mano</div>
+      <div class="hero-h">Hacer esto a mano<br>te cuesta <strong id="r-total">$0</strong> al año.</div>
     </div>
 
     <!-- MINI CTA — justo después del número -->
@@ -933,7 +936,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <div class="mini-cta-wrap">
         <div>
           <div class="mini-cta-tag">Diagnóstico gratuito · 30 minutos</div>
-          <div class="mini-cta-title">Analizamos si este número es recuperable en tu operación real.</div>
+          <div class="mini-cta-title">Validamos cuánto de este número recuperás en tu operación real.</div>
           <div class="mini-cta-note">Solo para operaciones activas.</div>
         </div>
         <button class="mini-cta-btn" onclick="scrollToCta()">Quiero mi Sesión de Mapeo Operativo →</button>
@@ -1125,11 +1128,11 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
 
   const ZONES = [
-    { max: 10000,   cls: 'z-elite',      label: 'ATLETA DE ÉLITE',       eyebrow: 'Zona verde · Alta eficiencia operativa',    desc: 'Tu operación ya es eficiente. La fricción es baja. La automatización es una mejora de performance, no una urgencia médica.' },
-    { max: 25000,   cls: 'z-amateur',    label: 'AMATEUR CON POTENCIAL',  eyebrow: 'Zona amarilla · Fricción silenciosa',       desc: 'El proceso parece estable, pero ya existe una pérdida recurrente. Corregirla ahora es más barato que cuando escale.' },
-    { max: 75000,   cls: 'z-sedentario', label: 'SEDENTARIO',             eyebrow: 'Zona naranja · Desgaste operativo visible', desc: 'Tu equipo está absorbiendo trabajo repetitivo que ya debería estar automatizado. Cada mes que esperás acumula deuda operativa.' },
-    { max: 150000,  cls: 'z-lesionado',  label: 'LESIONADO',              eyebrow: 'Zona roja · Sobrecarga crítica',            desc: 'Escalás con personas lo que debería escalar con sistemas. El margen y la velocidad se deterioran rápidamente.' },
-    { max: Infinity,cls: 'z-fuera',      label: 'FUERA DE COMPETENCIA',   eyebrow: 'Zona negra · Riesgo estructural',           desc: 'La estructura operativa ya no soporta el crecimiento manual. El costo de no intervenir ya es material y crítico.' },
+    { max: 10000,   cls: 'z-elite',      label: 'COSTO BAJO',       eyebrow: 'Operación eficiente',          desc: 'Tu operación ya es eficiente. El costo de hacerlo a mano es bajo. Automatizar acá es afinar, no resolver un problema grande.' },
+    { max: 25000,   cls: 'z-amateur',    label: 'COSTO MODERADO',   eyebrow: 'Pérdida recurrente',           desc: 'El proceso parece estable, pero ya hay una pérdida recurrente. Resolverla ahora cuesta menos que cuando el volumen escale.' },
+    { max: 75000,   cls: 'z-sedentario', label: 'COSTO ALTO',       eyebrow: 'Trabajo manual absorbido',     desc: 'Tu equipo está absorbiendo trabajo repetitivo que un sistema podría hacer. El costo anual ya es material.' },
+    { max: 150000,  cls: 'z-lesionado',  label: 'COSTO MUY ALTO',   eyebrow: 'Escalás con personas',         desc: 'Estás escalando con personas lo que puede escalar con sistemas. El margen y la velocidad se resienten a medida que crecés.' },
+    { max: Infinity,cls: 'z-fuera',      label: 'COSTO CRÍTICO',    eyebrow: 'Por encima del modo manual',   desc: 'El volumen ya superó al modo manual. El costo de seguir así es alto y crece con cada mes.' },
   ];
 
   function run() {
@@ -1141,7 +1144,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     const fillEl  = document.getElementById('scanFill');
     const pctEl   = document.getElementById('scanPct');
     const labelEl = document.getElementById('scanLabel');
-    const labels  = ['Analizando proceso…','Calculando deuda operativa…','Detectando fricción…','Generando diagnóstico…','Compilando resultados…'];
+    const labels  = ['Analizando proceso…','Calculando tu costo…','Midiendo la fricción…','Armando el resultado…','Compilando resultados…'];
     let li = 0, pct = 0;
     overlay.classList.add('on');
     const lInt = setInterval(() => { labelEl.textContent = labels[Math.min(li++, labels.length - 1)]; }, 300);
