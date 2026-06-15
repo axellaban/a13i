@@ -11,15 +11,15 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A13I — Calculadora de Deuda Operativa</title>
-<meta name="description" content="Descubrí cuánto te está costando operar sin automatización. Diagnóstico gratuito de deuda operacional para operaciones activas en LATAM.">
+<title>A13I — Calculadora de Costo Operativo</title>
+<meta name="description" content="Calculá con tus números cuántas horas y cuánto dinero se va en trabajo manual que un sistema podría estar haciendo. Para operaciones activas en LATAM.">
 <meta property="og:title" content="A13I — Diagnóstico de Automatización">
-<meta property="og:description" content="Calculá tu deuda operacional en 2 minutos. Diagnóstico gratuito para operaciones activas en LATAM.">
+<meta property="og:description" content="Calculalo con tus números en 2 minutos. Para operaciones activas en LATAM.">
 <meta property="og:image" content="/assets/axel.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A13I — Diagnóstico de Automatización">
-<meta name="twitter:description" content="Calculá tu deuda operacional en 2 minutos. Diagnóstico gratuito para operaciones activas en LATAM.">
+<meta name="twitter:description" content="Calculalo con tus números en 2 minutos. Para operaciones activas en LATAM.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -418,12 +418,12 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   </div>
 
   <h1 class="hero-title">
-    Los proyectos de IA que no aparecen en tu P&L
-    <span class="accent">no existen.</span>
+    Cuántas horas de tu equipo se van en trabajo
+    <span class="accent">que un sistema ya podría hacer.</span>
   </h1>
 
   <p class="hero-sub">
-    Calculá el ROI real en 2 minutos.
+    Calculalo con tus números en 2 minutos. Tu costo real, tu equipo, tu volumen.
   </p>
 
   <!-- Línea vertical -->
@@ -432,8 +432,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   <!-- HVCO Card -->
   <div class="hvco">
     <span class="hvco-tag">↓ Recurso gratuito</span>
-    <div class="hvco-title">Calculadora de deuda operativa</div>
-    <div class="hvco-desc">Costo real de operar manual + ROI estimado de automatizar.</div>
+    <div class="hvco-title">Calculadora de Costo Operativo</div>
+    <div class="hvco-desc">El costo real de hacerlo a mano, y qué parte recuperás con un sistema. Con tus datos.</div>
   </div>
 
   <div class="vline-2"></div>
@@ -444,7 +444,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <label class="f-label" for="wa">Tu WhatsApp</label>
       <input type="tel" id="wa" class="f-input" placeholder="+54 9 11 XXXX XXXX"
         onkeydown="if(event.key==='Enter')doSubmit()">
-      <button class="f-btn" onclick="doSubmit()">Quiero el diagnóstico →</button>
+      <button class="f-btn" onclick="doSubmit()">Calcular con mis números →</button>
       <p id="optin-err" style="display:none;color:var(--accent);margin-top:8px;font-size:.9rem;text-align:center;font-family:'JetBrains Mono',monospace;"></p>
     </div>
   </div>
@@ -486,7 +486,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   async function doSubmit() {
     const wa = document.getElementById('wa').value.trim();
     if (!wa) { document.getElementById('wa').focus(); return; }
-    
+
     const btn = document.querySelector('.f-btn');
     const errEl = document.getElementById('optin-err');
     btn.disabled = true;
@@ -505,7 +505,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     } catch(e) {
       console.error('Webhook error:', e);
       btn.disabled = false;
-      btn.textContent = 'Quiero el diagnóstico →';
+      btn.textContent = 'Calcular con mis números →';
       errEl.textContent = 'Error al enviar. Intentá de nuevo.';
       errEl.style.display = 'block';
       return;
@@ -517,7 +517,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     document.getElementById('success').style.display = 'block';
 
     setTimeout(() => {
-      window.location.href = 'calculadora.html';
+      window.location.href = '/calculadora';
     }, 2500);
   }
 </script>

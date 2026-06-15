@@ -11,10 +11,10 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A13I — Tu diagnóstico</title>
-<meta name="description" content="Completá tu aplicación y agendá tu llamada de diagnóstico gratuita con Axel Laban Arzubi.">
-<meta property="og:title" content="A13I — Tu diagnóstico">
-<meta property="og:description" content="Completá tu aplicación y agendá tu llamada de diagnóstico gratuita.">
+<title>A13I — Tu Sesión de Mapeo Operativo</title>
+<meta name="description" content="Completá tu aplicación y agendá tu Sesión de Mapeo Operativo gratuita con Axel Laban Arzubi.">
+<meta property="og:title" content="A13I — Sesión de Mapeo Operativo">
+<meta property="og:description" content="Completá tu aplicación y agendá tu Sesión de Mapeo Operativo gratuita.">
 <meta property="og:image" content="/assets/axel.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -142,6 +142,60 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     padding: 60px 32px 100px;
     animation: fadeInUp 0.8s ease-out;
   }
+
+  /* ── BRIDGE (tráfico sin contexto de calculadora) ── */
+  .bridge-card {
+    background: var(--card);
+    border: 1px solid var(--border-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 16px 16px 0;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+  }
+  .bridge-eye {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-2); margin-bottom: 10px;
+  }
+  .bridge-title {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--text); margin-bottom: 8px; line-height: 1.2;
+  }
+  .bridge-sub {
+    font-size: 14.5px; color: var(--muted); line-height: 1.65; margin-bottom: 20px;
+  }
+  .bridge-btn {
+    display: inline-block; padding: 14px 28px;
+    background: var(--accent); border-radius: 10px;
+    color: #fff; font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: background .18s; box-shadow: 0 4px 20px rgba(232, 50, 10, 0.35);
+  }
+  .bridge-btn:hover { background: var(--accent-2); }
+  .bridge-or {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--dim); margin: 20px 0 12px;
+  }
+  .bridge-wa-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bridge-input {
+    flex: 1; min-width: 180px;
+    background: var(--card-2); border: 1px solid var(--border-2);
+    border-radius: 10px; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 15px;
+    padding: 13px 16px; outline: none; -webkit-appearance: none;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .bridge-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,50,10,0.12); }
+  .bridge-input::placeholder { color: var(--faint); }
+  .bridge-wa-btn {
+    padding: 13px 24px; background: var(--ui-2);
+    border: 1px solid var(--border-2); border-radius: 10px;
+    color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: background .18s, border-color .18s; white-space: nowrap;
+  }
+  .bridge-wa-btn:hover { background: var(--ui); border-color: var(--accent); }
 
   /* ── PAGE HEADER ── */
   .page-header {
@@ -302,6 +356,17 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     color: var(--dim);
   }
 
+  /* Costo de oportunidad — lo que seguía drenándose antes de actuar */
+  .proof-cost {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.02em; line-height: 1.6;
+    color: var(--dim);
+  }
+  .proof-cost strong { color: var(--accent-2); font-weight: 600; }
+  .proof-card.own .proof-cost strong { color: var(--green); }
+
   /* ── FORM SECTION ── */
   .form-heading {
     font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
@@ -340,7 +405,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .q-body { padding: 20px; }
 
   /* Inputs */
-  input[type=text], textarea, select {
+  input[type=text], input[type=tel], textarea, select {
     width: 100%;
     background: var(--card-2);
     border: 1px solid var(--border-2);
@@ -434,6 +499,15 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     border-radius: 0 0 16px 16px;
     padding: 36px;
   }
+  /* Línea de fricción — postura de autoridad antes de agendar */
+  .cal-friction {
+    font-size: 13.5px; color: var(--text); font-weight: 600;
+    line-height: 1.6; margin-bottom: 18px;
+    padding: 12px 16px;
+    background: var(--card-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
   .cal-sub {
     font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 28px;
   }
@@ -507,6 +581,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     .cal-btn { display: block; text-align: center; width: 100%; white-space: normal; }
     .cal-banner { padding: 28px 16px; }
     .cal-body { padding: 16px 8px; }
+    .bridge-card { padding: 22px 18px; }
+    .bridge-wa-btn { width: 100%; }
   }
 </style>
 </head>
@@ -524,6 +600,22 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
 <main class="wrap">
 
+  <!-- BLOQUE PUENTE: visible solo si el visitante NO viene de la calculadora -->
+  <div id="bridge" style="display:none;">
+    <div class="bridge-card">
+      <div class="bridge-eye">¿Llegaste sin pasar por la calculadora?</div>
+      <div class="bridge-title">Calculá tu número exacto en 2 minutos.</div>
+      <p class="bridge-sub">La calculadora te muestra, con tus datos, cuánto te cuesta hoy operar a mano. Es el mejor punto de partida para la Sesión de Mapeo Operativo.</p>
+      <a class="bridge-btn" href="/calculadora">Ir a la calculadora →</a>
+      <div class="bridge-or">o dejanos tu WhatsApp y coordinamos igual</div>
+      <div class="bridge-wa-row">
+        <input type="tel" id="bridgeWa" class="bridge-input" placeholder="+54 9 11 XXXX XXXX">
+        <button class="bridge-wa-btn" onclick="saveBridgeWa()">Guardar →</button>
+      </div>
+      <p id="bridge-ok" style="display:none;color:var(--green);margin-top:12px;font-size:.85rem;font-family:'JetBrains Mono',monospace;">✓ Listo, ya podés completar la aplicación abajo.</p>
+    </div>
+  </div>
+
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="eyebrow">
@@ -532,9 +624,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     </div>
     <h1>
       Cuatro operaciones reales.
-      <span class="accent">El mismo problema que el tuyo.</span>
+      <span class="accent">Mirá qué les sacamos de encima.</span>
     </h1>
-    <p class="page-sub">Mirá cómo lo resolvimos con AI en cada caso — y cuál se parece más a tu operación.</p>
+    <p class="page-sub">Qué proceso era, qué rompía y qué resultado dio. Cuál se parece más a tu operación.</p>
   </div>
 
   <!-- Línea vertical -->
@@ -559,6 +651,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
             <span class="proof-pill">1.250 consultas resueltas automáticamente/mes</span>
             <span class="proof-pill neutral">Sin agregar headcount</span>
           </div>
+          <p class="proof-cost">Lo que se seguía perdiendo cada mes antes de tocarlo: <strong>1.250 consultas absorbidas a mano por el equipo, mes tras mes.</strong></p>
         </div>
       </div>
 
@@ -578,6 +671,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
             <span class="proof-pill">Ventas recuperadas que se perdían en silencio</span>
             <span class="proof-pill neutral">Probado en producción propia primero</span>
           </div>
+          <p class="proof-cost">Lo que se seguía perdiendo cada mes antes de tocarlo: <strong>cada abandono caía en silencio, sin recupero, mes tras mes.</strong></p>
         </div>
       </div>
     </div>
@@ -600,6 +694,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
             <span class="proof-pill">Research + calendario + creación por canal</span>
             <span class="proof-pill neutral">Un solo flujo integrado</span>
           </div>
+          <p class="proof-cost">Lo que se seguía perdiendo cada mes antes de tocarlo: <strong>12 hs/semana del equipo (≈48 hs/mes) en coordinación manual.</strong></p>
         </div>
       </div>
 
@@ -619,6 +714,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
             <span class="proof-pill">Cada reunión con contexto completo previo</span>
             <span class="proof-pill neutral">Brief post-reunión generado automáticamente</span>
           </div>
+          <p class="proof-cost">Lo que se seguía perdiendo cada mes antes de tocarlo: <strong>6 hs/semana por comercial (≈24 hs/mes) en preparar reuniones a mano.</strong></p>
         </div>
       </div>
     </div>
@@ -683,6 +779,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <div class="cal-h">Agendá tu Sesión<br>de Mapeo Operativo.</div>
     </div>
     <div class="cal-body">
+      <p class="cal-friction">Valoramos tu tiempo y el nuestro. Si agendás, asistí.</p>
       <p class="cal-sub">Trabajo con cuatro operaciones por mes, así puedo garantizar el resultado.</p>
       <div id="calendly-inline" style="width:100%;min-width:0;height:700px;overflow:hidden;border-radius:10px;"></div>
     </div>
@@ -704,15 +801,33 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       alert('Completá las tres preguntas para continuar.');
       return;
     }
+
+    // Resolver WhatsApp: de la calculadora (sessionStorage) o del bloque puente.
+    let wa = sessionStorage.getItem('a13i_wa') || '';
+    if (!wa) {
+      const bw = document.getElementById('bridgeWa');
+      if (bw && bw.value.trim()) {
+        wa = bw.value.trim();
+        sessionStorage.setItem('a13i_wa', wa);
+      }
+    }
+    if (!wa) {
+      const bw = document.getElementById('bridgeWa');
+      const b  = document.getElementById('bridge');
+      if (b) b.style.display = 'block';
+      if (bw) { bw.focus(); b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      alert('Dejanos tu WhatsApp en el bloque de arriba para poder contactarte.');
+      return;
+    }
+
     const btn = document.getElementById('submitBtn');
     const errEl = document.getElementById('form-err');
     btn.disabled = true;
     btn.textContent = 'Enviando…';
     errEl.style.display = 'none';
 
-    const wa = sessionStorage.getItem('a13i_wa') || '';
     const name = sessionStorage.getItem('a13i_name') || '';
-    console.log('KONA aplicación:', { q1, q2, q3, wa });
+    console.log('A13I aplicación:', { q1, q2, q3, wa });
     fbq('trackCustom', 'FormularioEnviado');
 
     try {
@@ -732,7 +847,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     } catch(e) {
       console.error('Webhook formulario error:', e);
       btn.disabled = false;
-      btn.textContent = 'Enviar aplicación →';
+      btn.textContent = 'Preparar mi Sesión de Mapeo Operativo →';
       errEl.textContent = 'Error al enviar. Intentá de nuevo.';
       errEl.style.display = 'block';
       return;
@@ -753,6 +868,22 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
     document.getElementById('calendly-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // Guardar el WhatsApp del bloque puente (tráfico sin contexto de calculadora)
+  function saveBridgeWa() {
+    const v = document.getElementById('bridgeWa').value.trim();
+    if (!v) { document.getElementById('bridgeWa').focus(); return; }
+    sessionStorage.setItem('a13i_wa', v);
+    document.getElementById('bridge-ok').style.display = 'block';
+  }
+
+  // Mostrar el bloque puente si el visitante NO viene de la calculadora
+  (function () {
+    if (!sessionStorage.getItem('a13i_wa')) {
+      const b = document.getElementById('bridge');
+      if (b) b.style.display = 'block';
+    }
+  })();
 
   function trackCalendlyClick() {
     fbq('trackCustom', 'ClickCalendly');
