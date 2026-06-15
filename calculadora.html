@@ -12,14 +12,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A13I — Calculadora de Costo Operativo</title>
-<meta name="description" content="Calculá tu costo real de operar a mano. 7 variables, resultado en segundos.">
+<meta name="description" content="Calculá el costo real de operar tu negocio sin automatización. 7 variables, resultado en segundos.">
 <meta property="og:title" content="A13I — Calculadora de Costo Operativo">
-<meta property="og:description" content="Calculá tu costo real de operar a mano, con tus números.">
+<meta property="og:description" content="Calculá el costo real de operar tu negocio sin automatización.">
 <meta property="og:image" content="/assets/axel.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A13I — Calculadora de Costo Operativo">
-<meta name="twitter:description" content="Calculá tu costo real de operar a mano, con tus números.">
+<meta name="twitter:description" content="Calculá el costo real de operar tu negocio sin automatización.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -375,6 +375,13 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     letter-spacing: -0.02em; line-height: 1.0; color: #fff;
     position: relative; z-index: 1;
   }
+  /* Reencuadre de pérdida: el mismo número, como sangrado mensual activo */
+  .hero-loss {
+    font-size: 16px; font-weight: 600; line-height: 1.5;
+    color: rgba(255,255,255,0.92);
+    margin-top: 16px; position: relative; z-index: 1;
+  }
+  .hero-loss strong { font-weight: 900; color: #fff; }
 
   /* Result context */
   .result-context {
@@ -929,13 +936,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     <div class="hero-banner">
       <div class="hero-eyebrow">Costo anual de operar esto a mano</div>
       <div class="hero-h">Hacer esto a mano<br>te cuesta <strong id="r-total">$0</strong> al año.</div>
+      <div class="hero-loss" id="heroLoss" style="display:none;">Son <strong id="r-monthly">$0</strong> por mes que se te van mientras leés esto.</div>
     </div>
 
     <!-- MINI CTA — justo después del número -->
     <div id="miniCta" style="display:none; margin-bottom:8px;">
       <div class="mini-cta-wrap">
         <div>
-          <div class="mini-cta-tag">Diagnóstico gratuito · 30 minutos</div>
+          <div class="mini-cta-tag">Sesión de Mapeo Operativo · 30 minutos</div>
           <div class="mini-cta-title">Validamos cuánto de este número recuperás en tu operación real.</div>
           <div class="mini-cta-note">Solo para operaciones activas.</div>
         </div>
@@ -958,9 +966,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
     <div class="m-grid">
       <div class="m-card hi">
-        <div class="m-label">Ahorro neto anual estimado</div>
+        <div class="m-label">Lo que estás dejando sobre la mesa cada año</div>
         <div class="m-val" id="r-net">$0</div>
-        <div class="m-sub">Recuperable después de descontar OPEX estimado de operación.</div>
+        <div class="m-sub">Recuperable después de descontar el OPEX estimado de operación.</div>
       </div>
       <div class="m-card">
         <div class="m-label">Inversión recomendada (payback 6m)</div>
@@ -1021,7 +1029,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
         <li>El upside estratégico varía según complejidad: 10% (baja), 20% (media), 30% (alta). Es un estimado no garantizado.</li>
         <li>El ahorro directo bruto se obtiene multiplicando el % de la solución por el % de captura de la variabilidad, aplicado al costo directo (trabajo base + error). El upside capturable usa esa misma lógica sobre el costo de oportunidad.</li>
         <li>El costo mensual directo es el costo operativo directo anual dividido por 12.</li>
-        <li>El ahorro neto anual estimado es la suma del ahorro directo bruto y el upside capturable, menos el OPEX.</li>
+        <li>Lo que estás dejando sobre la mesa cada año es la suma del ahorro directo bruto y el upside capturable, menos el OPEX.</li>
       </ul>
     </div>
 
@@ -1188,6 +1196,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     netoAnual            = Math.max(0, grossDirect + grossStrategic - opex);
 
     document.getElementById('r-total').textContent  = fmt(directCost);
+    document.getElementById('r-monthly').textContent = fmt(directCost / 12);
+    document.getElementById('heroLoss').style.display = 'block';
     document.getElementById('miniCta').style.display = 'block';
     document.getElementById('r-net').textContent    = fmt(netoAnual);
     document.getElementById('r-maxinv').textContent = fmt(Math.max(0, netoAnual / 2));
@@ -1298,7 +1308,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     sessionStorage.setItem('a13i_name', name);
 
     setTimeout(() => {
-      window.location.href = 'thankyou.html';
+      window.location.href = '/thankyou';
     }, 2000);
   }
 </script>
