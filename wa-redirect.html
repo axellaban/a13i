@@ -313,32 +313,15 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   <div class="eyebrow">
     <span class="dot"></span>
-    Ese número tiene solución.
+    Solo falta un paso
   </div>
 
-  <h1 class="hero-title">MANDAME<br>ESTO.</h1>
+  <h1 class="hero-title">ABRÍ<br>WHATSAPP.</h1>
 
   <p class="hero-sub">
-    Reviso tu operación personalmente.<br>
-    <strong>En 24hs te digo si hay caso real.</strong>
+    Para mandarte tu análisis personalizado, abrí WhatsApp.<br>
+    <strong>El mensaje ya está escrito, solo hacé clic en Enviar.</strong>
   </p>
-
-  <div class="vline"></div>
-
-  <!-- Vista previa del mensaje -->
-  <span class="preview-label">Vista previa del mensaje</span>
-  <div class="preview-wrap">
-    <div class="wa-bubble" id="msgPreview">
-      Cargando tu mensaje…
-    </div>
-    <div class="wa-time" id="msgTime"></div>
-    <p class="preview-note">El mensaje ya está escrito · Solo tocá Enviar</p>
-  </div>
-
-  <!-- Desktop note (shown only on non-mobile) -->
-  <div class="desktop-note" id="desktopNote">
-    <strong>¿Usás WhatsApp en la computadora?</strong> Se va a abrir WhatsApp Web. Si preferís desde el celular, escaneá el QR o copiá el link desde tu teléfono.
-  </div>
 
   <a class="wa-btn" id="waBtn" href="#" target="_blank" rel="noopener">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -348,27 +331,22 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   </a>
 
   <div class="countdown-wrap" id="countdownWrap">
-    Abriendo en <span id="countdown-num">3</span> segundos…
+    Abriendo WhatsApp en <span id="countdown-num">5</span> segundos…
   </div>
 
-  <!-- Qué pasa después (Cole Gordon: eliminar incertidumbre post-envío) -->
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-top:32px;text-align:left;">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:14px;">Qué pasa después</div>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;padding-top:1px;">01</span>
-        <span style="font-size:13px;color:var(--muted);line-height:1.5;">Recibo tu mensaje y reviso tu operación</span>
-      </div>
-      <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;padding-top:1px;">02</span>
-        <span style="font-size:13px;color:var(--muted);line-height:1.5;">Te respondo en menos de 24hs — si hay caso real o no</span>
-      </div>
-      <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;padding-top:1px;">03</span>
-        <span style="font-size:13px;color:var(--muted);line-height:1.5;">Si tiene sentido, mapeamos tu operación en 30 min · sin costo</span>
-      </div>
+  <!-- Vista previa del mensaje -->
+  <span class="preview-label">Vista previa del mensaje</span>
+  <div class="preview-wrap">
+    <div class="wa-bubble" id="msgPreview">
+      Cargando tu mensaje…
     </div>
-    <p style="font-size:12px;color:var(--faint);margin-top:14px;margin-bottom:0;font-family:'JetBrains Mono',monospace;">Lo reviso personalmente. No hay vendedores, no hay pitch. Si no tiene sentido trabajar juntos, te lo digo en la primera respuesta.</p>
+    <div class="wa-time" id="msgTime"></div>
+    <p class="preview-note">Solamente hacé clic en Enviar en WhatsApp</p>
+  </div>
+
+  <!-- Desktop note (shown only on non-mobile) -->
+  <div class="desktop-note" id="desktopNote">
+    <strong>¿Usás WhatsApp en la computadora?</strong> Se va a abrir WhatsApp Web. Si preferís desde el celular, abrilo desde tu teléfono.
   </div>
 
   <div class="divider"></div>
@@ -469,7 +447,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   });
 
   // ── Countdown ─────────────────────────────────────────────────────────────
-  let countdownVal = 3;
+  let countdownVal = 5;
   let countdownTimer = null;
 
   function clearCountdown() {
