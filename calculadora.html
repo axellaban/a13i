@@ -234,28 +234,6 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     animation: fadeInUp 0.8s ease-out;
   }
 
-  /* ── ABOUT / CRED (moved from optin) ── */
-  .about-card {
-    display: flex; align-items: center; gap: 16px;
-    margin-top: 40px;
-  }
-  .about-av {
-    width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
-    overflow: hidden; border: 2px solid var(--border-2);
-    background: var(--ui-2);
-  }
-  .about-av img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .about-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-  .about-bio  { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .cred-block {
-    background: var(--card-2); border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 12px 12px 0;
-    padding: 16px 20px; margin-top: 14px;
-  }
-  .cred-text { font-size: 13px; color: var(--muted); line-height: 1.75; }
-  .cred-text strong { color: var(--text); font-weight: 600; }
-
   /* ── PAGE HEADER ── */
   .page-header {
     margin-bottom: 48px;
@@ -343,6 +321,44 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     color: var(--dim); padding: 14px 20px; border-left: 1px solid var(--border);
   }
   .block-body { padding: 24px; }
+
+  /* ── STEPPER (mismo patrón que ops-canvas: click para avanzar) ── */
+  .step{ display: none; }
+  .step.is-active{ display: block; animation: stepIn .32s cubic-bezier(.2,.8,.2,1); }
+  @keyframes stepIn{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: translateY(0); } }
+  .step-nav{
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin: 14px 0 8px;
+  }
+  .step-back{
+    background: none; border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.06em;
+    color: var(--dim);
+    cursor: pointer; padding: 10px 6px;
+    transition: color .18s;
+  }
+  .step-back:hover{ color: var(--text); }
+  .step-back:disabled{ opacity: 0; pointer-events: none; }
+  .step-continue{
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; font-size: 15px;
+    padding: 14px 24px;
+    border: none; border-radius: 11px;
+    cursor: pointer;
+    transition: background .18s, box-shadow .18s, opacity .18s;
+    margin-left: auto;
+  }
+  .step-continue:hover{ background: var(--accent-2); box-shadow: 0 8px 28px var(--accent-glow); }
+  .step-continue:disabled{ opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+  @media(max-width: 600px){
+    .step-continue{ width: 100%; justify-content: center; }
+    .step-nav{ flex-direction: column-reverse; align-items: stretch; }
+    .step-back{ text-align: center; }
+  }
 
   /* Tags */
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
@@ -919,161 +935,171 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     <p class="page-sub" style="margin-left:auto;margin-right:auto;">
       Calculá lo que te cuesta tu operación a mano, con tus números reales, en 30 segundos.
     </p>
-
-    <div class="about-card">
-      <div class="about-av">
-        <img src="assets/axel.jpg" alt="Axel Laban Arzubi">
-      </div>
-      <div class="about-body">
-        <div class="about-name">Axel Laban Arzubi</div>
-        <div class="about-bio">3x emprendedor · docente en la Maestría en Negocios Digitales e IA de la UBA</div>
-      </div>
-    </div>
-    <div class="cred-block">
-      <p class="cred-text">
-        Bootstrapeé <strong>HolaVeggie hasta $2M</strong> sin inversión. Antes armé equipos de eCommerce y el BI que los hacía correr, y los llevé a <strong>+$15M/año</strong>. Hoy armo esos mismos sistemas, ahora con IA, en operaciones reales.
-      </p>
-    </div>
   </div>
 
   <!-- Línea vertical -->
   <div class="vline"></div>
 
-  <!-- FORM BLOCKS -->
+  <!-- FORM BLOCKS (wizard, un grupo por pantalla, click para avanzar) -->
   <div id="formBlocks">
-    <div class="block">
-      <div class="block-hd">
-        <div class="block-num">01</div>
-        <div class="block-title">Principal cuello de botella</div>
-        <div class="block-status">Seleccioná uno</div>
-      </div>
-      <div class="block-body">
-        <div class="tags" id="tags1">
-          <div class="tag" onclick="selTag(this,'Atención al cliente')">Atención al cliente</div>
-          <div class="tag" onclick="selTag(this,'Calificación de leads 24/7')">Calificación de leads 24/7</div>
-          <div class="tag" onclick="selTag(this,'Facturación y cobranzas')">Facturación y cobranzas</div>
-          <div class="tag" onclick="selTag(this,'Onboarding')">Onboarding</div>
-          <div class="tag" onclick="selTag(this,'Agendamiento')">Agendamiento</div>
-          <div class="tag" onclick="selTag(this,'Soporte interno')">Soporte interno</div>
-          <div class="tag" onclick="selTag(this,'Conciliación de datos')">Conciliación de datos</div>
-          <div class="tag" onclick="selTag(this,'Contenido para redes')">Contenido para redes</div>
-          <div class="tag" onclick="selTag(this,'Propuestas comerciales')">Propuestas comerciales</div>
-          <div class="tag" onclick="selTag(this,'Análisis de llamadas')">Análisis de llamadas</div>
-          <div class="tag" onclick="selTag(this,'Informes ejecutivos')">Informes ejecutivos</div>
-          <div class="tag" onclick="selTag(this,'Recupero de carritos')">Recupero de carritos</div>
-          <div class="tag" onclick="selTag(this,'Enriquecimiento de CRM')">Enriquecimiento de CRM</div>
-        </div>
-        <input type="text" id="proc1" placeholder="O describí tu proceso específico..." oninput="p1=this.value;clearTags()">
-      </div>
-    </div>
 
-    <div class="block">
-      <div class="block-hd">
-        <div class="block-num">02</div>
-        <div class="block-title">Rubro de tu negocio</div>
-        <div class="block-status">Seleccioná uno</div>
-      </div>
-      <div class="block-body">
-        <div class="tags" id="tagsRubro">
-          <div class="tag" onclick="selRubro(this,'eCommerce')">eCommerce</div>
-          <div class="tag" onclick="selRubro(this,'Servicios B2B')">Servicios B2B</div>
-          <div class="tag" onclick="selRubro(this,'Logística / Distribución')">Logística / Distribución</div>
-          <div class="tag" onclick="selRubro(this,'SaaS / Tech')">SaaS / Tech</div>
-          <div class="tag" onclick="selRubro(this,'Agencia')">Agencia</div>
-          <div class="tag" onclick="selRubro(this,'Retail / Franquicias')">Retail / Franquicias</div>
-          <div class="tag" onclick="selRubro(this,'Salud / Bienestar')">Salud / Bienestar</div>
-          <div class="tag" onclick="selRubro(this,'Educación / Formación')">Educación / Formación</div>
-          <div class="tag" onclick="selRubro(this,'Otro')">Otro</div>
+    <div class="step is-active" data-step="1">
+      <div class="block">
+        <div class="block-hd">
+          <div class="block-num">01</div>
+          <div class="block-title">Principal cuello de botella</div>
+          <div class="block-status">Seleccioná uno</div>
+        </div>
+        <div class="block-body">
+          <div class="tags" id="tags1">
+            <div class="tag" onclick="selTag(this,'Atención al cliente')">Atención al cliente</div>
+            <div class="tag" onclick="selTag(this,'Calificación de leads 24/7')">Calificación de leads 24/7</div>
+            <div class="tag" onclick="selTag(this,'Facturación y cobranzas')">Facturación y cobranzas</div>
+            <div class="tag" onclick="selTag(this,'Onboarding')">Onboarding</div>
+            <div class="tag" onclick="selTag(this,'Agendamiento')">Agendamiento</div>
+            <div class="tag" onclick="selTag(this,'Soporte interno')">Soporte interno</div>
+            <div class="tag" onclick="selTag(this,'Conciliación de datos')">Conciliación de datos</div>
+            <div class="tag" onclick="selTag(this,'Contenido para redes')">Contenido para redes</div>
+            <div class="tag" onclick="selTag(this,'Propuestas comerciales')">Propuestas comerciales</div>
+            <div class="tag" onclick="selTag(this,'Análisis de llamadas')">Análisis de llamadas</div>
+            <div class="tag" onclick="selTag(this,'Informes ejecutivos')">Informes ejecutivos</div>
+            <div class="tag" onclick="selTag(this,'Recupero de carritos')">Recupero de carritos</div>
+            <div class="tag" onclick="selTag(this,'Enriquecimiento de CRM')">Enriquecimiento de CRM</div>
+          </div>
+          <input type="text" id="proc1" placeholder="O describí tu proceso específico..." oninput="p1=this.value;clearTags();updateCwButtons()">
         </div>
       </div>
-    </div>
-
-    <div class="block">
-      <div class="block-hd">
-        <div class="block-num">03</div>
-        <div class="block-title">Horas semanales por persona</div>
-        <div class="block-status">Promedio</div>
-      </div>
-      <div class="block-body">
-        <div class="slider-val" id="hDisp"><span class="h-val">10</span> <span>horas / semana</span></div>
-        <input type="range" id="hSlider" min="1" max="60" value="10"
-          oninput="document.getElementById('hDisp').querySelector('.h-val').textContent=this.value">
-        <div class="slider-marks"><span>1</span><span>15</span><span>30</span><span>45</span><span>60</span></div>
-        <p class="hint">Promedio semanal de cada persona involucrada en el proceso.</p>
+      <div class="step-nav">
+        <button class="step-back" disabled>← Atrás</button>
+        <button class="step-continue" id="cwCont1" onclick="nextCwStep()" disabled>Continuar →</button>
       </div>
     </div>
 
-    <div class="block">
-      <div class="block-hd">
-        <div class="block-num">04</div>
-        <div class="block-title">Costo por hora (fully-loaded)</div>
-        <div class="block-status">USD</div>
-      </div>
-      <div class="block-body">
-        <div class="input-row">
-          <input type="number" id="rate" value="20" min="1" max="500" style="max-width:200px">
-          <span class="unit">USD / hora</span>
+    <div class="step" data-step="2">
+      <div class="block">
+        <div class="block-hd">
+          <div class="block-num">02</div>
+          <div class="block-title">Rubro de tu negocio</div>
+          <div class="block-status">Seleccioná uno</div>
         </div>
-        <p class="hint">Sueldo + cargas sociales + overhead. Si no sabés: sueldo mensual ÷ 160.</p>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-hd">
-        <div class="block-num">05</div>
-        <div class="block-title">Cantidad de personas involucradas</div>
-        <div class="block-status">Equipo actual</div>
-      </div>
-      <div class="block-body">
-        <div class="input-row">
-          <input type="number" id="team" value="3" min="1" max="200" style="max-width:200px">
-          <span class="unit">personas</span>
+        <div class="block-body">
+          <div class="tags" id="tagsRubro">
+            <div class="tag" onclick="selRubro(this,'eCommerce')">eCommerce</div>
+            <div class="tag" onclick="selRubro(this,'Servicios B2B')">Servicios B2B</div>
+            <div class="tag" onclick="selRubro(this,'Logística / Distribución')">Logística / Distribución</div>
+            <div class="tag" onclick="selRubro(this,'SaaS / Tech')">SaaS / Tech</div>
+            <div class="tag" onclick="selRubro(this,'Agencia')">Agencia</div>
+            <div class="tag" onclick="selRubro(this,'Retail / Franquicias')">Retail / Franquicias</div>
+            <div class="tag" onclick="selRubro(this,'Salud / Bienestar')">Salud / Bienestar</div>
+            <div class="tag" onclick="selRubro(this,'Educación / Formación')">Educación / Formación</div>
+            <div class="tag" onclick="selRubro(this,'Otro')">Otro</div>
+          </div>
         </div>
       </div>
+      <div class="step-nav">
+        <button class="step-back" onclick="prevCwStep()">← Atrás</button>
+        <button class="step-continue" id="cwCont2" onclick="nextCwStep()" disabled>Continuar →</button>
+      </div>
     </div>
 
-    <div class="block">
-      <div class="block-hd">
-        <div class="block-num">06</div>
-        <div class="block-title">Tasa de errores / retrasos</div>
-        <div class="block-status">Tasa actual</div>
+    <div class="step" data-step="3">
+      <div class="block">
+        <div class="block-hd">
+          <div class="block-num">03</div>
+          <div class="block-title">Horas semanales por persona</div>
+          <div class="block-status">Promedio</div>
+        </div>
+        <div class="block-body">
+          <div class="slider-val" id="hDisp"><span class="h-val">10</span> <span>horas / semana</span></div>
+          <input type="range" id="hSlider" min="1" max="60" value="10"
+            oninput="document.getElementById('hDisp').querySelector('.h-val').textContent=this.value">
+          <div class="slider-marks"><span>1</span><span>15</span><span>30</span><span>45</span><span>60</span></div>
+          <p class="hint">Promedio semanal de cada persona involucrada en el proceso.</p>
+        </div>
       </div>
-      <div class="block-body">
-        <select id="err">
-          <option value="0.02">Baja — casi no hay errores (2%)</option>
-          <option value="0.05" selected>Media — algún error por semana (5%)</option>
-          <option value="0.10">Alta — varios errores frecuentes (10%)</option>
-          <option value="0.20">Crítica — proceso problemático (20%)</option>
-        </select>
+
+      <div class="block">
+        <div class="block-hd">
+          <div class="block-num">04</div>
+          <div class="block-title">Costo por hora (fully-loaded)</div>
+          <div class="block-status">USD</div>
+        </div>
+        <div class="block-body">
+          <div class="input-row">
+            <input type="number" id="rate" value="20" min="1" max="500" style="max-width:200px">
+            <span class="unit">USD / hora</span>
+          </div>
+          <p class="hint">Sueldo + cargas sociales + overhead. Si no sabés: sueldo mensual ÷ 160.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-hd">
+          <div class="block-num">05</div>
+          <div class="block-title">Cantidad de personas involucradas</div>
+          <div class="block-status">Equipo actual</div>
+        </div>
+        <div class="block-body">
+          <div class="input-row">
+            <input type="number" id="team" value="3" min="1" max="200" style="max-width:200px">
+            <span class="unit">personas</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="step-back" onclick="prevCwStep()">← Atrás</button>
+        <button class="step-continue" onclick="nextCwStep()">Continuar →</button>
       </div>
     </div>
+
+    <div class="step" data-step="4">
+      <div class="block">
+        <div class="block-hd">
+          <div class="block-num">06</div>
+          <div class="block-title">Tasa de errores / retrasos</div>
+          <div class="block-status">Tasa actual</div>
+        </div>
+        <div class="block-body">
+          <select id="err">
+            <option value="0.02">Baja — casi no hay errores (2%)</option>
+            <option value="0.05" selected>Media — algún error por semana (5%)</option>
+            <option value="0.10">Alta — varios errores frecuentes (10%)</option>
+            <option value="0.20">Crítica — proceso problemático (20%)</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="adv-toggle" onclick="toggleAdv()" id="advBtn">+ Ajustes avanzados (tipo de solución y complejidad)</button>
+
+      <div id="adv">
+        <div class="block">
+          <div class="block-hd"><div class="block-num">07</div><div class="block-title">Tipo de solución</div><div class="block-status">Opcional</div></div>
+          <div class="block-body">
+            <select id="sol">
+              <option value="0.15">Asistente / Copiloto — mejora productividad (~15% ahorro)</option>
+              <option value="0.50" selected>Automatización completa — delegación total (~50% ahorro)</option>
+            </select>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-hd"><div class="block-num">08</div><div class="block-title">Variabilidad del proceso</div><div class="block-status">Opcional</div></div>
+          <div class="block-body">
+            <select id="comp">
+              <option value="1.0">Baja — reglas claras, alta repetición (100% captura)</option>
+              <option value="0.6" selected>Media — flujo estándar con excepciones (60% captura)</option>
+              <option value="0.3">Alta — contexto variable, supervisión humana (30% captura)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="step-back" onclick="prevCwStep()">← Atrás</button>
+      </div>
+      <button class="calc-btn" onclick="run()">Calcular mi costo →</button>
+    </div>
+
   </div>
-
-  <button class="adv-toggle" onclick="toggleAdv()" id="advBtn">+ Ajustes avanzados (tipo de solución y complejidad)</button>
-
-  <div id="adv">
-    <div class="block">
-      <div class="block-hd"><div class="block-num">06</div><div class="block-title">Tipo de solución</div><div class="block-status">Opcional</div></div>
-      <div class="block-body">
-        <select id="sol">
-          <option value="0.15">Asistente / Copiloto — mejora productividad (~15% ahorro)</option>
-          <option value="0.50" selected>Automatización completa — delegación total (~50% ahorro)</option>
-        </select>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-hd"><div class="block-num">07</div><div class="block-title">Variabilidad del proceso</div><div class="block-status">Opcional</div></div>
-      <div class="block-body">
-        <select id="comp">
-          <option value="1.0">Baja — reglas claras, alta repetición (100% captura)</option>
-          <option value="0.6" selected>Media — flujo estándar con excepciones (60% captura)</option>
-          <option value="0.3">Alta — contexto variable, supervisión humana (30% captura)</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <button class="calc-btn" onclick="run()">Calcular mi costo →</button>
 
   <!-- RESULTS -->
   <div id="results">
@@ -1265,6 +1291,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     el.classList.add('on');
     p1 = val;
     document.getElementById('proc1').value = '';
+    updateCwButtons();
   }
   function clearTags() {
     document.getElementById('tags1').querySelectorAll('.tag').forEach(t => t.classList.remove('on'));
@@ -1273,6 +1300,33 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     document.getElementById('tagsRubro').querySelectorAll('.tag').forEach(t => t.classList.remove('on'));
     el.classList.add('on');
     rubro1 = val;
+    updateCwButtons();
+  }
+
+  // ── WIZARD: un grupo de campos por pantalla, click para avanzar ──────────
+  let cwStep = 1;
+  const CW_TOTAL = 4;
+
+  function updateCwButtons() {
+    const c1 = document.getElementById('cwCont1');
+    if (c1) c1.disabled = (p1 === 'tu proceso' && !document.getElementById('proc1').value.trim());
+    const c2 = document.getElementById('cwCont2');
+    if (c2) c2.disabled = !rubro1;
+  }
+
+  function renderCwStep() {
+    document.querySelectorAll('#formBlocks > .step').forEach(el => {
+      el.classList.toggle('is-active', parseInt(el.dataset.step, 10) === cwStep);
+    });
+    updateCwButtons();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextCwStep() {
+    if (cwStep < CW_TOTAL) { cwStep++; renderCwStep(); }
+  }
+  function prevCwStep() {
+    if (cwStep > 1) { cwStep--; renderCwStep(); }
   }
 
 
