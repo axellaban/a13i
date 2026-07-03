@@ -302,6 +302,39 @@ fbq('track', 'PageView');
     margin-bottom: 16px; display: none;
   }
 
+  /* ── STEP CARD (la "cajita" tipo Arcadia que envuelve el form) ── */
+  .step-card{
+    background: var(--card);
+    border: 1px solid var(--border-2);
+    border-radius: 24px;
+    padding: 36px 32px 28px;
+    max-width: 640px;
+    margin: 28px auto 0;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+  @media(max-width: 600px){ .step-card{ padding: 28px 20px 22px; } }
+  .step-card .step-nav{ margin-top: 24px; }
+
+  /* ── VALUE BULLETS (las 3 líneas debajo de la cajita) ─────── */
+  .value-bullets{
+    list-style: none;
+    max-width: 640px;
+    margin: 24px auto 0;
+    padding: 0 4px;
+  }
+  .value-bullets li{
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; font-weight: 700; color: var(--text);
+    padding: 7px 0;
+  }
+  .value-bullets li::before{
+    content: '';
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
   /* ── MOTOR SECTIONS ─────────────────────────────────────── */
   .motor{ padding: 40px 0 34px; border-bottom: 1px solid var(--border); }
   .motor-head{ display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
@@ -676,8 +709,11 @@ fbq('track', 'PageView');
 
   <!-- STEP 1: IDENTIDAD -->
   <div class="step is-active" data-step="1">
-    <header class="hero">
+    <header class="hero" style="text-align:center; border-bottom:none; padding-bottom:0;">
       <h1>Detectá los quick wins y big swings de tu eCommerce<span class="accent">… en menos de 1 minuto.</span></h1>
+    </header>
+
+    <div class="step-card">
       <div class="id-row">
         <div class="id-field">
           <label for="bizName">Negocio</label>
@@ -688,11 +724,17 @@ fbq('track', 'PageView');
           <input type="text" id="bizRubro" placeholder="Ej: indumentaria, USD 300K/año" oninput="renderCta()">
         </div>
       </div>
-    </header>
-    <div class="step-nav">
-      <button class="step-back" disabled>← Atrás</button>
-      <button class="step-continue" onclick="nextStep()">Empezar el mapeo →</button>
+      <div class="step-nav">
+        <button class="step-back" disabled>← Atrás</button>
+        <button class="step-continue" onclick="nextStep()">Empezar el mapeo →</button>
+      </div>
     </div>
+
+    <ul class="value-bullets">
+      <li>Recibí tus mejores accionables en menos de 30 segundos</li>
+      <li>+250 dueños de negocio ya activaron los suyos</li>
+      <li>100% gratuito — acceso instantáneo</li>
+    </ul>
   </div>
 
   <!-- STEP 2 · MOTOR A: ADQUISICIÓN -->
