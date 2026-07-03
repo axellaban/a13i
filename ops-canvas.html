@@ -659,13 +659,6 @@ fbq('track', 'PageView');
 </head>
 <body>
 
-<nav class="topbar">
-  <a class="logo" href="sesion.html" aria-label="A13I">
-    <span class="logo-text">A<span class="num">13</span>I<span class="cursor">_</span></span>
-  </a>
-  <a class="topbar-cta" href="#cta" onclick="return goToResults(event)">Mandar mi canvas →</a>
-</nav>
-
 <div class="proof-row">
   <div class="social-proof-pill">
     <div class="avatar-stack">
@@ -681,17 +674,10 @@ fbq('track', 'PageView');
 
 <div class="wrap">
 
-  <div class="step-progress" id="stepProgress">
-    <span id="stepProgressLabel">Pregunta 1 de 4</span>
-    <span class="dots" id="stepDots"></span>
-  </div>
-
   <!-- STEP 1: IDENTIDAD -->
   <div class="step is-active" data-step="1">
     <header class="hero">
-      <span class="eyebrow"><span class="dot"></span>OPS CANVAS · ECOMMERCE</span>
-      <h1>Qué automatizar <span class="accent">primero.</span></h1>
-      <p class="hero-sub">Mapeá tu operación en 3 motores. El canvas detecta los cuellos de botella donde se te va la plata y te marca <strong>el que conviene resolver primero</strong>. 4 pasos, sin registrarte.</p>
+      <h1>Detectá los quick wins y big swings de tu eCommerce<span class="accent">… en menos de 1 minuto.</span></h1>
       <div class="id-row">
         <div class="id-field">
           <label for="bizName">Negocio</label>
@@ -868,19 +854,7 @@ fbq('track', 'PageView');
   }
 
   function renderStepProgress(){
-    const wrap = document.getElementById('stepProgress');
-    const label = document.getElementById('stepProgressLabel');
-    const dots = document.getElementById('stepDots');
-    if(currentStep >= TOTAL_STEPS){ wrap.style.display = 'none'; return; }
-    wrap.style.display = 'flex';
-    label.textContent = `Pregunta ${currentStep} de ${TOTAL_STEPS - 1}`;
-    dots.innerHTML = '';
-    for(let i = 1; i < TOTAL_STEPS; i++){
-      const dot = document.createElement('i');
-      if(i < currentStep) dot.className = 'done';
-      else if(i === currentStep) dot.className = 'now';
-      dots.appendChild(dot);
-    }
+    // Sin indicador visual de progreso — el stepper solo controla la visibilidad de cada paso.
   }
 
   function renderStep(){
