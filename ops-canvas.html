@@ -85,6 +85,70 @@ fbq('track', 'PageView');
 
   .wrap{ max-width: 880px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 2; }
 
+  /* ── STEPPER (one question per screen, click-to-advance) ──── */
+  .step-progress{
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--dim);
+    margin: 28px 0 0;
+  }
+  .step-progress .dots{ display: flex; gap: 6px; }
+  .step-progress .dots i{
+    width: 20px; height: 4px; border-radius: 2px;
+    background: var(--border-2);
+    transition: background .25s;
+  }
+  .step-progress .dots i.done{ background: var(--accent-2); }
+  .step-progress .dots i.now{ background: var(--accent); }
+  .step{ display: none; }
+  .step.is-active{
+    display: block;
+    animation: stepIn .32s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes stepIn{
+    from{ opacity: 0; transform: translateY(14px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  .step-nav{
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-top: 24px;
+  }
+  .step-back{
+    background: none; border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.06em;
+    color: var(--dim);
+    cursor: pointer; padding: 10px 6px;
+    transition: color .18s;
+  }
+  .step-back:hover{ color: var(--text); }
+  .step-back:disabled{ opacity: 0; pointer-events: none; }
+  .step-continue{
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; font-size: 15px;
+    padding: 14px 24px;
+    border: none; border-radius: 11px;
+    cursor: pointer;
+    transition: background .18s, box-shadow .18s, opacity .18s;
+    margin-left: auto;
+  }
+  .step-continue:hover{ background: var(--accent-2); box-shadow: 0 8px 28px var(--accent-glow); }
+  .step-continue:disabled{ opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+  .step-hint{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--faint);
+    margin-top: 10px;
+  }
+  @media(max-width: 600px){
+    .step-continue{ width: 100%; justify-content: center; }
+    .step-nav{ flex-direction: column-reverse; align-items: stretch; }
+    .step-back{ text-align: center; }
+  }
+
   /* ── TOPBAR ─────────────────────────────────────────────── */
   .topbar{
     position: sticky; top: 0; z-index: 50;
@@ -548,65 +612,102 @@ fbq('track', 'PageView');
   <a class="logo" href="sesion.html" aria-label="A13I">
     <span class="logo-text">A<span class="num">13</span>I<span class="cursor">_</span></span>
   </a>
-  <a class="topbar-cta" href="#cta">Mandar mi canvas →</a>
+  <a class="topbar-cta" href="#cta" onclick="return goToResults(event)">Mandar mi canvas →</a>
 </nav>
 
 <div class="wrap">
 
-  <header class="hero">
-    <span class="eyebrow"><span class="dot"></span>OPS CANVAS · ECOMMERCE</span>
-    <h1>Qué automatizar <span class="accent">primero.</span></h1>
-    <p class="hero-sub">Mapeá tu operación en 3 motores. El canvas detecta los cuellos de botella donde se te va la plata y te marca <strong>el que conviene resolver primero</strong>. 10 minutos, sin registrarte.</p>
-    <div class="id-row">
-      <div class="id-field">
-        <label for="bizName">Negocio</label>
-        <input type="text" id="bizName" placeholder="Nombre de tu eCommerce" oninput="renderCta()">
+  <div class="step-progress" id="stepProgress">
+    <span id="stepProgressLabel">Pregunta 1 de 4</span>
+    <span class="dots" id="stepDots"></span>
+  </div>
+
+  <!-- STEP 1: IDENTIDAD -->
+  <div class="step is-active" data-step="1">
+    <header class="hero">
+      <span class="eyebrow"><span class="dot"></span>OPS CANVAS · ECOMMERCE</span>
+      <h1>Qué automatizar <span class="accent">primero.</span></h1>
+      <p class="hero-sub">Mapeá tu operación en 3 motores. El canvas detecta los cuellos de botella donde se te va la plata y te marca <strong>el que conviene resolver primero</strong>. 4 pasos, sin registrarte.</p>
+      <div class="id-row">
+        <div class="id-field">
+          <label for="bizName">Negocio</label>
+          <input type="text" id="bizName" placeholder="Nombre de tu eCommerce" oninput="renderCta()">
+        </div>
+        <div class="id-field">
+          <label for="bizRubro">Rubro / facturación aprox.</label>
+          <input type="text" id="bizRubro" placeholder="Ej: indumentaria, USD 300K/año" oninput="renderCta()">
+        </div>
       </div>
-      <div class="id-field">
-        <label for="bizRubro">Rubro / facturación aprox.</label>
-        <input type="text" id="bizRubro" placeholder="Ej: indumentaria, USD 300K/año" oninput="renderCta()">
+    </header>
+    <div class="step-nav">
+      <button class="step-back" disabled>← Atrás</button>
+      <button class="step-continue" onclick="nextStep()">Empezar el mapeo →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 · MOTOR A: ADQUISICIÓN -->
+  <div class="step" data-step="2">
+    <section class="motor" data-motor="A" style="border-bottom:none; padding-top:64px;">
+      <div class="motor-head">
+        <span class="motor-num">01 · A</span>
+        <h2 class="motor-title">Adquisición</h2>
+        <span class="motor-count" id="count-A"></span>
       </div>
+      <p class="motor-desc">Cómo generás tráfico, convertís leads en pedidos y qué pasa entre el primer contacto y la primera compra.</p>
+      <div class="motor-example"><span class="ex-tag">Ejemplo típico</span>Llega el lead por Meta Ads → se carga a mano en una planilla → seguimiento por WhatsApp sin CRM → se pierde el seguimiento después del día 3.</div>
+      <div class="bottlenecks-container" id="container-A"></div>
+      <button class="add-btn" onclick="addBottleneck('A')">+ marcar un cuello de botella en Adquisición</button>
+    </section>
+    <div class="step-nav">
+      <button class="step-back" onclick="prevStep()">← Atrás</button>
+      <button class="step-continue" id="contBtn2" onclick="nextStep()">Continuar →</button>
     </div>
-  </header>
+    <p class="step-hint" id="hint2">Describí al menos un cuello de botella para continuar.</p>
+  </div>
 
-  <!-- MOTOR A: ADQUISICIÓN -->
-  <section class="motor" data-motor="A">
-    <div class="motor-head">
-      <span class="motor-num">01 · A</span>
-      <h2 class="motor-title">Adquisición</h2>
-      <span class="motor-count" id="count-A"></span>
+  <!-- STEP 3 · MOTOR O: OPERACIÓN -->
+  <div class="step" data-step="3">
+    <section class="motor" data-motor="O" style="border-bottom:none; padding-top:64px;">
+      <div class="motor-head">
+        <span class="motor-num">02 · O</span>
+        <h2 class="motor-title">Operación</h2>
+        <span class="motor-count" id="count-O"></span>
+      </div>
+      <p class="motor-desc">Inventario, fulfillment, logística, proveedores, reporting. Todo lo que pasa entre que se confirma el pedido y llega al cliente.</p>
+      <div class="motor-example"><span class="ex-tag">Ejemplo típico</span>Se vende el producto → alguien chequea stock a mano en el depósito → arma la orden en Excel → la manda al courier por mail → no hay visibilidad del pedido hasta que el cliente pregunta.</div>
+      <div class="bottlenecks-container" id="container-O"></div>
+      <button class="add-btn" onclick="addBottleneck('O')">+ marcar un cuello de botella en Operación</button>
+    </section>
+    <div class="step-nav">
+      <button class="step-back" onclick="prevStep()">← Atrás</button>
+      <button class="step-continue" id="contBtn3" onclick="nextStep()">Continuar →</button>
     </div>
-    <p class="motor-desc">Cómo generás tráfico, convertís leads en pedidos y qué pasa entre el primer contacto y la primera compra.</p>
-    <div class="motor-example"><span class="ex-tag">Ejemplo típico</span>Llega el lead por Meta Ads → se carga a mano en una planilla → seguimiento por WhatsApp sin CRM → se pierde el seguimiento después del día 3.</div>
-    <div class="bottlenecks-container" id="container-A"></div>
-    <button class="add-btn" onclick="addBottleneck('A')">+ marcar un cuello de botella en Adquisición</button>
-  </section>
+    <p class="step-hint" id="hint3">Describí al menos un cuello de botella para continuar.</p>
+  </div>
 
-  <!-- MOTOR O: OPERACIÓN -->
-  <section class="motor" data-motor="O">
-    <div class="motor-head">
-      <span class="motor-num">02 · O</span>
-      <h2 class="motor-title">Operación</h2>
-      <span class="motor-count" id="count-O"></span>
+  <!-- STEP 4 · MOTOR S: ATENCIÓN AL CLIENTE -->
+  <div class="step" data-step="4">
+    <section class="motor" data-motor="S" style="border-bottom:none; padding-top:64px;">
+      <div class="motor-head">
+        <span class="motor-num">03 · S</span>
+        <h2 class="motor-title">Atención al Cliente</h2>
+        <span class="motor-count" id="count-S"></span>
+      </div>
+      <p class="motor-desc">Soporte, reclamos, devoluciones, reviews y todo lo que pasa después de la venta.</p>
+      <div class="motor-example"><span class="ex-tag">Ejemplo típico</span>El cliente escribe por Instagram con un reclamo → nadie centraliza los canales → se resuelve tarde o se pierde → no hay data de por qué devuelven.</div>
+      <div class="bottlenecks-container" id="container-S"></div>
+      <button class="add-btn" onclick="addBottleneck('S')">+ marcar un cuello de botella en Atención al Cliente</button>
+    </section>
+    <div class="step-nav">
+      <button class="step-back" onclick="prevStep()">← Atrás</button>
+      <button class="step-continue" id="contBtn4" onclick="nextStep()">Ver mi mapa →</button>
     </div>
-    <p class="motor-desc">Inventario, fulfillment, logística, proveedores, reporting. Todo lo que pasa entre que se confirma el pedido y llega al cliente.</p>
-    <div class="motor-example"><span class="ex-tag">Ejemplo típico</span>Se vende el producto → alguien chequea stock a mano en el depósito → arma la orden en Excel → la manda al courier por mail → no hay visibilidad del pedido hasta que el cliente pregunta.</div>
-    <div class="bottlenecks-container" id="container-O"></div>
-    <button class="add-btn" onclick="addBottleneck('O')">+ marcar un cuello de botella en Operación</button>
-  </section>
+    <p class="step-hint" id="hint4">Describí al menos un cuello de botella para ver tu resultado.</p>
+  </div>
 
-  <!-- MOTOR S: ATENCIÓN AL CLIENTE -->
-  <section class="motor" data-motor="S">
-    <div class="motor-head">
-      <span class="motor-num">03 · S</span>
-      <h2 class="motor-title">Atención al Cliente</h2>
-      <span class="motor-count" id="count-S"></span>
-    </div>
-    <p class="motor-desc">Soporte, reclamos, devoluciones, reviews y todo lo que pasa después de la venta.</p>
-    <div class="motor-example"><span class="ex-tag">Ejemplo típico</span>El cliente escribe por Instagram con un reclamo → nadie centraliza los canales → se resuelve tarde o se pierde → no hay data de por qué devuelven.</div>
-    <div class="bottlenecks-container" id="container-S"></div>
-    <button class="add-btn" onclick="addBottleneck('S')">+ marcar un cuello de botella en Atención al Cliente</button>
-  </section>
+  <!-- STEP 5 · RESULTADO -->
+  <div class="step" data-step="5">
+  <button class="step-back" onclick="prevStep()" style="margin-bottom:8px;">← Atrás</button>
 
   <!-- MATRIX -->
   <section class="section-head">
@@ -658,6 +759,9 @@ fbq('track', 'PageView');
 
   <p class="reset-row"><button class="reset-link" onclick="resetCanvas()">reiniciar canvas ×</button></p>
 
+  </div>
+  <!-- /STEP 5 -->
+
 </div>
 
 <footer>A13I — SISTEMA DE AUTONOMÍA OPERATIVA</footer>
@@ -667,6 +771,78 @@ fbq('track', 'PageView');
   let counter = 0;
   const motorNames = { A: 'Adquisición', O: 'Operación', S: 'Atención al Cliente' };
   const motorColor = { A: '#ff5a30', O: '#f59e0b', S: '#22c55e' };
+
+  // ── STEPPER — una pregunta por pantalla ────────────────────
+  const TOTAL_STEPS = 5; // 1-4 = preguntas, 5 = resultado
+  let currentStep = 1;
+  const stepMotor = { 2: 'A', 3: 'O', 4: 'S' };
+
+  function stepHasContent(motor){
+    return (state[motor] || []).some(b => b.texto && b.texto.trim().length > 0);
+  }
+
+  function updateContinueButtons(){
+    [2, 3, 4].forEach(s => {
+      const motor = stepMotor[s];
+      const btn = document.getElementById('contBtn' + s);
+      const hint = document.getElementById('hint' + s);
+      if(!btn) return;
+      const ok = stepHasContent(motor);
+      btn.disabled = !ok;
+      if(hint) hint.style.display = ok ? 'none' : 'block';
+    });
+  }
+
+  function renderStepProgress(){
+    const wrap = document.getElementById('stepProgress');
+    const label = document.getElementById('stepProgressLabel');
+    const dots = document.getElementById('stepDots');
+    if(currentStep >= TOTAL_STEPS){ wrap.style.display = 'none'; return; }
+    wrap.style.display = 'flex';
+    label.textContent = `Pregunta ${currentStep} de ${TOTAL_STEPS - 1}`;
+    dots.innerHTML = '';
+    for(let i = 1; i < TOTAL_STEPS; i++){
+      const dot = document.createElement('i');
+      if(i < currentStep) dot.className = 'done';
+      else if(i === currentStep) dot.className = 'now';
+      dots.appendChild(dot);
+    }
+  }
+
+  function renderStep(){
+    document.querySelectorAll('.step').forEach(el => {
+      el.classList.toggle('is-active', parseInt(el.dataset.step, 10) === currentStep);
+    });
+    updateContinueButtons();
+    renderStepProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    save();
+  }
+
+  function nextStep(){
+    if(currentStep < TOTAL_STEPS){
+      currentStep++;
+      renderStep();
+      if(currentStep === TOTAL_STEPS){ renderChart(); renderSummary(); renderCta(); }
+    }
+  }
+
+  function prevStep(){
+    if(currentStep > 1){
+      currentStep--;
+      renderStep();
+    }
+  }
+
+  function goToResults(e){
+    if(e) e.preventDefault();
+    currentStep = TOTAL_STEPS;
+    renderStep();
+    renderChart();
+    renderSummary();
+    renderCta();
+    return false;
+  }
 
   function addBottleneck(motor, focus = true){
     const id = 'bn-' + (counter++);
@@ -687,9 +863,9 @@ fbq('track', 'PageView');
     const item = state[motor].find(b => b.id === id);
     if(item){ item[field] = value; }
     if(field !== 'texto'){ renderSliderVals(motor, id); }
-    renderChart();
-    renderSummary();
+    if(currentStep === TOTAL_STEPS){ renderChart(); renderSummary(); }
     renderCta();
+    updateContinueButtons();
   }
 
   function renderSliderVals(motor, id){
@@ -732,9 +908,9 @@ fbq('track', 'PageView');
     const countEl = document.getElementById('count-' + motor);
     const n = state[motor].length;
     countEl.textContent = n ? n + (n === 1 ? ' cuello' : ' cuellos') : '';
-    renderChart();
-    renderSummary();
+    if(currentStep === TOTAL_STEPS){ renderChart(); renderSummary(); }
     renderCta();
+    updateContinueButtons();
   }
 
   function allBottlenecks(){
@@ -904,7 +1080,7 @@ fbq('track', 'PageView');
       localStorage.setItem(LS_KEY, JSON.stringify({
         name: document.getElementById('bizName').value,
         rubro: document.getElementById('bizRubro').value,
-        state, counter
+        state, counter, currentStep
       }));
     }catch(e){}
   }
@@ -921,6 +1097,7 @@ fbq('track', 'PageView');
       document.getElementById('bizName').value = data.name || '';
       document.getElementById('bizRubro').value = data.rubro || '';
       ['A','O','S'].forEach(m => { if(state[m].length === 0){ state[m].push({ id: 'bn-' + (counter++), texto: '', impacto: 5, facilidad: 5 }); } renderMotor(m); });
+      currentStep = Math.min(Math.max(parseInt(data.currentStep, 10) || 1, 1), TOTAL_STEPS);
       return true;
     }catch(e){ return false; }
   }
@@ -936,6 +1113,7 @@ fbq('track', 'PageView');
     addBottleneck('S', false);
   }
   renderCta();
+  renderStep();
   window.matchMedia('(max-width: 600px)').addEventListener('change', renderChart);
 </script>
 
