@@ -85,6 +85,38 @@ fbq('track', 'PageView');
 
   .wrap{ max-width: 880px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 2; }
 
+  /* ── SOCIAL PROOF PILL (igual que calculadora.html) ────────── */
+  .social-proof-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    padding: 6px 16px 6px 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .avatar-stack{ display: flex; align-items: center; }
+  .avatar-stack .av{
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 2px solid var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: #fff;
+    margin-left: -7px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .avatar-stack .av:first-child{ margin-left: 0; }
+  .proof-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .proof-row{ display: flex; justify-content: center; padding: 20px 0 0; }
+  @media(max-width: 600px){ .proof-row{ padding-top: 14px; } }
+
   /* ── STEPPER (one question per screen, click-to-advance) ──── */
   .step-progress{
     display: flex; align-items: center; gap: 10px;
@@ -633,6 +665,19 @@ fbq('track', 'PageView');
   </a>
   <a class="topbar-cta" href="#cta" onclick="return goToResults(event)">Mandar mi canvas →</a>
 </nav>
+
+<div class="proof-row">
+  <div class="social-proof-pill">
+    <div class="avatar-stack">
+      <img class="av" src="/assets/av-01.webp" alt="" style="padding:0;overflow:hidden;">
+      <img class="av" src="/assets/av-02.webp" alt="" style="padding:0;overflow:hidden;">
+      <img class="av" src="/assets/av-03.webp" alt="" style="padding:0;overflow:hidden;">
+      <img class="av" src="/assets/av-04.webp" alt="" style="padding:0;overflow:hidden;">
+    </div>
+    <span style="color:var(--accent-2);font-size:12px;letter-spacing:0.04em;">★★★★★</span>
+    <span class="proof-text"><strong>+470 operaciones</strong> analizadas</span>
+  </div>
+</div>
 
 <div class="wrap">
 
