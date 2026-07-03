@@ -238,7 +238,6 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .page-header {
     margin-bottom: 48px;
     padding-bottom: 48px;
-    border-bottom: 1px solid var(--border);
   }
 
   .eyebrow {
@@ -687,18 +686,31 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .veredicto strong { color: var(--text); font-weight: 600; }
   .veredicto em { color: var(--accent-2); font-style: normal; }
 
-  /* Assumptions */
+  /* Assumptions (desplegable, contraído por default) */
   .assumptions {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 24px 28px; margin-bottom: 48px;
+    padding: 4px 28px; margin-bottom: 48px;
   }
+  .assumptions[open] { padding: 20px 28px 24px; }
   .assumptions-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--dim); margin-bottom: 14px;
+    color: var(--dim);
+    padding: 16px 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
   }
+  .assumptions-title::-webkit-details-marker { display: none; }
+  .assumptions-title::after {
+    content: '+';
+    font-size: 14px; color: var(--dim); flex-shrink: 0;
+    transition: transform .18s;
+  }
+  .assumptions[open] .assumptions-title{ margin-bottom: 10px; }
+  .assumptions[open] .assumptions-title::after { content: '−'; }
   .assumptions ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .assumptions li {
     font-size: 13px; color: var(--dim); line-height: 1.6;
@@ -1191,8 +1203,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
     <div class="vline-2"></div>
 
-    <div class="assumptions">
-      <div class="assumptions-title">Supuestos del modelo</div>
+    <details class="assumptions">
+      <summary class="assumptions-title">Supuestos del modelo</summary>
       <ul>
         <li>50 semanas laborales por año.</li>
         <li>El retrabajo por error se estima con multiplicador de 1.5×.</li>
@@ -1202,7 +1214,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
         <li>El costo mensual directo es el costo operativo directo anual dividido por 12.</li>
         <li>Lo que estás dejando sobre la mesa cada año es la suma del ahorro directo bruto y el upside capturable, menos el OPEX.</li>
       </ul>
-    </div>
+    </details>
 
     <!-- SOCIAL PROOF PILL -->
     <div style="text-align:center;margin-bottom:8px;">
@@ -1219,10 +1231,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
     <!-- CTA PRINCIPAL: WhatsApp -->
     <div class="cta-box">
-      <span class="cta-eyebrow">Ese número tiene solución.</span>
       <div class="cta-title">¿Cuánto podés<br>recuperar<br>realmente?</div>
       <span class="cta-dynamic" id="cta-dynamic"></span>
-      <p class="cta-sub">Mandame tus números. Reviso tu operación personalmente y te digo en menos de 24hs si hay un caso real de automatización — y cuánto podés recuperar. Si no tiene sentido, también te lo digo.</p>
+      <p class="cta-sub">Te digo en menos de 24hs si hay un caso real de automatización acá.</p>
 
       <div class="btn-spin-wrap">
       <button class="optin-btn" id="waCtaBtn" onclick="goToWA()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;padding:18px 24px;">
@@ -1552,7 +1563,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       ctaDyn.textContent = 'Oportunidad estimada según tus datos: ' + fmt(netoAnual) + ' / año';
     } else {
       vEl.innerHTML      = '<strong>Diagnóstico:</strong> En <em>"' + p1safe + '"</em> hay fricción suficiente para justificar un análisis serio. El modelo estima <strong>' + fmt(netoAnual) + ' de oportunidad neta anual</strong> sobre una carga operativa directa de <strong>' + fmt(directCost) + '</strong>.';
-      ctaDyn.textContent = 'Calculaste ' + fmt(directCost) + ' de costo operativo directo — en 30 min analizamos si es recuperable.';
+      ctaDyn.textContent = 'Calculaste ' + fmt(directCost) + ' de costo operativo directo.';
     }
 
     const res = document.getElementById('results');
