@@ -1336,8 +1336,58 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     { max: Infinity,cls: 'z-fuera',      label: 'COSTO CRÍTICO',    eyebrow: 'Por encima del modo manual',   desc: 'El volumen ya superó al modo manual. El costo de seguir así es alto y crece con cada mes.' },
   ];
 
+  // ── Guard: pide WA (y nombre si falta) antes de mostrar resultados ────────
+  // Se inserta una sola vez, antes del botón de calcular. Se salta si ya hay a13i_wa guardado.
+  (function() {
+    const calcBtn = document.querySelector('.calc-btn');
+    if (!calcBtn || sessionStorage.getItem('a13i_wa')) return;
+
+    const tieneNombre = !!sessionStorage.getItem('a13i_nombre');
+    const guard = document.createElement('div');
+    guard.id = 'guardOptin';
+    guard.style.cssText = 'background:var(--card);border:1px solid var(--border-2);border-left:3px solid var(--accent);border-radius:0 14px 14px 0;padding:24px;margin-bottom:16px;display:none;';
+    guard.innerHTML = `
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:14px;">Para ver tus resultados</p>
+      ${!tieneNombre ? `<input type="text" id="guardNombre" placeholder="Tu nombre" style="display:block;margin-bottom:10px;background:var(--card-2);border:1px solid var(--border-2);border-radius:10px;color:var(--text);font-size:15px;padding:14px 16px;width:100%;outline:none;box-sizing:border-box;" autocomplete="given-name">` : ''}
+      <input type="tel" id="guardWa" placeholder="Tu WhatsApp (+54 9 11...)" style="display:block;margin-bottom:10px;background:var(--card-2);border:1px solid var(--border-2);border-radius:10px;color:var(--text);font-size:15px;padding:14px 16px;width:100%;outline:none;box-sizing:border-box;" autocomplete="tel">
+      <button onclick="saveGuardData()" style="width:100%;background:var(--accent);border:none;border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;padding:15px;cursor:pointer;box-sizing:border-box;">Ver mis resultados →</button>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);margin-top:10px;text-align:center;">Solo para enviarte el análisis. Sin spam.</p>
+    `;
+    calcBtn.parentNode.insertBefore(guard, calcBtn);
+  })();
+
+  function saveGuardData() {
+    const waEl     = document.getElementById('guardWa');
+    const nombreEl = document.getElementById('guardNombre'); // puede no existir
+    const w = waEl ? waEl.value.trim() : '';
+    const n = nombreEl ? nombreEl.value.trim() : (sessionStorage.getItem('a13i_nombre') || '');
+    if (!w || !n) { if (!w && waEl) waEl.focus(); return; }
+    sessionStorage.setItem('a13i_wa', w);
+    sessionStorage.setItem('a13i_nombre', n);
+    const g = document.getElementById('guardOptin');
+    if (g) g.style.display = 'none';
+    fbq('track', 'Lead');
+    fetch('https://n8n-n8n.fu6abb.easypanel.host/webhook/kona-optin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: n, wa: w, fuente: 'calculadora-guard', timestamp: new Date().toISOString() })
+    }).catch(e => console.warn('Webhook guard error:', e));
+    run();
+  }
+
   function run() {
     const calcBtn = document.querySelector('.calc-btn');
+
+    // Si todavía no dejó WA, mostramos el guard en vez de calcular.
+    if (!sessionStorage.getItem('a13i_wa')) {
+      const guard = document.getElementById('guardOptin');
+      if (guard) {
+        guard.style.display = 'block';
+        guard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+    }
+
     if (calcBtn) { calcBtn.disabled = true; calcBtn.textContent = 'Calculando…'; }
 
     fbq('trackCustom', 'CalculadoraIniciada');
