@@ -44,21 +44,21 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
 <style>
   :root {
-    --bg: #070810;
-    --card: #0f1119;
-    --card-2: #131623;
-    --ui: #171a27;
-    --ui-2: #1b1e2c;
-    --border: #242838;
-    --border-2: #2e3244;
-    --text: #f4f4f5;
-    --muted: #a1a1aa;
-    --dim: #6b7280;
-    --faint: #4b5563;
-    --accent: #e8320a;
-    --accent-2: #ff5a30;
-    --accent-glow: rgba(232, 50, 10, 0.28);
-    --green: #22c55e;
+    --bg: #FEFBF2;
+    --card: #FFFFFF;
+    --card-2: #FDFAF3;
+    --ui: #F7F0E4;
+    --ui-2: #F3E7D6;
+    --border: #EAD9C8;
+    --border-2: #EAD9C8;
+    --text: #1A1410;
+    --muted: #6B5A4A;
+    --dim: #8C7A68;
+    --faint: #B7A692;
+    --accent: #D4612A;
+    --accent-2: #E15E3F;
+    --accent-glow: rgba(212, 97, 42, 0.22);
+    --green: #1E8E5A;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,8 +89,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     content: '';
     position: fixed; inset: 0;
     background:
-      radial-gradient(800px at 20% 0%, rgba(232, 50, 10, 0.07), transparent 60%),
-      radial-gradient(600px at 80% 100%, rgba(96, 165, 250, 0.04), transparent 60%);
+      radial-gradient(800px at 20% 0%, rgba(212, 97, 42, 0.07), transparent 60%),
+      radial-gradient(600px at 80% 100%, rgba(225, 94, 63, 0.04), transparent 60%);
     pointer-events: none; z-index: 0;
   }
 
@@ -101,7 +101,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   /* ── TOPBAR ── */
   .topbar {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(7, 8, 16, 0.82);
+    background: rgba(254, 251, 242, 0.96);
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     height: 60px;
@@ -173,7 +173,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     background: var(--accent); border-radius: 10px;
     color: #fff; font-family: 'Inter', sans-serif;
     font-size: 15px; font-weight: 700; text-decoration: none;
-    transition: background .18s; box-shadow: 0 4px 20px rgba(232, 50, 10, 0.35);
+    transition: background .18s; box-shadow: 0 4px 20px rgba(212, 97, 42, 0.35);
   }
   .bridge-btn:hover { background: var(--accent-2); }
   .bridge-or {
@@ -190,7 +190,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     padding: 13px 16px; outline: none; -webkit-appearance: none;
     transition: border-color .18s, box-shadow .18s;
   }
-  .bridge-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,50,10,0.12); }
+  .bridge-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212, 97, 42, 0.12); }
   .bridge-input::placeholder { color: var(--faint); }
   .bridge-wa-btn {
     padding: 13px 24px; background: var(--ui-2);
@@ -215,9 +215,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--accent-2);
     padding: 6px 14px;
-    border: 1px solid rgba(232, 50, 10, 0.3);
+    border: 1px solid rgba(212, 97, 42, 0.3);
     border-radius: 100px;
-    background: rgba(232, 50, 10, 0.06);
+    background: rgba(212, 97, 42, 0.06);
     margin-bottom: 24px;
   }
   .eyebrow .dot {
@@ -290,7 +290,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .proof-card.own {
     --c: var(--green);
     border-left: 3px solid var(--green);
-    border-color: rgba(34,197,94,0.3);
+    border-color: rgba(30,142,90,0.3);
   }
 
   .proof-card-hd {
@@ -425,7 +425,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   input:focus, textarea:focus, select:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(232, 50, 10, 0.12);
+    box-shadow: 0 0 0 3px rgba(212, 97, 42, 0.12);
   }
   input::placeholder, textarea::placeholder { color: var(--faint); }
   select { cursor: pointer; }
@@ -440,7 +440,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     cursor: pointer; transition: all .15s;
   }
   .radio-opt:hover { border-color: var(--border-2); background: var(--ui); }
-  .radio-opt.sel { border-color: var(--accent); background: rgba(232, 50, 10, 0.06); }
+  .radio-opt.sel { border-color: var(--accent); background: rgba(212, 97, 42, 0.06); }
   .radio-dot { width: 16px; height: 16px; border: 1px solid var(--dim); border-radius: 50%; flex-shrink: 0; position: relative; }
   .radio-opt.sel .radio-dot { border-color: var(--accent); }
   .radio-opt.sel .radio-dot::after { content: ''; position: absolute; inset: 3px; background: var(--accent); border-radius: 50%; }
@@ -456,7 +456,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     cursor: pointer;
     transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
     position: relative; overflow: hidden;
-    box-shadow: 0 4px 24px rgba(232, 50, 10, 0.4);
+    box-shadow: 0 4px 24px rgba(212, 97, 42, 0.4);
     margin-top: 4px; margin-bottom: 64px;
   }
   .submit-btn::before {
@@ -465,7 +465,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
     transition: left 0.4s ease;
   }
-  .submit-btn:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(232, 50, 10, 0.5); }
+  .submit-btn:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(212, 97, 42, 0.5); }
   .submit-btn:hover::before { left: 100%; }
   .submit-btn:active { transform: translateY(0); }
   .submit-btn:disabled { background: var(--faint); cursor: not-allowed; transform: none; box-shadow: none; }
@@ -522,9 +522,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     font-size: 16px; font-weight: 700;
     text-decoration: none; cursor: pointer;
     transition: background .18s, transform .15s, box-shadow .18s;
-    box-shadow: 0 4px 20px rgba(232, 50, 10, 0.35);
+    box-shadow: 0 4px 20px rgba(212, 97, 42, 0.35);
   }
-  .cal-btn:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(232, 50, 10, 0.45); }
+  .cal-btn:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(212, 97, 42, 0.45); }
   .cal-note {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -564,7 +564,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .vline {
     width: 2px; height: 72px;
     margin: 0 auto 40px;
-    background: linear-gradient(180deg, var(--accent), rgba(232,50,10,0.2));
+    background: linear-gradient(180deg, var(--accent), rgba(212, 97, 42, 0.2));
     border-radius: 2px;
     opacity: 0.85;
     box-shadow: 0 0 20px var(--accent-glow), 0 0 6px var(--accent);
@@ -572,7 +572,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .vline-2 {
     width: 2px; height: 56px;
     margin: 0 auto 36px;
-    background: linear-gradient(180deg, rgba(232,50,10,0.2), var(--border-2), transparent);
+    background: linear-gradient(180deg, rgba(212, 97, 42, 0.2), var(--border-2), transparent);
     border-radius: 2px;
     opacity: 1;
   }
@@ -610,7 +610,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:6px;">¿Ya calculaste tu costo operativo?</div>
       <div style="font-size:15px;font-weight:600;color:var(--text);">Mandame tus números por WhatsApp — es más rápido.</div>
     </div>
-    <a href="optin.html" style="background:var(--accent);border:none;border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;padding:12px 20px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 16px rgba(232,50,10,0.3);">Ir a la calculadora →</a>
+    <a href="optin.html" style="background:var(--accent);border:none;border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;padding:12px 20px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 16px rgba(212, 97, 42, 0.3);">Ir a la calculadora →</a>
   </div>
 
   <!-- PAGE HEADER -->
