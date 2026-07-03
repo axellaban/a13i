@@ -258,21 +258,20 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     border: 1px solid var(--border-2);
     border-radius: 14px;
     overflow: hidden;
-    opacity: 0; animation: fadeInUp 0.4s ease forwards;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s, box-shadow 0.2s;
     cursor: default;
+    will-change: opacity, transform;
+  }
+  .proof-card.visible {
+    opacity: 1; transform: translateY(0);
   }
   .proof-card:hover {
     border-color: color-mix(in oklab, var(--c) 40%, var(--border-2));
     transform: translateY(-2px);
     box-shadow: 0 10px 28px -8px color-mix(in oklab, var(--c) 18%, transparent);
   }
-
-  /* nth-child delays */
-  .proof-group:nth-child(1) .proof-card:nth-child(1){ animation-delay:.05s }
-  .proof-group:nth-child(1) .proof-card:nth-child(2){ animation-delay:.13s }
-  .proof-group:nth-child(2) .proof-card:nth-child(1){ animation-delay:.21s }
-  .proof-group:nth-child(2) .proof-card:nth-child(2){ animation-delay:.29s }
+  .proof-card.visible:hover { transform: translateY(-2px); }
 
   /* Caso propio — borde verde izquierdo */
   .proof-card.own {
@@ -565,6 +564,31 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     opacity: 1;
   }
 
+  /* ── BORDER-BEAM ── */
+  @property --ba {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+  @keyframes border-beam-rotate { to { --ba: 360deg; } }
+  .beam {
+    pointer-events: none;
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--ba, 0deg),
+      transparent 0deg, transparent 270deg,
+      var(--accent-2) 310deg, #ffb085 330deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: border-beam-rotate 3.5s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { .beam { animation: none; } }
+
   /* ── RESPONSIVE ── */
   @media(max-width:600px) {
     .wrap { padding: 48px 12px 80px; }
@@ -753,7 +777,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       </div>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="submitApp()">Preparar mi Sesión de Mapeo Operativo →</button>
+    <button class="submit-btn" id="submitBtn" onclick="submitApp()"><span class="beam" aria-hidden="true"></span>Preparar mi Sesión de Mapeo Operativo →</button>
     <p id="form-err" style="display:none;color:var(--accent);margin-top:10px;font-size:.9rem;font-family:'JetBrains Mono',monospace;text-align:center;"></p>
 
   </div>
@@ -872,5 +896,72 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     }
   });
 </script>
+
+<script>
+  // ── Proof cards: reveal on scroll ──
+  (function () {
+    var cards = document.querySelectorAll('.proof-card');
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(function (c) { c.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var delay = parseInt(el.dataset.revealDelay, 10) || 0;
+        setTimeout(function () { el.classList.add('visible'); }, delay);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12 });
+    cards.forEach(function (card, i) {
+      card.dataset.revealDelay = i * 90;
+      io.observe(card);
+    });
+  })();
+
+  // ── Count-up en números de proof ──
+  (function () {
+    function parseNum(text) {
+      var raw = text.replace(/[^0-9]/g, '');
+      return raw ? parseInt(raw, 10) : null;
+    }
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    var nums = document.querySelectorAll('.proof-number');
+    if (!('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        io.unobserve(el);
+
+        // Separate prefix/suffix from the text node (keep .proof-unit intact)
+        var unit = el.querySelector('.proof-unit');
+        var unitHTML = unit ? unit.outerHTML : '';
+        var raw = el.textContent.replace(unit ? unit.textContent : '', '').trim();
+        var prefix = raw.match(/^[^0-9]*/)[0];
+        var suffix = raw.match(/[^0-9]*$/)[0];
+        var target = parseNum(raw);
+        if (!target) return;
+
+        var duration = 900;
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var value = Math.round(easeOut(progress) * target);
+          el.innerHTML = prefix + value + suffix + unitHTML;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.5 });
+
+    nums.forEach(function (n) { io.observe(n); });
+  })();
+</script>
 </body>
+
 </html>
