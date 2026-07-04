@@ -206,6 +206,36 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     animation: shimmer 5s linear infinite;
   }
 
+  /* Efecto animado tipo Accelerator: subrayado que se dibuja bajo la línea 1,
+     highlight que aparece detrás de la línea 2 */
+  .h1-underline { position: relative; display: inline-block; }
+  .h1-underline::after {
+    content: '';
+    position: absolute; left: 0; bottom: -4px;
+    height: 4px; width: 0%;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: underlineIn 0.7s ease-out 0.4s forwards;
+  }
+  @keyframes underlineIn { to { width: 100%; } }
+
+  .h1-highlight { position: relative; z-index: 1; }
+  .h1-highlight::before {
+    content: '';
+    position: absolute; inset: 6% -8px;
+    background: rgba(212, 97, 42, 0.16);
+    border-radius: 6px;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: highlightIn 0.55s ease-out 1s forwards;
+  }
+  @keyframes highlightIn { to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) {
+    .h1-underline::after { animation: none; width: 100%; }
+    .h1-highlight::before { animation: none; transform: scaleX(1); }
+  }
+
   .page-sub {
     font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px;
   }
@@ -231,6 +261,84 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   .cred-text { font-size: 13px; color: var(--muted); line-height: 1.75; }
   .cred-text strong { color: var(--text); font-weight: 600; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--text);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .stats-bar .stat {
+    padding: 26px 22px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stats-bar .stat:last-child { border-right: none; }
+  .stats-bar .stat-line {
+    width: 22px; height: 2px;
+    background: var(--accent-2);
+    margin-bottom: 12px;
+  }
+  .stats-bar .stat-num {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 900; letter-spacing: -0.02em;
+    color: #fff; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stats-bar .stat-label {
+    font-size: 12px; color: rgba(255,255,255,0.62);
+    line-height: 1.4;
+  }
+  @media(max-width:600px){
+    .stats-bar { grid-template-columns: 1fr; }
+    .stats-bar .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .stats-bar .stat:last-child { border-bottom: none; }
+  }
+
+  /* ── FIT TEST (¿esto es para vos?) ── */
+  .fit-test { margin-bottom: 40px; }
+  .fit-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-2);
+    padding: 6px 14px;
+    border: 1px solid rgba(212, 97, 42, 0.3);
+    border-radius: 100px;
+    background: rgba(212, 97, 42, 0.06);
+    margin-bottom: 18px;
+  }
+  .fit-title {
+    font-size: clamp(24px, 3.6vw, 32px);
+    font-weight: 900; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .fit-sub { font-size: 14.5px; color: var(--muted); margin-bottom: 28px; }
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 28px; }
+  @media(max-width:640px){ .fit-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .fit-col-label {
+    display: inline-block;
+    font-weight: 800; font-size: 13px;
+    padding: 4px 10px; border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .fit-col-label.yes { background: rgba(30,142,90,0.12); color: var(--green); }
+  .fit-col-label.no { background: rgba(212,97,42,0.1); color: var(--accent-2); }
+  .fit-item { display: flex; gap: 10px; margin-bottom: 16px; }
+  .fit-item:last-child { margin-bottom: 0; }
+  .fit-icon {
+    width: 20px; height: 20px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .fit-icon.yes { background: rgba(30,142,90,0.15); color: var(--green); }
+  .fit-icon.no { background: rgba(212,97,42,0.12); color: var(--accent-2); }
+  .fit-text { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+  .fit-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
 
   /* ── PROOF STACK ── */
   .proof-stack { display: flex; flex-direction: column; gap: 24px; margin-bottom: 48px; }
@@ -616,8 +724,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     </div>
     <p class="kicker">Implementación de IA para dueños de eCommerce con equipo operativo.</p>
     <h1>
-      Cuatro operaciones reales.
-      <span class="accent">Mirá qué les sacamos de encima.</span>
+      <span class="h1-underline">Cuatro operaciones reales.</span>
+      <span class="accent h1-highlight">Mirá qué les sacamos de encima.</span>
     </h1>
     <p class="page-sub">Qué proceso era, qué rompía y qué resultado dio. Cuál se parece más a tu operación.</p>
 
@@ -634,6 +742,25 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       <p class="cred-text">
         Bootstrapeé <strong>HolaVeggie hasta $2M</strong> sin inversión. Antes armé equipos de eCommerce y el BI que los hacía correr, y los llevé a <strong>+$15M/año</strong>. Hoy armo esos mismos sistemas, ahora con IA, en operaciones reales.
       </p>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-line"></div>
+      <div class="stat-num">470+</div>
+      <div class="stat-label">Operaciones mapeadas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-line"></div>
+      <div class="stat-num">$450K+</div>
+      <div class="stat-label">Ahorro generado a clientes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-line"></div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">Cupo mensual de operaciones</div>
     </div>
   </div>
 
@@ -731,13 +858,35 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   <div class="vline-2"></div>
 
+  <!-- FIT TEST -->
+  <div class="fit-test">
+    <div class="fit-eyebrow"><span class="dot"></span>Test de encaje</div>
+    <div class="fit-title">¿Esto es para vos?</div>
+    <p class="fit-sub">Cuatro pruebas de cada lado. Si el "sí" te representa más, reservá la llamada.</p>
+    <div class="fit-grid">
+      <div>
+        <span class="fit-col-label yes">Sí, si...</span>
+        <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Ya operás.</strong>Tenés facturación real y equipo haciendo el trabajo manual, no una idea en papel.</span></div>
+        <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Querés implementación, no un curso.</strong>Buscás que alguien construya el sistema con vos, no aprender a hacerlo solo.</span></div>
+        <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Te importa el número.</strong>Horas ahorradas, errores reducidos, plata recuperada — no una demo linda.</span></div>
+        <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Estás dispuesto a mostrar cómo opera tu negocio hoy</strong>, con sus problemas reales, sin filtro.</span></div>
+      </div>
+      <div>
+        <span class="fit-col-label no">No, si...</span>
+        <div class="fit-item"><span class="fit-icon no">✕</span><span class="fit-text"><strong>Buscás aprender a construirlo vos mismo.</strong>Esto es implementación 1:1, no un programa de builders.</span></div>
+        <div class="fit-item"><span class="fit-icon no">✕</span><span class="fit-text"><strong>Todavía no tenés operación corriendo.</strong>Sin proceso real en marcha, no hay qué automatizar todavía.</span></div>
+        <div class="fit-item"><span class="fit-icon no">✕</span><span class="fit-text"><strong>Buscás algo genérico de estante.</strong>Lo que armo es a medida de cómo opera tu negocio, no una app prearmada.</span></div>
+        <div class="fit-item"><span class="fit-icon no">✕</span><span class="fit-text"><strong>No estás dispuesto a revisar cómo funciona tu negocio hoy.</strong>Si no hay apertura a mirar el proceso real, hay poco para mejorar.</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Guarantee -->
   <div class="guarantee">
     <div class="g-title">Trabajo 1:1 con cada dueño/líder de operación</div>
     <p class="g-text">
       Vendedores de mapas sobran. Trabajo en el barro con vos.
       <strong>Si no hay caso concreto de automatización, te lo digo en la llamada.</strong>
-      Y si lo que buscás es aprender a construir esto vos mismo, esto no es para vos.
     </p>
   </div>
 
