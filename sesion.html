@@ -206,33 +206,37 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     animation: shimmer 5s linear infinite;
   }
 
-  /* Efecto animado tipo Accelerator: subrayado que se dibuja bajo la línea 1,
-     highlight que aparece detrás de la línea 2 */
-  .h1-underline { position: relative; display: inline-block; }
-  .h1-underline::after {
-    content: '';
-    position: absolute; left: 0; bottom: -4px;
-    height: 4px; width: 0%;
-    background: var(--accent);
-    border-radius: 2px;
-    animation: underlineIn 0.7s ease-out 0.4s forwards;
+  /* Efecto animado tipo Accelerator: subrayado a mano alzada bajo "reales." (línea 1),
+     highlight que aparece detrás de "reales." (línea 2) */
+  .h1-underline-wrap { position: relative; display: inline-block; }
+  .h1-underline-svg {
+    position: absolute; left: -2%; bottom: -14px;
+    width: 104%; height: 18px;
+    overflow: visible;
+    pointer-events: none;
   }
-  @keyframes underlineIn { to { width: 100%; } }
+  .h1-underline-svg path {
+    fill: none; stroke: var(--accent);
+    stroke-width: 6; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 300; stroke-dashoffset: 300;
+    animation: drawUnderline 0.75s ease-out 0.4s forwards;
+  }
+  @keyframes drawUnderline { to { stroke-dashoffset: 0; } }
 
-  .h1-highlight { position: relative; z-index: 1; }
+  .h1-highlight { position: relative; z-index: 1; display: inline-block; }
   .h1-highlight::before {
     content: '';
-    position: absolute; inset: 6% -8px;
-    background: rgba(212, 97, 42, 0.16);
+    position: absolute; inset: 4% -8px;
+    background: rgba(212, 97, 42, 0.18);
     border-radius: 6px;
     z-index: -1;
     transform: scaleX(0);
     transform-origin: left;
-    animation: highlightIn 0.55s ease-out 1s forwards;
+    animation: highlightIn 0.5s ease-out 1s forwards;
   }
   @keyframes highlightIn { to { transform: scaleX(1); } }
   @media (prefers-reduced-motion: reduce) {
-    .h1-underline::after { animation: none; width: 100%; }
+    .h1-underline-svg path { animation: none; stroke-dashoffset: 0; }
     .h1-highlight::before { animation: none; transform: scaleX(1); }
   }
 
@@ -724,8 +728,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     </div>
     <p class="kicker">Implementación de IA para dueños de eCommerce con equipo operativo.</p>
     <h1>
-      <span class="h1-underline">Cuatro operaciones reales.</span>
-      <span class="accent h1-highlight">Mirá qué les sacamos de encima.</span>
+      <span style="display:block">Operaciones <span class="h1-underline-wrap">reales.<svg class="h1-underline-svg" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3,11 Q30,17 60,9 T120,10 Q150,13 197,5"/></svg></span></span>
+      <span style="display:block">Transformaciones <span class="h1-highlight">reales.</span></span>
     </h1>
     <p class="page-sub">Qué proceso era, qué rompía y qué resultado dio. Cuál se parece más a tu operación.</p>
 
