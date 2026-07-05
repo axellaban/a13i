@@ -16,14 +16,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A13I — Mapa de Oportunidades de IA para eCommerce</title>
-<meta name="description" content="32 iniciativas de IA para eCommerce en LATAM, organizadas en 4 verticales y 4 pilares. Quick wins de 0 a 60 días y big swings de 12 a 36 meses, con métrica, stack y riesgo de cada una. Te lo mandamos en PDF por WhatsApp.">
+<meta name="description" content="32 iniciativas de IA para eCommerce en LATAM, organizadas en 4 verticales y 4 áreas. Quick wins de 0 a 60 días y big swings de 12 a 36 meses, con métrica, stack recomendado y riesgo de cada una. Te mandamos el documento en PDF por WhatsApp.">
 <meta property="og:title" content="A13I — Mapa de Oportunidades de IA para eCommerce">
-<meta property="og:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por pilar. Te lo mandamos en PDF por WhatsApp.">
+<meta property="og:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por área. Te mandamos el documento en PDF por WhatsApp.">
 <meta property="og:image" content="/assets/og-image.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A13I — Mapa de Oportunidades de IA para eCommerce">
-<meta name="twitter:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por pilar.">
+<meta name="twitter:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por área.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -193,11 +193,6 @@ fbq('track', 'PageView');
   }
   .vertical-card:hover{ border-color: var(--accent); }
   .vertical-card.selected{ border-color: var(--accent); background: rgba(212, 97, 42, 0.07); box-shadow: 0 0 0 3px var(--accent-glow); }
-  .vertical-card .v-tag{
-    display: inline-block; font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-    color: var(--accent-2); margin-bottom: 6px;
-  }
   .vertical-card .v-name{ font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
   .vertical-card .v-desc{ font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 
@@ -212,7 +207,7 @@ fbq('track', 'PageView');
     font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--dim); margin-bottom: 7px;
   }
-  input[type=text], input[type=tel], select{
+  input[type=text], select{
     width: 100%; background: var(--card-2); border: 1px solid var(--border-2); border-radius: 10px;
     color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px;
     padding: 13px 16px; outline: none;
@@ -221,7 +216,7 @@ fbq('track', 'PageView');
   select{ appearance: none; cursor: pointer; }
   select:invalid{ color: var(--faint); }
   input::placeholder{ color: var(--faint); }
-  input[type=text]:focus, input[type=tel]:focus, select:focus{
+  input[type=text]:focus, select:focus{
     border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
   }
   .lead-error{
@@ -289,9 +284,7 @@ fbq('track', 'PageView');
   <!-- STEP 1: VERTICAL -->
   <div class="step is-active" data-step="1">
     <header class="hero">
-      <span class="eyebrow"><span class="dot"></span>A13I · Mapa de Oportunidades IA</span>
-      <h1>El mapa de oportunidades de IA para tu eCommerce en LATAM<span class="accent">, en 32 movidas concretas.</span></h1>
-      <p class="hero-sub">32 iniciativas organizadas en 4 verticales y 4 pilares. Cada una con <strong>quick win</strong> de 0 a 60 días, <strong>big swing</strong> de 12 a 36 meses, métrica de impacto, stack típico y riesgo principal.</p>
+      <h1>Recibí el mapa de oportunidades y accionables de IA para tu eCommerce.</h1>
     </header>
 
     <div class="step-card">
@@ -306,9 +299,9 @@ fbq('track', 'PageView');
     </div>
 
     <ul class="value-bullets">
-      <li>32 iniciativas de IA mapeadas por vertical y por pilar</li>
-      <li>Métrica de impacto, stack típico y riesgo principal en cada una</li>
-      <li>Te lo mandamos en PDF por WhatsApp</li>
+      <li>32 iniciativas de IA mapeadas por vertical y por área</li>
+      <li>Métrica de impacto, stack recomendado y riesgo principal en cada una</li>
+      <li>Te mandamos el documento en PDF por WhatsApp</li>
     </ul>
   </div>
 
@@ -334,16 +327,8 @@ fbq('track', 'PageView');
             <option value="Más de USD 20M">Más de USD 20M</option>
           </select>
         </div>
-        <div class="lead-field">
-          <label for="leadName">Tu nombre</label>
-          <input type="text" id="leadName" placeholder="Tu nombre">
-        </div>
-        <div class="lead-field">
-          <label for="leadWa">Tu WhatsApp</label>
-          <input type="tel" id="leadWa" placeholder="+54 9 11 1234 5678">
-        </div>
       </div>
-      <p class="lead-error" id="leadError">Completá los 4 campos para continuar.</p>
+      <p class="lead-error" id="leadError">Completá los 2 campos para continuar.</p>
 
       <div class="step-nav">
         <button class="step-back" onclick="prevStep()">← Atrás</button>
@@ -360,10 +345,10 @@ fbq('track', 'PageView');
 
 <script>
   const VERTICALS = [
-    { id: 'moda',   tag: 'V1', name: 'Moda y Belleza',                       desc: 'Indumentaria, calzado, cosmética, accesorios.' },
-    { id: 'retail', tag: 'V2', name: 'Electrónica, Retail y Marketplaces',    desc: 'Electrónica, hogar, retail generalista, marketplaces.' },
-    { id: 'cpg',    tag: 'V3', name: 'Supermercados, B2B y CPG',             desc: 'Supermercados, distribución B2B, consumo masivo.' },
-    { id: 'travel', tag: 'V4', name: 'Travel, Educación y Servicios Online', desc: 'Turismo, cursos online, suscripciones de servicio.' },
+    { id: 'moda',   name: 'Moda y Belleza',                       desc: 'Indumentaria, calzado, cosmética, accesorios.' },
+    { id: 'retail', name: 'Electrónica, Retail y Marketplaces',    desc: 'Electrónica, hogar, retail generalista, marketplaces.' },
+    { id: 'cpg',    name: 'Supermercados, B2B y CPG',             desc: 'Supermercados, distribución B2B, consumo masivo.' },
+    { id: 'travel', name: 'Travel, Educación y Servicios Online', desc: 'Turismo, cursos online, suscripciones de servicio.' },
   ];
 
   const state = { vertical: null };
@@ -375,7 +360,6 @@ fbq('track', 'PageView');
     const grid = document.getElementById('verticalGrid');
     grid.innerHTML = VERTICALS.map(v => `
       <div class="vertical-card${state.vertical === v.id ? ' selected' : ''}" data-v="${v.id}" onclick="selectVertical('${v.id}')">
-        <span class="v-tag">${v.tag}</span>
         <div class="v-name">${v.name}</div>
         <div class="v-desc">${v.desc}</div>
       </div>
@@ -418,29 +402,23 @@ fbq('track', 'PageView');
   }
 
   // ── WhatsApp handoff ─────────────────────────────────────────
-  function buildWaMessage(empresa, facturacion, name){
+  function buildWaMessage(empresa, facturacion){
     const v = VERTICALS.find(x => x.id === state.vertical);
-    return `Hola Axel, quiero el Mapa de Oportunidades de IA. Soy ${name}, de ${empresa}. Vertical: ${v ? v.name : ''}. Facturación aproximada: ${facturacion}.`;
+    return `Hola Axel, quiero recibir el mapa de oportunidades y accionables de IA para mi eCommerce. Empresa: ${empresa}. Vertical: ${v ? v.name : ''}. Facturación aproximada: ${facturacion}.`;
   }
 
   function submitLead(){
     const empresaEl = document.getElementById('bizEmpresa');
     const factEl     = document.getElementById('bizFacturacion');
-    const nameEl     = document.getElementById('leadName');
-    const waEl       = document.getElementById('leadWa');
     const errEl      = document.getElementById('leadError');
 
     const empresa = empresaEl.value.trim();
     const fact    = factEl.value;
-    const name    = nameEl.value.trim();
-    const wa      = waEl.value.trim();
 
-    if(!empresa || !fact || !name || !wa){
+    if(!empresa || !fact){
       errEl.style.display = 'block';
       if(!empresa) empresaEl.focus();
-      else if(!fact) factEl.focus();
-      else if(!name) nameEl.focus();
-      else waEl.focus();
+      else factEl.focus();
       return;
     }
     errEl.style.display = 'none';
@@ -448,13 +426,11 @@ fbq('track', 'PageView');
     const v = VERTICALS.find(x => x.id === state.vertical);
 
     try{
-      sessionStorage.setItem('a13i_nombre', name);
-      sessionStorage.setItem('a13i_wa', wa);
       sessionStorage.setItem('a13i_empresa', empresa);
       sessionStorage.setItem('a13i_facturacion', fact);
       sessionStorage.setItem('a13i_vertical', v ? v.name : '');
       sessionStorage.setItem('a13i_rubro', v ? v.name : '');
-      sessionStorage.setItem('a13i_canvas_msg', buildWaMessage(empresa, fact, name));
+      sessionStorage.setItem('a13i_canvas_msg', buildWaMessage(empresa, fact));
       sessionStorage.setItem('a13i_lm_source', 'quick-wins-ai');
     }catch(e){}
 
