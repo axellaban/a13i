@@ -149,10 +149,49 @@ fbq('track', 'PageView');
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.15;} }
   h1{
     font-size: clamp(32px, 5.5vw, 52px);
-    font-weight: 900; letter-spacing: -0.03em; line-height: 1.05;
+    font-weight: 900; letter-spacing: -0.03em; line-height: 1.1;
     color: var(--text); margin-bottom: 16px;
   }
   h1 .accent{ color: var(--accent-2); }
+
+  /* Subrayado a mano alzada + highlight, igual que sesion.html */
+  .h1-underline-wrap{ position: relative; display: inline-block; }
+  .h1-underline-svg{
+    position: absolute; left: -3%; bottom: -13px;
+    width: 106%; height: 22px;
+    overflow: visible; pointer-events: none;
+    transform: rotate(-1deg);
+  }
+  .h1-underline-svg path{
+    fill: none; stroke: var(--accent);
+    stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 320; stroke-dashoffset: 320;
+    animation: drawUnderline 0.8s ease-out 0.4s forwards;
+  }
+  .h1-underline-svg path.stroke-main{ stroke-width: 4.5; }
+  .h1-underline-svg path.stroke-pass2{
+    stroke-width: 3; opacity: 0.55;
+    animation-delay: 0.48s; animation-duration: 0.7s;
+  }
+  @keyframes drawUnderline{ to{ stroke-dashoffset: 0; } }
+
+  .h1-highlight{ position: relative; z-index: 1; display: inline-block; }
+  .h1-highlight::before{
+    content: '';
+    position: absolute; top: 6%; bottom: 2%; left: -10px; right: -6px;
+    background: rgba(212, 97, 42, 0.18);
+    border-radius: 3px 9px 4px 8px;
+    transform: rotate(-1.4deg) scaleX(0);
+    transform-origin: left;
+    z-index: -1;
+    animation: highlightIn 0.5s ease-out 1s forwards;
+  }
+  @keyframes highlightIn{ to{ transform: rotate(-1.4deg) scaleX(1); } }
+  @media (prefers-reduced-motion: reduce){
+    .h1-underline-svg path{ animation: none; stroke-dashoffset: 0; }
+    .h1-highlight::before{ animation: none; transform: scaleX(1); }
+  }
+
   .hero-sub{
     font-size: 16px; color: var(--muted); line-height: 1.7;
     max-width: 52ch; margin: 0 auto 36px;
@@ -284,7 +323,10 @@ fbq('track', 'PageView');
   <!-- STEP 1: VERTICAL -->
   <div class="step is-active" data-step="1">
     <header class="hero">
-      <h1>Recibí el mapa de oportunidades y accionables de IA para tu eCommerce.</h1>
+      <h1>
+        <span style="display:block">Recibí el <span class="h1-underline-wrap">mapa de oportunidades<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
+        <span style="display:block">y accionables de IA <span class="h1-highlight">para tu eCommerce.</span></span>
+      </h1>
     </header>
 
     <div class="step-card">
