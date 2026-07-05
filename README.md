@@ -7,7 +7,7 @@ Sitio de conversión y lead magnets para el programa DFY de A13I (Sistema de Aut
 - `sesion.html` (root `/`) — página de conversión: casos + bio + bloque de aplicación + Calendly inline. Es la página que recibe el tráfico principal.
 - `calculadora.html` (`/calculadora`) — lead magnet 1, Calculadora de Costo Operativo. Solo alcanzable por link directo.
 - `ops-canvas.html` (`/ops-canvas`) — lead magnet 2, Ops Canvas para eCommerce. Solo alcanzable por link directo.
-- `quick-wins-ai.html` (`/quick-wins-ai`) — lead magnet 3, Mapa de Oportunidades de IA (32 iniciativas, 4 verticales × 4 áreas). La página solo pide vertical, nombre de la empresa y facturación, y lo manda a WhatsApp con esos datos. El PDF (`quick-wins-ai-documento.pdf`, en la raíz de este repo) lo manda Axel a mano por WhatsApp después. Solo alcanzable por link directo.
+- `quick-wins-ai.html` (`/quick-wins-ai`) — lead magnet 3, Mapa de Oportunidades de IA (32 iniciativas, 4 verticales × 4 áreas). La página solo pide vertical, nombre de la empresa y facturación, y lo manda a WhatsApp con esos datos. El PDF con las 32 iniciativas no vive en este repo: Axel lo arma y lo manda a mano por WhatsApp aparte. Solo alcanzable por link directo.
 - `thankyou.html` (`/thankyou`) — página post-agenda, con el mismo bloque de formulario + Calendly que `sesion.html`.
 - `wa-redirect.html` — invisible, sin ruta propia: arma el mensaje de WhatsApp con los datos de la calculadora y dispara el webhook antes de abrir `wa.me`.
 - `optin.html` — stub de redirect a `calculadora.html` (compatibilidad con links viejos, no es parte del funnel activo).

@@ -19,9 +19,7 @@ Kicker de ICP arriba del H1 ("Implementación de IA para dueños de eCommerce co
 
 ## Lead magnet 3 — `/quick-wins-ai` (agregado 2026-07-05, corregido dos veces el mismo día)
 
-El documento (32 iniciativas de IA para eCommerce en LATAM: 4 verticales × 4 áreas × quick win/big swing, con métrica de impacto, stack recomendado y riesgo principal) se entrega en **PDF, a mano, por WhatsApp**. No es un tool que calcula ni un contenido que se revela en la página.
-
-El PDF ya existe: `a13i-partner/quick-wins-ai-documento.pdf` (9 páginas, generado con WeasyPrint). El script que lo genera está en `a13i-partner/docs/quick-wins-ai-documento-build.py` — corre standalone (`python3 quick-wins-ai-documento-build.py`, requiere `pip install weasyprint`) y regenera el PDF a partir de un diccionario `MATRIX` con las 32 iniciativas hardcodeadas en el propio script. Para editar el contenido del documento (títulos, métricas, stack, riesgo) se edita ese script, no el sitio.
+El documento (32 iniciativas de IA para eCommerce en LATAM: 4 verticales × 4 áreas × quick win/big swing, con métrica de impacto, stack recomendado y riesgo principal) se entrega en **PDF, a mano, por WhatsApp**. Ese PDF lo arma Axel por su cuenta, fuera de este repo — no vive acá ni se genera con código del sitio. Esta página no es un tool que calcula ni muestra ese contenido.
 
 Flujo de la página: paso 1 pide la vertical (grid de 4 tarjetas, sin tag de versión V1-V4, solo nombre y descripción). Paso 2 pide **nombre de la empresa** y **facturación anual aproximada** (select con 5 rangos), ambos obligatorios. **No pide nombre de la persona ni WhatsApp como campos del formulario** — Axel decidió sacarlos el 2026-07-05 porque son redundantes: al abrir WhatsApp para mandar el mensaje, el número del lead ya queda expuesto del lado de Axel sin necesidad de pedirlo antes. Al enviar, arma el mensaje de WhatsApp con empresa + vertical + facturación y redirige a `wa-redirect.html`. Axel manda el PDF manualmente por WhatsApp después de recibir el mensaje.
 
