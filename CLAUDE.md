@@ -1,46 +1,54 @@
-# CLAUDE.md — KONA Funnel
+# CLAUDE.md — A13I Partner
 
 ## Project Overview
 
-**KONA** is a 3-page sales funnel (Spanish-language) for a LATAM-focused AI automation program. It is a static HTML/CSS/Vanilla JS project with no build tooling, no package manager, and no framework dependencies. Pages are deployed directly to Vercel.
+**A13I Partner** is the conversion site + lead magnets repo for A13I's DFY program (Sistema de Autonomía Operativa). Spanish-language, static HTML/CSS/Vanilla JS, no build tooling, no package manager, no framework. Deployed to Vercel. Business context (ICP, offer, voice, decisions) lives one level up at `../01-estrategia.md` through `../05-decisiones.md` — read those before making copy or strategy calls here. This file is scoped to the technical/code side of this repo only.
 
-**Funnel Flow:**
+**Real flow (not a linear 3-page funnel):**
 ```
-Meta Ad → optin.html → calculadora.html → thankyou.html → Calendly call
+Contenido / Ads ──────────────────────────► sesion.html (aplicación + Calendly inline)
+Lead magnets (calculadora / ops-canvas) → wa-redirect.html → WhatsApp → sesion.html / thankyou.html → Calendly → Llamada
 ```
+`sesion.html` (root `/`) and `thankyou.html` (`/thankyou`) each carry their own application-form + inline-Calendly block; they aren't sequential steps of one path.
 
 **External Integrations:**
-- **n8n** (self-hosted at `n8n-n8n.fu6abb.easypanel.host`) — handles all webhook data
-- **Meta Pixel** (`1274224524679737`) — ad tracking on all 3 pages
-- **Calendly** (`https://calendly.com/axellaban`) — appointment booking
-- **Vimeo** — VSL embed in `thankyou.html` (Video Sales Letter)
-- **Google Fonts** — Barlow Condensed, Barlow, DM Mono (CDN)
+- **n8n** (self-hosted at `n8n-n8n.fu6abb.easypanel.host`) — handles all webhook data.
+- **Meta Pixel** (`1274224524679737`) — on all 5 HTML pages.
+- **Google Analytics 4** (`G-FV5WCTFBC3`, gtag.js) — on all 5 HTML pages.
+- **Calendly** (`calendly.com/axellaban/30min`) — inline widget (not just a link) in `sesion.html` and `thankyou.html`, with a `message` listener for `calendly.event_scheduled`.
+- **No Vimeo / VSL** — the old video-sales-letter step in `thankyou.html` is gone. Don't assume it's still there.
+- **Google Fonts** — Inter (400–900) + JetBrains Mono, loaded on every page.
 
 ---
 
 ## Repository Structure
 
 ```
-kona/
-├── optin.html                  # Page 1: WhatsApp lead capture form
-├── calculadora.html            # Page 2: Operational debt calculator (~43 KB)
-├── thankyou.html               # Page 3: VSL + application form + Calendly
+a13i-partner/
+├── sesion.html                 # Root "/": conversion page — casos + bio + aplicación + Calendly inline
+├── calculadora.html            # "/calculadora": lead magnet 1, operational cost calculator (~69 KB)
+├── ops-canvas.html             # "/ops-canvas": lead magnet 2, Ops Canvas (Impacto×Facilidad matrix, ~50 KB)
+├── quick-wins-ai.html          # "/quick-wins-ai": lead magnet 3, static reference doc — 32 AI initiatives (4 verticals × 4 pillars), added 2026-07-05
+├── thankyou.html                # "/thankyou": post-agenda page, same form+Calendly pattern as sesion.html
+├── wa-redirect.html            # invisible utility: builds the WhatsApp message from sessionStorage, fires webhook, redirects to wa.me
+├── optin.html                  # legacy redirect stub → calculadora.html (kept for old links only)
+├── arquitectura-sitio.md       # routes, verified prod state, pending items — owned doc, keep in sync with root context
 ├── assets/
-│   └── axel.jpg               # Profile image
-├── n8n-workflows/
-│   ├── wf_1_optin.json        # n8n workflow: opt-in webhook
-│   ├── wf_2_calculator.json   # n8n workflow: calculator submission
-│   ├── wf_3_form.json         # n8n workflow: thank-you form
-│   └── wf_4_calendly.json     # n8n workflow: Calendly booking tracking
-├── whatsapp-scripts/
-│   ├── 01-el-fantasma.txt     # Follow-up: non-starters
-│   ├── 02-el-asustado.txt     # Follow-up: scared/hesitant
-│   ├── 03-el-indeciso.txt     # Follow-up: indecisive
-│   └── 04-el-agendado.txt     # Follow-up: already scheduled
-├── vercel.json                # Rewrites "/" → "/optin.html"
-├── .env.example               # Required environment variable template
-├── README.md                  # Setup and deployment guide
-└── INSTRUCCIONES_EXPERTAS.md  # Step-by-step manual setup for Axel
+│   ├── axel.jpg, av-01..04.webp   # profile + avatar images
+│   └── og-image.jpg               # OG preview image (dark, branded)
+├── favicon/
+├── n8n-workflows/               # current workflow exports — source of truth
+│   ├── wf_1_optin.json
+│   ├── wf_2_calculator.json
+│   ├── wf_3_form.json
+│   └── wf_4_calendly.json
+├── wf_optin.json, wf_calc.json, wf_form.json, wf_calendly.json   # OLDER duplicate exports at root (Jun 29, stale) — do not import these
+├── whatsapp-scripts/            # 6 manual follow-up templates (see below)
+├── vercel.json                  # rewrites + cache headers
+├── .env.example                 # reference only, values are hardcoded in HTML
+├── skills-lock.json / .agents/skills / .claude/skills   # installed agent skills: deploy-to-vercel, frontend-design, seo, accessibility
+├── README.md
+└── INSTRUCCIONES_EXPERTAS.md    # manual setup notes, written for the original KONA-branded scaffold — steps are still roughly valid but naming is stale
 ```
 
 ---
@@ -48,227 +56,165 @@ kona/
 ## Architecture
 
 ### Single-File Pattern
-Each HTML page is **fully self-contained**: embedded `<style>` in `<head>` and `<script>` at bottom of `<body>`. There are no external `.css` or `.js` files.
+Each HTML page is fully self-contained: `<style>` in `<head>`, `<script>` at the bottom of `<body>`. No external `.css`/`.js` files.
 
 ### Page-to-Page Data Flow
-WhatsApp number is passed as a URL query parameter across pages:
+No more URL query param handoff. Lead data travels via `sessionStorage`, all keys prefixed `a13i_`:
 ```
-optin.html → calculadora.html?wa=521XXXXXXXXXX → thankyou.html?wa=521XXXXXXXXXX
+a13i_nombre, a13i_wa, a13i_email, a13i_proceso, a13i_rubro,
+a13i_costoAnual, a13i_costoMensual, a13i_recuperable,
+a13i_personas, a13i_tasaError, a13i_canvas_msg
 ```
-JavaScript reads it with: `new URLSearchParams(window.location.search).get('wa')`
+`calculadora.html` and `ops-canvas.html` write these; `wa-redirect.html`, `sesion.html`, and `thankyou.html` read them. If a page needs to hand off lead data to another, use these keys — don't reintroduce `?wa=` query params.
 
 ### Webhook Pattern
-Every form submission `POST`s JSON to an n8n webhook via `fetch`:
 ```javascript
 await fetch('https://n8n-n8n.fu6abb.easypanel.host/webhook/<route>', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ nombre, whatsapp, ... })
+  body: JSON.stringify({ ... })
 });
 ```
+Webhook route slugs (`kona-optin`, `kona-calculadora`, `kona-form`) are leftover names from the project's original scaffold, before the A13I rebrand. They are internal identifiers only — no user-facing copy references "KONA" anymore. Changing them requires updating the n8n workflows, not just the HTML.
 
 ---
 
-## Design System
+## Design System (verified in code, all 5 HTML pages, 2026-07-05)
 
-### Color Palette (CSS Custom Properties)
+This is the **actual current** palette — it does not match the dark theme described in some older project notes. If a request references a dark/red theme for this repo, confirm with Axel before applying it; the live site is a light editorial theme.
+
+### Color Palette
 ```css
---black: #000000   /* page background */
---off:   #0a0a0a   /* card/block backgrounds */
---dark:  #111111   /* secondary backgrounds */
---border:#1a1a1a   /* borders */
---red:   #e8320a   /* primary accent, CTAs, highlights */
---green: #22c55e   /* success states */
+--bg:      #FEFBF2   /* cream/paper page background */
+--card:    #FFFFFF
+--card-2:  #FDFAF3
+--ui:      #F7F0E4
+--ui-2:    #F3E7D6
+--border:  #EAD9C8
+--text:    #1A1410   /* near-black warm */
+--muted:   #6B5A4A
+--dim:     #8C7A68
+--faint:   #B7A692
+--accent:  #D4612A   /* burnt orange — CTAs, highlights */
+--accent-2:#E15E3F
+--green:   #1E8E5A   /* success */
+--amber:   #B5790A   /* calculadora/ops-canvas only, mid-severity */
 ```
+`wa-redirect.html` additionally defines `--green-wa: #25D366` for the WhatsApp button.
 
 ### Typography
-- `--dp`: `'Barlow Condensed'` — display/headings
-- `--bd`: `'Barlow'` — body text
-- `--mn`: `'DM Mono'` — labels, tags, UI chrome
+- Body/UI: `Inter` (400–900).
+- Labels, chrome, financial figures: `JetBrains Mono` (400–700).
+- No Fraunces, no Barlow, no IBM Plex Mono anywhere in this repo's live code.
 
-### Layout Breakpoints
-- Two-column grid collapses at `820px` (single column on mobile)
-
-### Recurring UI Patterns
-- **Scan line overlay**: moving red line animation for cyberpunk aesthetic
-- **Grid background**: subtle 60px grid pattern
-- **Pulse dot**: blinking red dot for urgency
-- **Fade-in-up**: animation class for appearing elements
-- **Loading overlay**: scan-ring spinner during async operations
+### Layout
+Cards with rounded corners, cream card-on-cream-background editorial feel, no dark mode.
 
 ---
 
 ## calculadora.html — Calculator Logic
 
-The most complex file (~43 KB). Implements a 7-block cost modeling form.
+Wizard-style form (~69 KB), 7-block cost model.
 
-### Inputs
-1. Process name (tag chips or free text)
-2. Annual revenue / throughput
-3. Manual work hours/month
-4. Team size
-5. Error rate (2–20%)
-6. Solution type (15% vs 50% efficiency gain)
-7. Process variability / automation capture (30–100%)
-
-### Key Calculations
+### Key variables
 ```javascript
-annualWorkCost  = hours × 12 × hourlyRate
-errorCost       = annualWorkCost × errorRate × 1.5   // rework multiplier
-OPEX            = $600 base + $20 × teamSize / month
-grossSavings    = (workCost + errorCost) × solutionPct × capturePct
-netAnnualSaving = grossSavings + opportunityCost - annualOPEX
+directCost   = baseLabor + errCost                       // annual direct operational cost
+grossDirect  = directCost * cobertura * adjComp
+netoAnual    = max(0, grossDirect + grossStrategic - opex)
+opex         = $600 base + $20 × personas /month, annualized
 ```
 
-### Zone Classification (5 levels by total annual cost)
-- **Elite** — lowest operational debt
-- **Amateur**
-- **Sedentario**
-- **Lesionado**
-- **Fuera** — highest (urgency messaging)
+### Zone classification (by `directCost`, `ZONES` array)
+| max | class | user-facing label |
+|---|---|---|
+| 10,000 | `z-elite` | "COSTO BAJO" |
+| 25,000 | `z-amateur` | "COSTO MODERADO" |
+| 75,000 | `z-sedentario` | "COSTO ALTO" |
+| 150,000 | `z-lesionado` | "COSTO MUY ALTO" |
+| ∞ | `z-fuera` | "COSTO CRÍTICO" |
 
-### Advanced Options (toggleable)
-- ROI simulator with custom investment input
-- Stacked bar chart (work cost vs error cost)
-- Detailed breakdown table
-- Academic citations (Stanford HAI, Deloitte, NBER)
+CSS class names keep the old gamified naming (`z-elite`, `z-amateur`...) but user-facing copy was changed to plain severity labels — don't rename the classes without checking every page that references them.
+
+---
+
+## quick-wins-ai.html — Mapa de Oportunidades de IA
+
+Lead-qualification page, added 2026-07-05. **The actual deliverable (a PDF covering 32 AI initiatives across 4 verticals × 4 pillars) is never rendered on this page or anywhere in the codebase.** Axel writes/sends that PDF manually over WhatsApp after the lead comes in. This page's only job is to qualify the lead and hand them off to WhatsApp with useful structured data — do not add a step that reveals the document's content on-page; that was the first version of this file and it was deliberately reverted (see `05-decisiones.md`, 2026-07-05 entries).
+
+Flow: step 1 asks which vertical the business is in (radio-card grid, `selectVertical()`). Step 2 is a qualification form: nombre de la empresa, facturación anual aproximada (`<select>`, 5 fixed ranges, required), nombre de la persona, WhatsApp — all four required, no email field. `submitLead()` validates all four, builds the WhatsApp message via `buildWaMessage()`, and redirects to `wa-redirect.html`.
+
+`sessionStorage` handoff: sets `a13i_nombre`, `a13i_wa`, `a13i_empresa`, `a13i_facturacion`, `a13i_vertical` (also mirrored into `a13i_rubro` for `wa-redirect.html`'s generic fallback path), `a13i_canvas_msg` (read by `wa-redirect.html`'s `buildMessage()`), and `a13i_lm_source = 'quick-wins-ai'`. `wa-redirect.html` was extended to also forward `empresa`, `facturacion`, and `vertical` as their own fields in the n8n webhook payload — not just baked into the message text — so they're queryable/filterable data, which is the actual point of asking for them (lead qualification, not just personalization).
+
+`VERTICALS` is the only content array left in this file (4 items: moda, retail, cpg, travel — used for the step-1 picker and the message text). If the underlying 32-initiative content changes, edit the PDF Axel sends, not this file.
 
 ---
 
 ## Development Workflow
 
-### Running Locally
-No build step required. Open HTML files directly in browser or serve with any static server:
 ```bash
 python3 -m http.server 8080
-# then visit http://localhost:8080/optin.html
+# then visit http://localhost:8080/sesion.html
 ```
-
-### Deployment
-Deployed to Vercel as a static site. Push to `main` → auto-deploy. `vercel.json` rewrites root to `optin.html`.
-
-### Making Changes
-1. Edit the relevant HTML file directly
-2. Test in browser
-3. Commit and push to trigger Vercel deployment
+Push to `main` → Vercel auto-deploys. No test suite, no linter — match existing style by convention.
 
 ---
 
-## Environment Variables
+## Environment Variables (`.env.example`, reference only)
 
-Defined in `.env.example`. These are **not automatically injected** into static HTML — they are reference values that must be manually placed in the HTML files. The actual values are currently hardcoded in the files.
-
-| Variable | Current Value | File(s) |
+| Variable | Current value | File(s) |
 |---|---|---|
-| `META_PIXEL_ID` | `1274224524679737` | all 3 HTML files |
-| `WEBHOOK_URL_OPTIN` | `…/webhook/kona-optin` | optin.html |
-| `WEBHOOK_URL_CALCULADORA` | `…/webhook/kona-calculadora` | calculadora.html |
-| `WEBHOOK_URL_FORMULARIO` | `…/webhook/kona-form` | thankyou.html |
-| `CALENDLY_URL` | `https://calendly.com/axellaban` | thankyou.html |
-| `VIMEO_VIDEO_ID` | (placeholder) | thankyou.html |
+| `META_PIXEL_ID` | `1274224524679737` | all 5 HTML files |
+| `WEBHOOK_URL_OPTIN` | `…/webhook/kona-optin` | `calculadora.html` |
+| `WEBHOOK_URL_CALCULADORA` | `…/webhook/kona-calculadora` | `wa-redirect.html` |
+| `WEBHOOK_URL_FORMULARIO` | `…/webhook/kona-form` | `sesion.html`, `thankyou.html` |
+| `CALENDLY_URL` | `https://calendly.com/axellaban/30min` | `sesion.html`, `thankyou.html` |
+
+(`VIMEO_VIDEO_ID` no longer applies — removed from the funnel.)
 
 ---
 
-## n8n Workflows
+## Meta Pixel & GA4 Events
 
-Import JSON files from `n8n-workflows/` into the n8n instance. Each workflow:
-- Listens on a webhook route
-- Processes lead data
-- Triggers WhatsApp follow-up sequences via the appropriate script template
+| Page | Events |
+|---|---|
+| `calculadora.html` | `PageView`, `Lead`, `CalculadoraIniciada`, `ClickBotonWA`, `CalculadoraResultadosVistos` |
+| `ops-canvas.html` | `PageView`, `OpsCanvasWhatsApp` |
+| `quick-wins-ai.html` | `PageView`, `QuickWinsVerticalSelected`, `QuickWinsLeadSubmit`, `Lead` |
+| `sesion.html` | `PageView`, `FormularioEnviado`, `CalendarioMostrado`, `ClickCalendly`, `LlamadaAgendada` |
+| `thankyou.html` | `PageView`, `FormularioEnviado`, `CalendarioMostrado`, `ClickCalendly`, `LlamadaAgendada` |
+| `wa-redirect.html` | `PageView`, `WARedirectPageView`, `ClickBotonWA`, `CountdownCompletado` |
 
-Webhook base URL: `https://n8n-n8n.fu6abb.easypanel.host/webhook/`
-
-### Webhook Payload Specifications
-
-**POST `/webhook/kona-optin`** — sent by `optin.html`:
-```json
-{ "wa": "521XXXXXXXXXX", "fuente": "optin", "timestamp": "2026-01-01T00:00:00.000Z" }
-```
-
-**POST `/webhook/kona-calculadora`** — sent by `calculadora.html`:
-```json
-{
-  "name": "Nombre del lead",
-  "wa": "521XXXXXXXXXX",
-  "proceso": "Facturación",
-  "netoAnual": 48000,
-  "directCost": 72000,
-  "fuente": "calculadora",
-  "timestamp": "2026-01-01T00:00:00.000Z"
-}
-```
-
-**POST `/webhook/kona-form`** — sent by `thankyou.html`:
-```json
-{
-  "wa": "521XXXXXXXXXX",
-  "q1": "respuesta a pregunta 1",
-  "q2": "respuesta a pregunta 2",
-  "q3": "respuesta a pregunta 3",
-  "fuente": "formulario",
-  "timestamp": "2026-01-01T00:00:00.000Z"
-}
-```
-
-**POST `/webhook/<uuid>`** — Calendly tracking, sent by `thankyou.html` (fired by Calendly JS widget event).
+Every `fbq('trackCustom', ...)` has a matching `gtag('event', ...)` call with a snake_case name.
 
 ---
 
-## Meta Pixel Events
+## WhatsApp Follow-up Scripts (`whatsapp-scripts/`, 6 files, manual — not automated)
 
-| Page | Event | Trigger |
-|---|---|---|
-| `optin.html` | `PageView` | on load |
-| `optin.html` | `Lead` | on successful form submission |
-| `calculadora.html` | `PageView` | on load |
-| `calculadora.html` | `CalculadoraIniciada` (custom) | when `run()` is called |
-| `calculadora.html` | `CalculadoraCompleta` (custom) | on CTA form submit |
-| `thankyou.html` | `PageView` | on load |
-| `thankyou.html` | `FormularioEnviado` (custom) | on application form submit |
+- `00-triage-respuesta.txt` — first reply script when a lead's WhatsApp comes in with calculator data.
+- `01-el-fantasma.txt` — left WhatsApp at opt-in but never finished the calculator. Wait 2–4h.
+- `02-el-asustado.txt` — saw their number, went quiet/scared. References a "6 min video" — stale, no video currently lives in `thankyou.html`; check before sending.
+- `02-no-envio-wa.txt` — reached `wa-redirect.html` (webhook fired) but never actually sent the WhatsApp message. Wait 1–2h, message manually using the number captured in the webhook.
+- `03-el-indeciso.txt` — sent WhatsApp data but never replied to triage. Send once, 48h later, no follow-up after.
+- `04-el-agendado.txt` — call booked. Confirmation + pre-call case study link.
 
----
-
-## WhatsApp Follow-up Scripts
-
-Located in `whatsapp-scripts/`. Four templates targeting different lead behaviors:
-- `01-el-fantasma.txt` — Lead opted in but never engaged
-- `02-el-asustado.txt` — Lead engaged but showed fear/resistance
-- `03-el-indeciso.txt` — Lead is hesitant / hasn't decided
-- `04-el-agendado.txt` — Lead booked a call (nurture sequence)
-
-### Script Variable Mapping
-
-| Script | Placeholder | Source | Status |
-|---|---|---|---|
-| `01-el-fantasma.txt` | `[nombre]` | wf_1_optin — from opt-in data | ✓ |
-| `01-el-fantasma.txt` | `[link calculadora]` | hardcoded in workflow | ✓ |
-| `02-el-asustado.txt` | `[nombre]` | wf_2_calculator | ✓ |
-| `02-el-asustado.txt` | `[monto]` | wf_2_calculator — from `netoAnual` | ✓ |
-| `02-el-asustado.txt` | `[proceso]` | wf_2_calculator — from `proceso` field | ✓ |
-| `03-el-indeciso.txt` | `[nombre]` | wf_3_form | ✓ |
-| `03-el-indeciso.txt` | `[proceso]` | wf_3_form — now sent directly from `sesion.html`/`thankyou.html` as `proceso` (also already in the sheet from the calculator step) | ✓ fixed 2026-06-30 |
-| `04-el-agendado.txt` | `[nombre]` | wf_4_calendly | ✓ |
-| `04-el-agendado.txt` | `[día]` / `[hora]` | wf_4_calendly — `Dia_Booking`/`Hora_Booking` columns, formatted in `America/Argentina/Buenos_Aires` (es locale) from `event_start_time` | ✓ fixed 2026-06-30 — requires adding `Dia_Booking`/`Hora_Booking` columns to the Leads sheet before re-importing the workflow |
-| `04-el-agendado.txt` | `[link]` | hardcoded in workflow | ✓ |
+These are manual send templates, not n8n-automated messages — `[nombre]`, `[monto]`, `[proceso]`, `[día]`/`[hora]` are filled in by hand from the n8n sheet/webhook data.
 
 ---
 
 ## Key Conventions to Follow
 
-1. **No build tooling** — never introduce npm, webpack, or transpilation. Keep it plain HTML/CSS/JS.
-2. **Single-file pages** — keep CSS in `<style>` and JS in `<script>` within each HTML file. Do not create separate asset files unless explicitly requested.
-3. **CSS variables for theming** — always use the defined `--red`, `--green`, `--black`, etc. variables. Never hardcode hex colors inline.
-4. **Spanish content** — all user-facing text is in Spanish. Keep it that way.
-5. **Vanilla JS** — no jQuery, no React, no framework. Use `fetch`, `async/await`, `URLSearchParams`, and standard DOM APIs.
-6. **Webhook error handling** — always wrap `fetch` calls in `try/catch`; show a user-visible error message on failure rather than silently failing.
-7. **Meta Pixel on all pages** — `fbq('track', 'Lead')` must fire on all meaningful conversion actions.
-8. **Query param continuity** — when linking between pages, always forward the `wa` (WhatsApp) query parameter.
-9. **No test suite** — this project has no automated tests. Test changes manually in the browser.
-10. **No linting tools** — no ESLint, Prettier, or stylelint. Follow the existing code style by convention.
+1. No build tooling — plain HTML/CSS/JS only.
+2. Single-file pages — CSS in `<style>`, JS in `<script>`, no separate asset files unless asked.
+3. CSS variables for theming — use the palette above, never hardcode hex inline.
+4. Spanish content throughout.
+5. Vanilla JS — `fetch`, `async/await`, `sessionStorage`, standard DOM APIs. No frameworks.
+6. Webhook calls wrapped in `try/catch` with a user-visible failure message.
+7. Meta Pixel + GA4 fire together on every meaningful event — keep both in sync when adding one.
+8. Lead-data handoff between pages goes through `sessionStorage` (`a13i_*` keys), not query params.
+9. No test suite, no linter — match existing style by convention.
 
 ---
 
-## Git Branch
+## Git
 
-Active development branch: `claude/add-claude-documentation-NYaxt`
-Production branch: `main`
+Production branch: `main`. Working tree is normally clean; ignore the many zero-byte `*.lock.bak*`/`*.lock.pre_*` files under `.git/` — leftovers from an external backup tool, not real git locks.

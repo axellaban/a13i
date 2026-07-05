@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<link rel="icon" href="/favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="/favicon/favicon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FV5WCTFBC3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FV5WCTFBC3');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A13I — Mapa de Oportunidades de IA para eCommerce</title>
+<meta name="description" content="32 iniciativas de IA para eCommerce en LATAM, organizadas en 4 verticales y 4 pilares. Quick wins de 0 a 60 días y big swings de 12 a 36 meses, con métrica, stack y riesgo de cada una. Te lo mandamos en PDF por WhatsApp.">
+<meta property="og:title" content="A13I — Mapa de Oportunidades de IA para eCommerce">
+<meta property="og:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por pilar. Te lo mandamos en PDF por WhatsApp.">
+<meta property="og:image" content="/assets/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A13I — Mapa de Oportunidades de IA para eCommerce">
+<meta name="twitter:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por pilar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1274224524679737');
+fbq('track', 'PageView');
+</script>
+<style>
+  :root{
+    --bg: #FEFBF2;
+    --card: #FFFFFF;
+    --card-2: #FDFAF3;
+    --ui: #F7F0E4;
+    --ui-2: #F3E7D6;
+    --border: #E8E3DE;
+    --border-2: #EAD9C8;
+    --text: #1A1410;
+    --muted: #6B5A4A;
+    --dim: #8C7A68;
+    --faint: #B7A692;
+    --accent: #D4612A;
+    --accent-2: #E15E3F;
+    --accent-glow: rgba(212, 97, 42, 0.22);
+    --green: #1E8E5A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before{
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.015; pointer-events: none; z-index: 100; mix-blend-mode: multiply;
+  }
+  body::after{
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(900px at 15% 0%, rgba(212, 97, 42, 0.08), transparent 60%),
+      radial-gradient(700px at 90% 10%, rgba(225, 94, 63, 0.06), transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrap{ max-width: 640px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 2; }
+
+  /* ── SOCIAL PROOF PILL ─────────────────────────────────────── */
+  .social-proof-pill{
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--card); border: none; border-radius: 999px;
+    padding: 6px 16px 6px 8px;
+    box-shadow: 0 1px 2px rgba(120,80,40,0.05), 0 4px 18px rgba(180,120,80,0.08);
+  }
+  .avatar-stack{ display: flex; align-items: center; }
+  .avatar-stack .av{
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: #fff;
+    margin-left: -7px; flex-shrink: 0; object-fit: cover;
+  }
+  .avatar-stack .av:first-child{ margin-left: 0; }
+  .proof-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .proof-row{ display: flex; justify-content: center; padding: 20px 0 0; }
+  @media(max-width: 600px){ .proof-row{ padding-top: 14px; } }
+
+  /* ── STEPPER ────────────────────────────────────────────────── */
+  .step{ display: none; }
+  .step.is-active{ display: block; animation: stepIn .32s cubic-bezier(.2,.8,.2,1); }
+  @keyframes stepIn{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: translateY(0); } }
+  .step-nav{ display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
+  .step-back{
+    background: none; border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.06em; color: var(--dim);
+    cursor: pointer; padding: 10px 6px; transition: color .18s;
+  }
+  .step-back:hover{ color: var(--text); }
+  .step-back:disabled{ opacity: 0; pointer-events: none; }
+  .step-continue{
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
+    padding: 14px 24px; border: none; border-radius: 11px;
+    cursor: pointer; transition: background .18s, box-shadow .18s, opacity .18s;
+    margin-left: auto;
+  }
+  .step-continue:hover{ background: var(--accent-2); box-shadow: 0 8px 28px var(--accent-glow); }
+  .step-continue:disabled{ opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+  @media(max-width: 600px){
+    .step-continue{ width: 100%; justify-content: center; }
+    .step-nav{ flex-direction: column-reverse; align-items: stretch; }
+    .step-back{ text-align: center; }
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────────── */
+  header.hero{ padding: 64px 0 44px; margin-bottom: 8px; text-align: center; }
+  .eyebrow{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-2);
+    padding: 6px 14px; border: 1px solid rgba(212, 97, 42, 0.25); border-radius: 100px;
+    background: rgba(212, 97, 42, 0.07);
+    margin-bottom: 24px;
+  }
+  .eyebrow .dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.15;} }
+  h1{
+    font-size: clamp(32px, 5.5vw, 52px);
+    font-weight: 900; letter-spacing: -0.03em; line-height: 1.05;
+    color: var(--text); margin-bottom: 16px;
+  }
+  h1 .accent{ color: var(--accent-2); }
+  .hero-sub{
+    font-size: 16px; color: var(--muted); line-height: 1.7;
+    max-width: 52ch; margin: 0 auto 36px;
+  }
+  .hero-sub strong{ color: var(--text); font-weight: 600; }
+
+  /* ── STEP CARD ──────────────────────────────────────────────── */
+  .step-card{
+    background: var(--card); border: 1px solid var(--border-2); border-radius: 24px;
+    padding: 40px 36px 32px; max-width: 560px; margin: 28px auto 0;
+    box-shadow: 0 2px 12px rgba(31,20,16,0.05), 0 16px 40px rgba(31,20,16,0.07);
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .step-card::before{
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(360px at 50% 0%, rgba(212, 97, 42, 0.10), transparent 65%);
+    pointer-events: none;
+  }
+  @media(max-width: 600px){ .step-card{ padding: 30px 22px 26px; } }
+  .step-card .step-nav{ margin-top: 26px; justify-content: center; position: relative; z-index: 1; }
+  .step-card .step-nav .step-back{ position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+  .step-question{
+    font-size: clamp(19px, 3vw, 24px); font-weight: 800; letter-spacing: -0.01em;
+    color: var(--text); margin-bottom: 8px; position: relative; z-index: 1;
+  }
+  .step-note{
+    font-size: 13.5px; color: var(--muted); margin-bottom: 22px; position: relative; z-index: 1;
+  }
+
+  /* ── VERTICAL PICKER ────────────────────────────────────────── */
+  .vertical-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; z-index: 1; }
+  @media(max-width: 600px){ .vertical-grid{ grid-template-columns: 1fr; } }
+  .vertical-card{
+    text-align: left; cursor: pointer;
+    background: var(--card-2); border: 1.5px solid var(--border-2); border-radius: 14px;
+    padding: 16px 18px;
+    transition: border-color .18s, background .18s, box-shadow .18s;
+  }
+  .vertical-card:hover{ border-color: var(--accent); }
+  .vertical-card.selected{ border-color: var(--accent); background: rgba(212, 97, 42, 0.07); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .vertical-card .v-tag{
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--accent-2); margin-bottom: 6px;
+  }
+  .vertical-card .v-name{ font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .vertical-card .v-desc{ font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+  /* ── FORM FIELDS (step 2) ───────────────────────────────────── */
+  .lead-form{
+    display: flex; flex-direction: column; gap: 14px;
+    max-width: 420px; margin: 0 auto; text-align: left;
+    position: relative; z-index: 1;
+  }
+  .lead-field label{
+    display: block; font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 7px;
+  }
+  input[type=text], input[type=tel], select{
+    width: 100%; background: var(--card-2); border: 1px solid var(--border-2); border-radius: 10px;
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px;
+    padding: 13px 16px; outline: none;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  select{ appearance: none; cursor: pointer; }
+  select:invalid{ color: var(--faint); }
+  input::placeholder{ color: var(--faint); }
+  input[type=text]:focus, input[type=tel]:focus, select:focus{
+    border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .lead-error{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent-2);
+    margin: 16px auto 0; max-width: 420px; text-align: left; display: none; position: relative; z-index: 1;
+  }
+
+  /* ── VALUE BULLETS ──────────────────────────────────────────── */
+  .value-bullets{ list-style: none; max-width: 480px; margin: 24px auto 0; padding: 0 4px; }
+  .value-bullets li{
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; font-weight: 700; color: var(--text);
+    padding: 7px 0; text-align: left;
+  }
+  .value-bullets li::before{ content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-top: 8px; flex-shrink: 0; }
+
+  .btn-spin-wrap{
+    display: inline-block; padding: 2px; border-radius: 13px; position: relative;
+    background: conic-gradient(from var(--spin-angle, 0deg), transparent 0%, var(--accent) 12%, var(--accent-2) 20%, transparent 35%);
+    animation: spinBorder 2.8s linear infinite;
+  }
+  @keyframes spinBorder{ to{ --spin-angle: 360deg; } }
+  @property --spin-angle{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  .cta-btn{
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--accent); color: #fff;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px;
+    text-decoration: none; padding: 16px 26px; border-radius: 11px;
+    border: none; cursor: pointer; transition: background .18s, box-shadow .18s;
+  }
+  .cta-btn:hover{ background: var(--accent-2); box-shadow: 0 8px 32px var(--accent-glow); }
+  .cta-btn:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
+
+  footer{
+    border-top: 1px solid var(--border); padding: 22px 32px; text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em;
+    color: var(--faint); position: relative; z-index: 2;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn-spin-wrap{ animation: none; background: var(--accent); }
+    .eyebrow .dot{ animation: none; }
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="proof-row">
+  <div class="social-proof-pill">
+    <div class="avatar-stack">
+      <img class="av" src="/assets/av-01.webp" alt="" style="padding:0;overflow:hidden;">
+      <img class="av" src="/assets/av-02.webp" alt="" style="padding:0;overflow:hidden;">
+      <img class="av" src="/assets/av-03.webp" alt="" style="padding:0;overflow:hidden;">
+      <img class="av" src="/assets/av-04.webp" alt="" style="padding:0;overflow:hidden;">
+    </div>
+    <span style="color:var(--accent-2);font-size:12px;letter-spacing:0.04em;">★★★★★</span>
+    <span class="proof-text"><strong>+470 operaciones</strong> analizadas</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- STEP 1: VERTICAL -->
+  <div class="step is-active" data-step="1">
+    <header class="hero">
+      <span class="eyebrow"><span class="dot"></span>A13I · Mapa de Oportunidades IA</span>
+      <h1>El mapa de oportunidades de IA para tu eCommerce en LATAM<span class="accent">, en 32 movidas concretas.</span></h1>
+      <p class="hero-sub">32 iniciativas organizadas en 4 verticales y 4 pilares. Cada una con <strong>quick win</strong> de 0 a 60 días, <strong>big swing</strong> de 12 a 36 meses, métrica de impacto, stack típico y riesgo principal.</p>
+    </header>
+
+    <div class="step-card">
+      <div class="step-question">¿En qué vertical opera tu eCommerce?</div>
+      <div class="vertical-grid" id="verticalGrid"></div>
+      <div class="step-nav">
+        <button class="step-back" disabled>← Atrás</button>
+        <div class="btn-spin-wrap">
+          <button class="step-continue" id="contBtn1" onclick="nextStep()" style="margin-left:0;" disabled>Continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="value-bullets">
+      <li>32 iniciativas de IA mapeadas por vertical y por pilar</li>
+      <li>Métrica de impacto, stack típico y riesgo principal en cada una</li>
+      <li>Te lo mandamos en PDF por WhatsApp</li>
+    </ul>
+  </div>
+
+  <!-- STEP 2: DATOS + WHATSAPP -->
+  <div class="step" data-step="2">
+    <div class="step-card">
+      <div class="step-question">Contame un poco de tu empresa</div>
+      <p class="step-note">Con esto te mando el documento completo por WhatsApp.</p>
+
+      <div class="lead-form">
+        <div class="lead-field">
+          <label for="bizEmpresa">Nombre de tu empresa</label>
+          <input type="text" id="bizEmpresa" placeholder="Ej: Mi Tienda">
+        </div>
+        <div class="lead-field">
+          <label for="bizFacturacion">Facturación anual aproximada</label>
+          <select id="bizFacturacion">
+            <option value="" disabled selected>Elegí un rango</option>
+            <option value="Menos de USD 1M">Menos de USD 1M</option>
+            <option value="USD 1M - 3M">USD 1M – 3M</option>
+            <option value="USD 3M - 10M">USD 3M – 10M</option>
+            <option value="USD 10M - 20M">USD 10M – 20M</option>
+            <option value="Más de USD 20M">Más de USD 20M</option>
+          </select>
+        </div>
+        <div class="lead-field">
+          <label for="leadName">Tu nombre</label>
+          <input type="text" id="leadName" placeholder="Tu nombre">
+        </div>
+        <div class="lead-field">
+          <label for="leadWa">Tu WhatsApp</label>
+          <input type="tel" id="leadWa" placeholder="+54 9 11 1234 5678">
+        </div>
+      </div>
+      <p class="lead-error" id="leadError">Completá los 4 campos para continuar.</p>
+
+      <div class="step-nav">
+        <button class="step-back" onclick="prevStep()">← Atrás</button>
+        <div class="btn-spin-wrap">
+          <button class="cta-btn" id="waBtn" onclick="submitLead()">Recibir el mapa por WhatsApp →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 A13I</footer>
+
+<script>
+  const VERTICALS = [
+    { id: 'moda',   tag: 'V1', name: 'Moda y Belleza',                       desc: 'Indumentaria, calzado, cosmética, accesorios.' },
+    { id: 'retail', tag: 'V2', name: 'Electrónica, Retail y Marketplaces',    desc: 'Electrónica, hogar, retail generalista, marketplaces.' },
+    { id: 'cpg',    tag: 'V3', name: 'Supermercados, B2B y CPG',             desc: 'Supermercados, distribución B2B, consumo masivo.' },
+    { id: 'travel', tag: 'V4', name: 'Travel, Educación y Servicios Online', desc: 'Turismo, cursos online, suscripciones de servicio.' },
+  ];
+
+  const state = { vertical: null };
+  let currentStep = 1;
+  const TOTAL_STEPS = 2;
+
+  // ── STEP 1: selector de vertical ────────────────────────────
+  function renderVerticalGrid(){
+    const grid = document.getElementById('verticalGrid');
+    grid.innerHTML = VERTICALS.map(v => `
+      <div class="vertical-card${state.vertical === v.id ? ' selected' : ''}" data-v="${v.id}" onclick="selectVertical('${v.id}')">
+        <span class="v-tag">${v.tag}</span>
+        <div class="v-name">${v.name}</div>
+        <div class="v-desc">${v.desc}</div>
+      </div>
+    `).join('');
+  }
+
+  function selectVertical(id){
+    state.vertical = id;
+    renderVerticalGrid();
+    document.getElementById('contBtn1').disabled = !state.vertical;
+    save();
+  }
+
+  // ── STEPPER ──────────────────────────────────────────────────
+  function renderStep(){
+    document.querySelectorAll('.step').forEach(el => {
+      el.classList.toggle('is-active', parseInt(el.dataset.step, 10) === currentStep);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    save();
+  }
+
+  function nextStep(){
+    if(!state.vertical) return;
+    if(currentStep < TOTAL_STEPS){
+      currentStep++;
+      renderStep();
+      try{
+        fbq('trackCustom', 'QuickWinsVerticalSelected', { vertical: state.vertical });
+        gtag('event', 'quick_wins_vertical_selected', { vertical: state.vertical });
+      }catch(e){}
+    }
+  }
+
+  function prevStep(){
+    if(currentStep > 1){
+      currentStep--;
+      renderStep();
+    }
+  }
+
+  // ── WhatsApp handoff ─────────────────────────────────────────
+  function buildWaMessage(empresa, facturacion, name){
+    const v = VERTICALS.find(x => x.id === state.vertical);
+    return `Hola Axel, quiero el Mapa de Oportunidades de IA. Soy ${name}, de ${empresa}. Vertical: ${v ? v.name : ''}. Facturación aproximada: ${facturacion}.`;
+  }
+
+  function submitLead(){
+    const empresaEl = document.getElementById('bizEmpresa');
+    const factEl     = document.getElementById('bizFacturacion');
+    const nameEl     = document.getElementById('leadName');
+    const waEl       = document.getElementById('leadWa');
+    const errEl      = document.getElementById('leadError');
+
+    const empresa = empresaEl.value.trim();
+    const fact    = factEl.value;
+    const name    = nameEl.value.trim();
+    const wa      = waEl.value.trim();
+
+    if(!empresa || !fact || !name || !wa){
+      errEl.style.display = 'block';
+      if(!empresa) empresaEl.focus();
+      else if(!fact) factEl.focus();
+      else if(!name) nameEl.focus();
+      else waEl.focus();
+      return;
+    }
+    errEl.style.display = 'none';
+
+    const v = VERTICALS.find(x => x.id === state.vertical);
+
+    try{
+      sessionStorage.setItem('a13i_nombre', name);
+      sessionStorage.setItem('a13i_wa', wa);
+      sessionStorage.setItem('a13i_empresa', empresa);
+      sessionStorage.setItem('a13i_facturacion', fact);
+      sessionStorage.setItem('a13i_vertical', v ? v.name : '');
+      sessionStorage.setItem('a13i_rubro', v ? v.name : '');
+      sessionStorage.setItem('a13i_canvas_msg', buildWaMessage(empresa, fact, name));
+      sessionStorage.setItem('a13i_lm_source', 'quick-wins-ai');
+    }catch(e){}
+
+    try{
+      fbq('track', 'Lead');
+      fbq('trackCustom', 'QuickWinsLeadSubmit', { vertical: state.vertical, facturacion: fact });
+      gtag('event', 'quick_wins_lead_submit', { vertical: state.vertical, facturacion: fact });
+    }catch(e){}
+
+    window.location.href = 'wa-redirect.html';
+  }
+
+  // ── Persistencia local ───────────────────────────────────────
+  const LS_KEY = 'a13i_quick_wins_v2';
+  function save(){
+    try{
+      localStorage.setItem(LS_KEY, JSON.stringify({
+        vertical: state.vertical,
+        empresa: document.getElementById('bizEmpresa') ? document.getElementById('bizEmpresa').value : '',
+        currentStep
+      }));
+    }catch(e){}
+  }
+  function restore(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if(!raw) return false;
+      const data = JSON.parse(raw);
+      if(!data || !data.vertical) return false;
+      state.vertical = data.vertical;
+      currentStep = Math.min(Math.max(parseInt(data.currentStep, 10) || 1, 1), TOTAL_STEPS);
+      return true;
+    }catch(e){ return false; }
+  }
+
+  // ── Init ──────────────────────────────────────────────────────
+  restore();
+  renderVerticalGrid();
+  document.getElementById('contBtn1').disabled = !state.vertical;
+  renderStep();
+  if(document.getElementById('bizEmpresa')){
+    document.getElementById('bizEmpresa').addEventListener('input', save);
+  }
+</script>
+
+</body>
+</html>

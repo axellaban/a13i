@@ -375,6 +375,10 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   const personas   = sessionStorage.getItem('a13i_personas') || '';
   const rubro      = sessionStorage.getItem('a13i_rubro')   || '';
   const canvasMsg  = sessionStorage.getItem('a13i_canvas_msg') || '';
+  const lmSource   = sessionStorage.getItem('a13i_lm_source') || '';
+  const empresa      = sessionStorage.getItem('a13i_empresa') || '';
+  const facturacion  = sessionStorage.getItem('a13i_facturacion') || '';
+  const vertical     = sessionStorage.getItem('a13i_vertical') || '';
 
   // Si no hay datos de calculadora ni del ops canvas, redirigir al optin
   if (!wa && !costoAnual && !canvasMsg) {
@@ -435,7 +439,10 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
           utm_source: sessionStorage.getItem('a13i_utm_source') || '',
           utm_medium: sessionStorage.getItem('a13i_utm_medium') || '',
           utm_campaign: sessionStorage.getItem('a13i_utm_campaign') || '',
-          fuente: canvasMsg ? 'ops-canvas' : 'wa-redirect',
+          empresa,
+          facturacion,
+          vertical,
+          fuente: canvasMsg ? (lmSource || 'ops-canvas') : 'wa-redirect',
           timestamp: new Date().toISOString()
         })
       });
