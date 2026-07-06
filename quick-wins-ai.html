@@ -26,7 +26,8 @@
 <meta name="twitter:description" content="32 movidas de IA para eCommerce en LATAM, organizadas por vertical y por área.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Geist:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -114,30 +115,8 @@ fbq('track', 'PageView');
   .step{ display: none; }
   .step.is-active{ display: block; animation: stepIn .32s cubic-bezier(.2,.8,.2,1); }
   @keyframes stepIn{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: translateY(0); } }
-  .step-nav{ display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
-  .step-back{
-    background: none; border: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; letter-spacing: 0.06em; color: var(--dim);
-    cursor: pointer; padding: 10px 6px; transition: color .18s;
-  }
-  .step-back:hover{ color: var(--text); }
-  .step-back:disabled{ opacity: 0; pointer-events: none; }
-  .step-continue{
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--accent); color: #fff;
-    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
-    padding: 14px 24px; border: none; border-radius: 11px;
-    cursor: pointer; transition: background .18s, box-shadow .18s, opacity .18s;
-    margin-left: auto;
-  }
-  .step-continue:hover{ background: var(--accent-2); box-shadow: 0 8px 28px var(--accent-glow); }
-  .step-continue:disabled{ opacity: 0.35; cursor: not-allowed; box-shadow: none; }
-  @media(max-width: 600px){
-    .step-continue{ width: 100%; justify-content: center; padding: 12px 20px; font-size: 14px; }
-    .step-nav{ flex-direction: column-reverse; align-items: stretch; margin-top: 16px; }
-    .step-back{ text-align: center; font-size: 11px; padding: 6px; }
-  }
+  .step-nav{ display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 24px; }
+  @media(max-width: 600px){ .step-nav{ margin-top: 16px; } }
 
   /* ── HEADER ─────────────────────────────────────────────────── */
   header.hero{ padding: 64px 0 44px; margin-bottom: 8px; text-align: center; }
@@ -154,50 +133,16 @@ fbq('track', 'PageView');
   .eyebrow .dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.15;} }
   h1{
+    font-family: 'Geist', 'Inter', sans-serif;
     font-size: clamp(32px, 5.5vw, 52px);
-    font-weight: 900; letter-spacing: -0.03em; line-height: 1.1;
+    font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
     color: var(--text); margin-bottom: 16px;
   }
   h1 .accent{ color: var(--accent-2); }
-  @media(max-width: 600px){ h1{ font-size: 24px; line-height: 1.12; margin-bottom: 8px; } }
+  @media(max-width: 600px){ h1{ font-size: 24px; line-height: 1.1; margin-bottom: 8px; } }
 
-  /* Subrayado a mano alzada + highlight, igual que sesion.html */
-  .h1-underline-wrap{ position: relative; display: inline-block; white-space: nowrap; }
-  .h1-underline-svg{
-    position: absolute; left: -3%; bottom: -13px;
-    width: 106%; height: 22px;
-    overflow: visible; pointer-events: none;
-    transform: rotate(-1deg);
-  }
-  .h1-underline-svg path{
-    fill: none; stroke: var(--accent);
-    stroke-linecap: round; stroke-linejoin: round;
-    stroke-dasharray: 320; stroke-dashoffset: 320;
-    animation: drawUnderline 0.8s ease-out 0.4s forwards;
-  }
-  .h1-underline-svg path.stroke-main{ stroke-width: 4.5; }
-  .h1-underline-svg path.stroke-pass2{
-    stroke-width: 3; opacity: 0.55;
-    animation-delay: 0.48s; animation-duration: 0.7s;
-  }
-  @keyframes drawUnderline{ to{ stroke-dashoffset: 0; } }
-
-  .h1-highlight{ position: relative; z-index: 1; display: inline-block; white-space: nowrap; }
-  .h1-highlight::before{
-    content: '';
-    position: absolute; top: 6%; bottom: 2%; left: -10px; right: -6px;
-    background: rgba(212, 97, 42, 0.18);
-    border-radius: 3px 9px 4px 8px;
-    transform: rotate(-1.4deg) scaleX(0);
-    transform-origin: left;
-    z-index: -1;
-    animation: highlightIn 0.5s ease-out 1s forwards;
-  }
-  @keyframes highlightIn{ to{ transform: rotate(-1.4deg) scaleX(1); } }
-  @media (prefers-reduced-motion: reduce){
-    .h1-underline-svg path{ animation: none; stroke-dashoffset: 0; }
-    .h1-highlight::before{ animation: none; transform: scaleX(1); }
-  }
+  /* Subrayado + highlight: mismo efecto que a13i-accelerator (librería rough-notation) */
+  #hlUnderline, #hlHighlight{ position: relative; display: inline-block; white-space: nowrap; }
 
   .hero-sub{
     font-size: 16px; color: var(--muted); line-height: 1.7;
@@ -219,11 +164,7 @@ fbq('track', 'PageView');
   }
   @media(max-width: 600px){ .step-card{ padding: 16px 14px 14px; margin-top: 10px; } }
   .step-card .step-nav{ margin-top: 26px; justify-content: center; position: relative; z-index: 1; }
-  .step-card .step-nav .step-back{ position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
-  @media(max-width: 600px){
-    .step-card .step-nav{ margin-top: 14px; }
-    .step-card .step-nav .step-back{ position: static; transform: none; width: 100%; }
-  }
+  @media(max-width: 600px){ .step-card .step-nav{ margin-top: 14px; } }
   .step-question{
     font-size: clamp(19px, 3vw, 24px); font-weight: 800; letter-spacing: -0.01em;
     color: var(--text); margin-bottom: 8px; position: relative; z-index: 1;
@@ -313,8 +254,8 @@ fbq('track', 'PageView');
   /* ── CTA border-beam (same effect as a13i-accelerator's .a13-cta) ── */
   @property --ba{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
   @keyframes border-beam-rotate{ to{ --ba: 360deg; } }
-  .step-continue, .cta-btn{ position: relative; isolation: isolate; overflow: hidden; }
-  .step-continue::before, .cta-btn::before{
+  .cta-btn{ position: relative; isolation: isolate; overflow: hidden; }
+  .cta-btn::before{
     content: ''; position: absolute; inset: 0; border-radius: inherit;
     padding: 1.5px;
     background: conic-gradient(from var(--ba,0deg), transparent 0deg, transparent 270deg, var(--accent-2) 310deg, #FFD9C4 330deg, transparent 360deg);
@@ -340,7 +281,7 @@ fbq('track', 'PageView');
   .cta-btn:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
   @media(max-width: 600px){ .cta-btn{ width: 100%; padding: 13px 20px; font-size: 14px; } }
   @media (prefers-reduced-motion: reduce){
-    .step-continue::before, .cta-btn::before{ animation: none; }
+    .cta-btn::before{ animation: none; }
   }
 
   footer{
@@ -374,8 +315,8 @@ fbq('track', 'PageView');
 
   <header class="hero">
     <h1>
-      <span style="display:block">Recibí gratis tu <span class="h1-underline-wrap">mapa de accionables<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
-      <span style="display:block"><span class="h1-highlight">para tu eCommerce</span>… en menos de 30 segundos</span>
+      <span style="display:block">Recibí gratis tu <span id="hlUnderline">mapa de accionables</span></span>
+      <span style="display:block"><span id="hlHighlight">para tu eCommerce</span>… en menos de 30 segundos</span>
     </h1>
   </header>
 
@@ -384,10 +325,6 @@ fbq('track', 'PageView');
     <div class="step-card">
       <div class="step-question">¿En qué vertical opera tu eCommerce?</div>
       <div class="vertical-grid" id="verticalGrid"></div>
-      <div class="step-nav">
-        <button class="step-back" disabled>← Atrás</button>
-        <button class="step-continue" id="contBtn1" onclick="nextStep()" style="margin-left:0;" disabled>Continuar <span class="cta-arrow" aria-hidden="true">→</span></button>
-      </div>
     </div>
 
     <ul class="value-bullets">
@@ -402,10 +339,6 @@ fbq('track', 'PageView');
     <div class="step-card">
       <div class="step-question">¿Cuánto factura tu eCommerce al año?</div>
       <div class="vertical-grid vertical-grid--single" id="facturacionGrid"></div>
-      <div class="step-nav">
-        <button class="step-back" onclick="prevStep()">← Atrás</button>
-        <button class="step-continue" id="contBtn2" onclick="nextStep()" style="margin-left:0;" disabled>Continuar <span class="cta-arrow" aria-hidden="true">→</span></button>
-      </div>
     </div>
   </div>
 
@@ -447,8 +380,7 @@ fbq('track', 'PageView');
       <p class="lead-error" id="leadError">Completá los campos para continuar.</p>
 
       <div class="step-nav">
-        <button class="step-back" onclick="prevStep()">← Atrás</button>
-        <button class="cta-btn" id="waBtn" onclick="submitLead()">Recibir el mapa por WhatsApp <span class="cta-arrow" aria-hidden="true">→</span></button>
+        <button class="cta-btn" id="waBtn" onclick="submitLead()">Recibir mi mapa gratis <span class="cta-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
   </div>
@@ -491,8 +423,11 @@ fbq('track', 'PageView');
   function selectVertical(id){
     state.vertical = id;
     renderVerticalGrid();
-    document.getElementById('contBtn1').disabled = !state.vertical;
-    save();
+    try{
+      fbq('trackCustom', 'QuickWinsVerticalSelected', { vertical: state.vertical });
+      gtag('event', 'quick_wins_vertical_selected', { vertical: state.vertical });
+    }catch(e){}
+    setTimeout(nextStep, 260);
   }
 
   // ── STEP 2: selector de facturación ─────────────────────────
@@ -509,8 +444,11 @@ fbq('track', 'PageView');
   function selectFacturacion(id){
     state.facturacion = id;
     renderFacturacionGrid();
-    document.getElementById('contBtn2').disabled = !state.facturacion;
-    save();
+    try{
+      fbq('trackCustom', 'QuickWinsFacturacionSelected', { facturacion: state.facturacion });
+      gtag('event', 'quick_wins_facturacion_selected', { facturacion: state.facturacion });
+    }catch(e){}
+    setTimeout(nextStep, 260);
   }
 
   // ── STEPPER ──────────────────────────────────────────────────
@@ -519,30 +457,11 @@ fbq('track', 'PageView');
       el.classList.toggle('is-active', parseInt(el.dataset.step, 10) === currentStep);
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    save();
   }
 
   function nextStep(){
-    if(currentStep === 1 && !state.vertical) return;
-    if(currentStep === 2 && !state.facturacion) return;
     if(currentStep < TOTAL_STEPS){
       currentStep++;
-      renderStep();
-      try{
-        if(currentStep === 2){
-          fbq('trackCustom', 'QuickWinsVerticalSelected', { vertical: state.vertical });
-          gtag('event', 'quick_wins_vertical_selected', { vertical: state.vertical });
-        } else if(currentStep === 3){
-          fbq('trackCustom', 'QuickWinsFacturacionSelected', { facturacion: state.facturacion });
-          gtag('event', 'quick_wins_facturacion_selected', { facturacion: state.facturacion });
-        }
-      }catch(e){}
-    }
-  }
-
-  function prevStep(){
-    if(currentStep > 1){
-      currentStep--;
       renderStep();
     }
   }
@@ -602,51 +521,27 @@ fbq('track', 'PageView');
     window.location.href = 'wa-redirect.html';
   }
 
-  // ── Persistencia local ───────────────────────────────────────
-  const LS_KEY = 'a13i_quick_wins_v2';
-  function save(){
-    try{
-      localStorage.setItem(LS_KEY, JSON.stringify({
-        vertical: state.vertical,
-        facturacion: state.facturacion,
-        empresa: document.getElementById('bizEmpresa') ? document.getElementById('bizEmpresa').value : '',
-        nombre: document.getElementById('leadNombre') ? document.getElementById('leadNombre').value : '',
-        email: document.getElementById('leadEmail') ? document.getElementById('leadEmail').value : '',
-        waNumber: document.getElementById('leadWaNumber') ? document.getElementById('leadWaNumber').value : '',
-        currentStep
-      }));
-    }catch(e){}
-  }
-  function restore(){
-    try{
-      const raw = localStorage.getItem(LS_KEY);
-      if(!raw) return false;
-      const data = JSON.parse(raw);
-      if(!data || !data.vertical) return false;
-      state.vertical = data.vertical;
-      state.facturacion = data.facturacion || null;
-      currentStep = Math.min(Math.max(parseInt(data.currentStep, 10) || 1, 1), TOTAL_STEPS);
-      return data;
-    }catch(e){ return false; }
-  }
-
   // ── Init ──────────────────────────────────────────────────────
-  const restored = restore();
   renderVerticalGrid();
   renderFacturacionGrid();
-  document.getElementById('contBtn1').disabled = !state.vertical;
-  document.getElementById('contBtn2').disabled = !state.facturacion;
   renderStep();
-  if(restored){
-    if(document.getElementById('bizEmpresa'))    document.getElementById('bizEmpresa').value    = restored.empresa || '';
-    if(document.getElementById('leadNombre'))    document.getElementById('leadNombre').value    = restored.nombre || '';
-    if(document.getElementById('leadEmail'))     document.getElementById('leadEmail').value     = restored.email || '';
-    if(document.getElementById('leadWaNumber'))  document.getElementById('leadWaNumber').value  = restored.waNumber || '';
-  }
-  ['bizEmpresa','leadNombre','leadEmail','leadWaNumber','leadWaCode'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.addEventListener('input', save);
-  });
+
+  // ── Subrayado + highlight del H1 (rough-notation, igual que a13i-accelerator) ──
+  (function initHeroAnnotations(){
+    if(!window.RoughNotation) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const { annotate } = window.RoughNotation;
+    const underline = annotate(document.getElementById('hlUnderline'), {
+      type: 'underline', color: '#D4612A', strokeWidth: 2,
+      animationDuration: 800, iterations: 2, animate: !reduceMotion
+    });
+    const highlight = annotate(document.getElementById('hlHighlight'), {
+      type: 'highlight', color: 'rgba(225,94,63,0.22)', strokeWidth: 1,
+      animationDuration: 900, iterations: 1, padding: 4, animate: !reduceMotion
+    });
+    underline.show();
+    setTimeout(() => highlight.show(), 250);
+  })();
 </script>
 
 </body>
