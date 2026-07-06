@@ -285,10 +285,25 @@ fbq('track', 'PageView');
   }
 
   footer{
-    border-top: 1px solid var(--border); padding: 22px 32px; text-align: center;
-    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em;
-    color: var(--faint); position: relative; z-index: 2;
+    border-top: 1px solid var(--border); padding: 32px 24px 24px; text-align: center;
+    position: relative; z-index: 2;
   }
+  footer .legal-disclaimer{
+    font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.6;
+    color: var(--dim); max-width: 540px; margin: 0 auto;
+  }
+  footer .legal-divider{
+    border: none; border-top: 1px solid var(--border); max-width: 220px; margin: 16px auto;
+  }
+  footer .legal-copy{
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    color: var(--faint); margin-top: 20px;
+  }
+  footer .legal-links{
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--faint); margin-top: 6px;
+  }
+  @media(max-width: 600px){ footer{ padding: 24px 16px 20px; } }
 
   @media (prefers-reduced-motion: reduce){
     .eyebrow .dot{ animation: none; }
@@ -326,12 +341,6 @@ fbq('track', 'PageView');
       <div class="step-question">¿En qué vertical opera tu eCommerce?</div>
       <div class="vertical-grid" id="verticalGrid"></div>
     </div>
-
-    <ul class="value-bullets">
-      <li>Recibí tu mapa personalizado en menos de 30 segundos</li>
-      <li>+470 operaciones ya analizadas</li>
-      <li>100% gratis — acceso instantáneo por WhatsApp</li>
-    </ul>
   </div>
 
   <!-- STEP 2: FACTURACIÓN -->
@@ -385,9 +394,21 @@ fbq('track', 'PageView');
     </div>
   </div>
 
+  <ul class="value-bullets">
+    <li>Recibí tu mapa personalizado en menos de 30 segundos</li>
+    <li>+470 operaciones ya analizadas</li>
+    <li>100% gratis — acceso instantáneo por WhatsApp</li>
+  </ul>
+
 </div>
 
-<footer>© 2026 A13I</footer>
+<footer>
+  <p class="legal-disclaimer">Al dejar tus datos aceptás que A13I se ponga en contacto con vos por WhatsApp, email o teléfono usando la información ingresada. No vendemos tu información personal. Al enviar el formulario aceptás nuestra Política de Privacidad y nuestros Términos de Servicio.</p>
+  <hr class="legal-divider">
+  <p class="legal-disclaimer">Los resultados individuales pueden variar y dependen de la implementación y el contexto de cada negocio. Este contenido es solo para fines educativos y no garantiza resultados específicos.</p>
+  <p class="legal-copy">© 2026 A13I. Todos los derechos reservados.</p>
+  <p class="legal-links">Privacidad • Términos • Cookies</p>
+</footer>
 
 <script>
   const VERTICALS = [
