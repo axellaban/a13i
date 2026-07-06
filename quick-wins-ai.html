@@ -157,7 +157,7 @@ fbq('track', 'PageView');
   @media(max-width: 600px){ h1{ font-size: 27px; margin-bottom: 10px; } }
 
   /* Subrayado a mano alzada + highlight, igual que sesion.html */
-  .h1-underline-wrap{ position: relative; display: inline-block; }
+  .h1-underline-wrap{ position: relative; display: inline-block; white-space: nowrap; }
   .h1-underline-svg{
     position: absolute; left: -3%; bottom: -13px;
     width: 106%; height: 22px;
@@ -177,7 +177,7 @@ fbq('track', 'PageView');
   }
   @keyframes drawUnderline{ to{ stroke-dashoffset: 0; } }
 
-  .h1-highlight{ position: relative; z-index: 1; display: inline-block; }
+  .h1-highlight{ position: relative; z-index: 1; display: inline-block; white-space: nowrap; }
   .h1-highlight::before{
     content: '';
     position: absolute; top: 6%; bottom: 2%; left: -10px; right: -6px;
@@ -215,6 +215,9 @@ fbq('track', 'PageView');
   @media(max-width: 600px){ .step-card{ padding: 24px 18px 20px; margin-top: 18px; } }
   .step-card .step-nav{ margin-top: 26px; justify-content: center; position: relative; z-index: 1; }
   .step-card .step-nav .step-back{ position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+  @media(max-width: 600px){
+    .step-card .step-nav .step-back{ position: static; transform: none; width: 100%; }
+  }
   .step-question{
     font-size: clamp(19px, 3vw, 24px); font-weight: 800; letter-spacing: -0.01em;
     color: var(--text); margin-bottom: 8px; position: relative; z-index: 1;
@@ -331,15 +334,15 @@ fbq('track', 'PageView');
 
 <div class="wrap">
 
+  <header class="hero">
+    <h1>
+      <span style="display:block">Recibí gratis tu <span class="h1-underline-wrap">mapa de accionables<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
+      <span style="display:block"><span class="h1-highlight">para tu eCommerce</span>… en menos de 30 segundos</span>
+    </h1>
+  </header>
+
   <!-- STEP 1: VERTICAL -->
   <div class="step is-active" data-step="1">
-    <header class="hero">
-      <h1>
-        <span style="display:block">Recibí gratis tu mapa de <span class="h1-underline-wrap">accionables<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
-        <span style="display:block">para tu <span class="h1-highlight">eCommerce</span>… en menos de 30 segundos</span>
-      </h1>
-    </header>
-
     <div class="step-card">
       <div class="step-question">¿En qué vertical opera tu eCommerce?</div>
       <div class="vertical-grid" id="verticalGrid"></div>
