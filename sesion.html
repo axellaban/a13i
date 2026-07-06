@@ -41,6 +41,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
+<!-- rough-notation: subrayado/highlight del H1, igual que a13i-accelerator -->
+<script src="https://unpkg.com/rough-notation@0.5.1/lib/rough-notation.iife.js"></script>
+
 <style>
   :root {
     --bg: #FEFBF2;
@@ -240,45 +243,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     animation: shimmer 5s linear infinite;
   }
 
-  /* Efecto animado tipo Accelerator: subrayado a mano alzada bajo "reales." (línea 1),
-     highlight que aparece detrás de "reales." (línea 2) */
-  .h1-underline-wrap { position: relative; display: inline-block; }
-  .h1-underline-svg {
-    position: absolute; left: -3%; bottom: -13px;
-    width: 106%; height: 22px;
-    overflow: visible;
-    pointer-events: none;
-    transform: rotate(-1deg);
-  }
-  .h1-underline-svg path {
-    fill: none; stroke: var(--accent);
-    stroke-linecap: round; stroke-linejoin: round;
-    stroke-dasharray: 320; stroke-dashoffset: 320;
-    animation: drawUnderline 0.8s ease-out 0.4s forwards;
-  }
-  .h1-underline-svg path.stroke-main { stroke-width: 4.5; }
-  .h1-underline-svg path.stroke-pass2 {
-    stroke-width: 3; opacity: 0.55;
-    animation-delay: 0.48s; animation-duration: 0.7s;
-  }
-  @keyframes drawUnderline { to { stroke-dashoffset: 0; } }
-
-  .h1-highlight { position: relative; z-index: 1; display: inline-block; }
-  .h1-highlight::before {
-    content: '';
-    position: absolute; top: 6%; bottom: 2%; left: -10px; right: -6px;
-    background: rgba(212, 97, 42, 0.18);
-    border-radius: 3px 9px 4px 8px;
-    transform: rotate(-1.4deg) scaleX(0);
-    transform-origin: left;
-    z-index: -1;
-    animation: highlightIn 0.5s ease-out 1s forwards;
-  }
-  @keyframes highlightIn { to { transform: rotate(-1.4deg) scaleX(1); } }
-  @media (prefers-reduced-motion: reduce) {
-    .h1-underline-svg path { animation: none; stroke-dashoffset: 0; }
-    .h1-highlight::before { animation: none; transform: scaleX(1); }
-  }
+  /* Subrayado + highlight: mismo efecto que a13i-accelerator (librería rough-notation) */
+  #hlUnderline, #hlHighlight { position: relative; display: inline-block; }
+  #hlHighlight { color: var(--accent-2); font-weight: 900; }
 
   .page-sub {
     font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px;
@@ -619,7 +586,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   #calendly-section { display: none; margin-bottom: 80px; animation: fadeInUp 0.5s ease; }
 
   .cal-banner {
-    background: var(--green);
+    background: var(--accent);
     border-radius: 16px 16px 0 0;
     padding: 40px;
     position: relative; overflow: hidden;
@@ -630,14 +597,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
     pointer-events: none;
   }
-  .cal-eye {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(0,0,0,0.55); margin-bottom: 10px;
-  }
   .cal-h {
     font-size: clamp(28px, 5vw, 44px); font-weight: 900;
-    letter-spacing: -0.02em; line-height: 1.0; color: #000;
+    letter-spacing: -0.02em; line-height: 1.0; color: #fff;
     position: relative; z-index: 1;
   }
 
@@ -776,12 +738,11 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   <div class="page-header">
     <div class="eyebrow">
       <span class="dot"></span>
-      A13I · Sesión de Mapeo Operativo
+      Implementación de IA para dueños de eCommerce con equipo operativo.
     </div>
-    <p class="kicker">Implementación de IA para dueños de eCommerce con equipo operativo.</p>
     <h1>
-      <span style="display:block">Operaciones <span class="h1-underline-wrap">reales.<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
-      <span style="display:block">Transformaciones <span class="h1-highlight">reales.</span></span>
+      <span style="display:block">Operaciones <span id="hlUnderline">reales</span>.</span>
+      <span style="display:block"><span id="hlHighlight">Transformaciones</span> reales.</span>
     </h1>
     <p class="page-sub">Qué proceso era, qué rompía y qué resultado dio. Cuál se parece más a tu operación.</p>
 
@@ -990,13 +951,11 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   <!-- Calendly (post-submit) -->
   <div id="calendly-section">
     <div class="cal-banner">
-      <div class="cal-eye">✓ Aplicación recibida</div>
       <div class="cal-h">Agendá tu Sesión<br>de Mapeo Operativo.</div>
     </div>
     <div class="cal-body">
       <p class="cal-friction">Valoramos tu tiempo y el nuestro. Si agendás, asistí.</p>
       <p class="cal-sub">Trabajo con cuatro operaciones por mes. Es lo que permite estar adentro de cada una.</p>
-      <p class="cal-sub" style="margin-top:-16px;font-size:13px;">La sesión es la primera fase del programa y la hago yo directamente.</p>
       <div id="calendly-inline" style="width:100%;min-width:0;height:700px;overflow:hidden;border-radius:10px;"></div>
     </div>
   </div>
@@ -1165,6 +1124,30 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     }, { threshold: 0.5 });
 
     nums.forEach(function (n) { io.observe(n); });
+  })();
+
+  // ── Subrayado + highlight del H1 (rough-notation, igual que a13i-accelerator) ──
+  (function initHeroAnnotations(){
+    if(!window.RoughNotation) return;
+    function draw(){
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var annotate = window.RoughNotation.annotate;
+      var underline = annotate(document.getElementById('hlUnderline'), {
+        type: 'underline', color: '#D4612A', strokeWidth: 2, padding: 2,
+        animationDuration: 800, iterations: 2, animate: !reduceMotion
+      });
+      var highlight = annotate(document.getElementById('hlHighlight'), {
+        type: 'highlight', color: 'rgba(225,94,63,0.22)', strokeWidth: 1,
+        animationDuration: 900, iterations: 1, padding: 4, animate: !reduceMotion
+      });
+      underline.show();
+      setTimeout(function(){ highlight.show(); }, 250);
+    }
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(draw);
+    } else {
+      draw();
+    }
   })();
 </script>
 </body>
