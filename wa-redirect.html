@@ -370,6 +370,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   // ── Leer datos de sessionStorage ──────────────────────────────────────────
   const nombre     = sessionStorage.getItem('a13i_nombre')  || '';
   const wa         = sessionStorage.getItem('a13i_wa')      || '';
+  const email      = sessionStorage.getItem('a13i_email')   || '';
   const proceso    = sessionStorage.getItem('a13i_proceso') || 'operaciones manuales';
   const costoAnual = sessionStorage.getItem('a13i_costoAnual') || '';
   const personas   = sessionStorage.getItem('a13i_personas') || '';
@@ -429,6 +430,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
         body: JSON.stringify({
           nombre,
           wa,
+          email,
           proceso,
           rubro,
           costoAnual: sessionStorage.getItem('a13i_costoAnual'),
