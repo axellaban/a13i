@@ -97,7 +97,38 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   @keyframes shimmer { 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
 
-
+  /* ── TOPBAR / LOGO (alineado a a13i-accelerator) ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(254, 251, 242, 0.96);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none; user-select: none;
+  }
+  .logo-mark {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; font-size: 19px;
+    letter-spacing: -0.01em; color: var(--text);
+  }
+  .logo-mark .num { color: var(--accent); }
+  .logo-mark .cursor { color: var(--accent); }
+  .logo-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .logo-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.22em; color: var(--dim);
+  }
+  .topbar-right { display: flex; align-items: center; gap: 8px; }
+  @media(max-width:600px) { .topbar { padding: 0 20px; } }
 
   /* ── MAIN WRAP ── */
   .wrap {
@@ -131,12 +162,13 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   .bridge-btn {
     display: inline-block; padding: 14px 28px;
-    background: var(--accent); border-radius: 10px;
+    background: #2E1A0E; border-radius: 13px;
     color: #fff; font-family: 'Inter', sans-serif;
     font-size: 15px; font-weight: 700; text-decoration: none;
-    transition: background .18s; box-shadow: 0 4px 20px rgba(212, 97, 42, 0.35);
+    transition: background .18s, transform .15s;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(20,12,6,0.25), 0 4px 8px rgba(20,12,6,0.20);
   }
-  .bridge-btn:hover { background: var(--accent-2); }
+  .bridge-btn:hover { background: #3a2416; transform: translateY(-1px); }
   .bridge-or {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -162,11 +194,12 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   .bridge-wa-btn:hover { background: var(--ui); border-color: var(--accent); }
 
-  /* ── PAGE HEADER ── */
+  /* ── PAGE HEADER (hero centrado, patrón accelerator) ── */
   .page-header {
     margin-bottom: 48px;
     padding-bottom: 48px;
     border-bottom: 1px solid var(--border);
+    text-align: center;
   }
 
   .eyebrow {
@@ -190,6 +223,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .kicker {
     font-size: 13px; font-weight: 600; color: var(--dim);
     letter-spacing: 0.01em; margin-bottom: 14px;
+    max-width: 480px; margin-left: auto; margin-right: auto;
   }
 
   h1 {
@@ -248,12 +282,15 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   .page-sub {
     font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px;
+    margin-left: auto; margin-right: auto;
   }
 
   /* ── ABOUT / CRED ── */
   .about-card {
     display: flex; align-items: center; gap: 16px;
-    margin-top: 32px;
+    justify-content: center;
+    margin: 32px auto 0; max-width: 480px;
+    text-align: left;
   }
   .about-av {
     width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
@@ -267,7 +304,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     background: var(--card-2); border: 1px solid var(--border);
     border-left: 3px solid var(--accent);
     border-radius: 0 12px 12px 0;
-    padding: 16px 20px; margin-top: 14px;
+    padding: 16px 20px; margin: 14px auto 0; max-width: 480px;
+    text-align: left;
   }
   .cred-text { font-size: 13px; color: var(--muted); line-height: 1.75; }
   .cred-text strong { color: var(--text); font-weight: 600; }
@@ -374,8 +412,9 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     --c: var(--accent-2);
     background: var(--card);
     border: 1px solid var(--border-2);
-    border-radius: 14px;
+    border-radius: 18px;
     overflow: hidden;
+    box-shadow: 0 2px 12px #1f14100d;
     opacity: 0; transform: translateY(22px);
     transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s, box-shadow 0.2s;
     cursor: default;
@@ -386,8 +425,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   .proof-card:hover {
     border-color: color-mix(in oklab, var(--c) 40%, var(--border-2));
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px -8px color-mix(in oklab, var(--c) 18%, transparent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -8px color-mix(in oklab, var(--c) 22%, transparent);
   }
   .proof-card.visible:hover { transform: translateY(-2px); }
 
@@ -489,7 +528,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .q-block {
     background: var(--card);
     border: 1px solid var(--border-2);
-    border-radius: 14px;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px #1f14100d;
     margin-bottom: 8px; overflow: hidden;
     opacity: 0; animation: fadeInUp 0.4s ease forwards;
   }
@@ -555,13 +595,13 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   /* Submit button */
   .submit-btn {
     width: 100%; padding: 20px 24px;
-    background: var(--accent); border: none; border-radius: 12px;
+    background: #2E1A0E; border: none; border-radius: 13px;
     color: #fff; font-family: 'Inter', sans-serif;
     font-size: 16px; font-weight: 700; letter-spacing: 0.01em;
     cursor: pointer;
     transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
     position: relative; overflow: hidden;
-    box-shadow: 0 4px 24px rgba(212, 97, 42, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(20,12,6,0.25), 0 4px 8px rgba(20,12,6,0.20);
     margin-top: 4px; margin-bottom: 64px;
   }
   .submit-btn::before {
@@ -570,7 +610,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
     transition: left 0.4s ease;
   }
-  .submit-btn:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(212, 97, 42, 0.5); }
+  .submit-btn:hover { background: #3a2416; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 8px rgba(20,12,6,0.3), 0 8px 20px rgba(20,12,6,0.22); }
   .submit-btn:hover::before { left: 100%; }
   .submit-btn:active { transform: translateY(0); }
   .submit-btn:disabled { background: var(--faint); cursor: not-allowed; transform: none; box-shadow: none; }
@@ -622,14 +662,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   .cal-btn {
     display: inline-block; padding: 18px 36px;
-    background: var(--accent); border-radius: 10px;
+    background: #2E1A0E; border-radius: 13px;
     color: #fff; font-family: 'Inter', sans-serif;
     font-size: 16px; font-weight: 700;
     text-decoration: none; cursor: pointer;
     transition: background .18s, transform .15s, box-shadow .18s;
-    box-shadow: 0 4px 20px rgba(212, 97, 42, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(20,12,6,0.25), 0 4px 8px rgba(20,12,6,0.20);
   }
-  .cal-btn:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(212, 97, 42, 0.45); }
+  .cal-btn:hover { background: #3a2416; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 8px rgba(20,12,6,0.3), 0 8px 20px rgba(20,12,6,0.22); }
   .cal-note {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -721,8 +761,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 </head>
 <body>
 
-
-
+<header class="topbar">
+  <a class="logo" href="/" aria-label="A13I Partner">
+    <span class="logo-mark">A<span class="num">13</span>I<span class="cursor">_</span></span>
+    <span class="logo-dot" aria-hidden="true"></span>
+    <span class="logo-sub">PARTNER</span>
+  </a>
+  <div class="topbar-right"></div>
+</header>
 
 <main class="wrap">
 
