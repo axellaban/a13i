@@ -103,7 +103,12 @@ fbq('track', 'PageView');
     color: var(--muted);
   }
   .proof-row{ display: flex; justify-content: center; padding: 20px 0 0; }
-  @media(max-width: 600px){ .proof-row{ padding-top: 10px; } }
+  @media(max-width: 600px){
+    .proof-row{ padding-top: 8px; }
+    .social-proof-pill{ padding: 5px 12px 5px 6px; gap: 8px; }
+    .avatar-stack .av{ width: 22px; height: 22px; }
+    .proof-text{ font-size: 10px; }
+  }
 
   /* ── STEPPER ────────────────────────────────────────────────── */
   .step{ display: none; }
@@ -129,14 +134,14 @@ fbq('track', 'PageView');
   .step-continue:hover{ background: var(--accent-2); box-shadow: 0 8px 28px var(--accent-glow); }
   .step-continue:disabled{ opacity: 0.35; cursor: not-allowed; box-shadow: none; }
   @media(max-width: 600px){
-    .step-continue{ width: 100%; justify-content: center; }
-    .step-nav{ flex-direction: column-reverse; align-items: stretch; }
-    .step-back{ text-align: center; }
+    .step-continue{ width: 100%; justify-content: center; padding: 12px 20px; font-size: 14px; }
+    .step-nav{ flex-direction: column-reverse; align-items: stretch; margin-top: 16px; }
+    .step-back{ text-align: center; font-size: 11px; padding: 6px; }
   }
 
   /* ── HEADER ─────────────────────────────────────────────────── */
   header.hero{ padding: 64px 0 44px; margin-bottom: 8px; text-align: center; }
-  @media(max-width: 600px){ header.hero{ padding: 34px 0 22px; } }
+  @media(max-width: 600px){ header.hero{ padding: 22px 0 14px; } }
   .eyebrow{
     display: inline-flex; align-items: center; gap: 8px;
     font-family: 'JetBrains Mono', monospace;
@@ -154,7 +159,7 @@ fbq('track', 'PageView');
     color: var(--text); margin-bottom: 16px;
   }
   h1 .accent{ color: var(--accent-2); }
-  @media(max-width: 600px){ h1{ font-size: 27px; margin-bottom: 10px; } }
+  @media(max-width: 600px){ h1{ font-size: 24px; line-height: 1.12; margin-bottom: 8px; } }
 
   /* Subrayado a mano alzada + highlight, igual que sesion.html */
   .h1-underline-wrap{ position: relative; display: inline-block; white-space: nowrap; }
@@ -212,28 +217,32 @@ fbq('track', 'PageView');
     background: radial-gradient(360px at 50% 0%, rgba(212, 97, 42, 0.10), transparent 65%);
     pointer-events: none;
   }
-  @media(max-width: 600px){ .step-card{ padding: 24px 18px 20px; margin-top: 18px; } }
+  @media(max-width: 600px){ .step-card{ padding: 16px 14px 14px; margin-top: 10px; } }
   .step-card .step-nav{ margin-top: 26px; justify-content: center; position: relative; z-index: 1; }
   .step-card .step-nav .step-back{ position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
   @media(max-width: 600px){
+    .step-card .step-nav{ margin-top: 14px; }
     .step-card .step-nav .step-back{ position: static; transform: none; width: 100%; }
   }
   .step-question{
     font-size: clamp(19px, 3vw, 24px); font-weight: 800; letter-spacing: -0.01em;
     color: var(--text); margin-bottom: 8px; position: relative; z-index: 1;
   }
+  @media(max-width: 600px){ .step-question{ font-size: 16px; margin-bottom: 12px; } }
   /* ── VERTICAL PICKER ────────────────────────────────────────── */
   .vertical-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; z-index: 1; }
-  @media(max-width: 600px){ .vertical-grid{ grid-template-columns: 1fr; } }
+  @media(max-width: 600px){ .vertical-grid{ grid-template-columns: 1fr; gap: 8px; } }
   .vertical-card{
     text-align: left; cursor: pointer;
     background: var(--card-2); border: 1.5px solid var(--border-2); border-radius: 14px;
     padding: 16px 18px;
     transition: border-color .18s, background .18s, box-shadow .18s;
   }
+  @media(max-width: 600px){ .vertical-card{ padding: 12px 14px; border-radius: 12px; } }
   .vertical-card:hover{ border-color: var(--accent); }
   .vertical-card.selected{ border-color: var(--accent); background: rgba(212, 97, 42, 0.07); box-shadow: 0 0 0 3px var(--accent-glow); }
   .vertical-card .v-name{ font-size: 15px; font-weight: 800; color: var(--text); }
+  @media(max-width: 600px){ .vertical-card .v-name{ font-size: 13.5px; } }
 
   /* ── FORM FIELDS (step 2) ───────────────────────────────────── */
   .lead-form{
@@ -241,6 +250,7 @@ fbq('track', 'PageView');
     max-width: 420px; margin: 0 auto; text-align: left;
     position: relative; z-index: 1;
   }
+  @media(max-width: 600px){ .lead-form{ gap: 10px; } }
   .lead-field label{
     display: block; font-family: 'JetBrains Mono', monospace;
     font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
@@ -252,6 +262,7 @@ fbq('track', 'PageView');
     padding: 13px 16px; outline: none;
     transition: border-color .18s, box-shadow .18s;
   }
+  @media(max-width: 600px){ input[type=text], select{ padding: 11px 14px; font-size: 14px; } }
   select{ appearance: none; cursor: pointer; }
   select:invalid{ color: var(--faint); }
   input::placeholder{ color: var(--faint); }
@@ -272,6 +283,10 @@ fbq('track', 'PageView');
     padding: 7px 0; text-align: left;
   }
   .value-bullets li::before{ content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-top: 8px; flex-shrink: 0; }
+  @media(max-width: 600px){
+    .value-bullets{ margin-top: 14px; }
+    .value-bullets li{ font-size: 13px; padding: 5px 0; gap: 10px; }
+  }
 
   /* ── CTA border-beam (same effect as a13i-accelerator's .a13-cta) ── */
   @property --ba{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
@@ -301,6 +316,7 @@ fbq('track', 'PageView');
   }
   .cta-btn:hover{ background: var(--accent-2); box-shadow: 0 8px 32px var(--accent-glow); }
   .cta-btn:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
+  @media(max-width: 600px){ .cta-btn{ width: 100%; padding: 13px 20px; font-size: 14px; } }
   @media (prefers-reduced-motion: reduce){
     .step-continue::before, .cta-btn::before{ animation: none; }
   }
