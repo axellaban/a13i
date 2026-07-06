@@ -80,7 +80,7 @@ fbq('track', 'PageView');
     pointer-events: none; z-index: 0;
   }
 
-  .wrap{ max-width: 640px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 2; }
+  .wrap{ max-width: 640px; margin: 0 auto; padding: 0 20px 32px; position: relative; z-index: 2; }
 
   /* ── SOCIAL PROOF PILL ─────────────────────────────────────── */
   .social-proof-pill{
@@ -550,18 +550,28 @@ fbq('track', 'PageView');
   // ── Subrayado + highlight del H1 (rough-notation, igual que a13i-accelerator) ──
   (function initHeroAnnotations(){
     if(!window.RoughNotation) return;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const { annotate } = window.RoughNotation;
-    const underline = annotate(document.getElementById('hlUnderline'), {
-      type: 'underline', color: '#D4612A', strokeWidth: 2,
-      animationDuration: 800, iterations: 2, animate: !reduceMotion
-    });
-    const highlight = annotate(document.getElementById('hlHighlight'), {
-      type: 'highlight', color: 'rgba(225,94,63,0.22)', strokeWidth: 1,
-      animationDuration: 900, iterations: 1, padding: 4, animate: !reduceMotion
-    });
-    underline.show();
-    setTimeout(() => highlight.show(), 250);
+    function draw(){
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const { annotate } = window.RoughNotation;
+      const underline = annotate(document.getElementById('hlUnderline'), {
+        type: 'underline', color: '#D4612A', strokeWidth: 2, padding: 2,
+        animationDuration: 800, iterations: 2, animate: !reduceMotion
+      });
+      const highlight = annotate(document.getElementById('hlHighlight'), {
+        type: 'highlight', color: 'rgba(225,94,63,0.22)', strokeWidth: 1,
+        animationDuration: 900, iterations: 1, padding: 4, animate: !reduceMotion
+      });
+      underline.show();
+      setTimeout(() => highlight.show(), 250);
+    }
+    // Esperar a que carguen las fuentes (Geist) para que el texto ya tenga su
+    // tamaño final — si se dibuja antes, el font-swap corre el layout y el
+    // trazo queda desalineado.
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(draw);
+    } else {
+      draw();
+    }
   })();
 </script>
 
