@@ -103,7 +103,7 @@ fbq('track', 'PageView');
     color: var(--muted);
   }
   .proof-row{ display: flex; justify-content: center; padding: 20px 0 0; }
-  @media(max-width: 600px){ .proof-row{ padding-top: 14px; } }
+  @media(max-width: 600px){ .proof-row{ padding-top: 10px; } }
 
   /* ── STEPPER ────────────────────────────────────────────────── */
   .step{ display: none; }
@@ -136,6 +136,7 @@ fbq('track', 'PageView');
 
   /* ── HEADER ─────────────────────────────────────────────────── */
   header.hero{ padding: 64px 0 44px; margin-bottom: 8px; text-align: center; }
+  @media(max-width: 600px){ header.hero{ padding: 34px 0 22px; } }
   .eyebrow{
     display: inline-flex; align-items: center; gap: 8px;
     font-family: 'JetBrains Mono', monospace;
@@ -153,6 +154,7 @@ fbq('track', 'PageView');
     color: var(--text); margin-bottom: 16px;
   }
   h1 .accent{ color: var(--accent-2); }
+  @media(max-width: 600px){ h1{ font-size: 27px; margin-bottom: 10px; } }
 
   /* Subrayado a mano alzada + highlight, igual que sesion.html */
   .h1-underline-wrap{ position: relative; display: inline-block; }
@@ -210,17 +212,13 @@ fbq('track', 'PageView');
     background: radial-gradient(360px at 50% 0%, rgba(212, 97, 42, 0.10), transparent 65%);
     pointer-events: none;
   }
-  @media(max-width: 600px){ .step-card{ padding: 30px 22px 26px; } }
+  @media(max-width: 600px){ .step-card{ padding: 24px 18px 20px; margin-top: 18px; } }
   .step-card .step-nav{ margin-top: 26px; justify-content: center; position: relative; z-index: 1; }
   .step-card .step-nav .step-back{ position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
   .step-question{
     font-size: clamp(19px, 3vw, 24px); font-weight: 800; letter-spacing: -0.01em;
     color: var(--text); margin-bottom: 8px; position: relative; z-index: 1;
   }
-  .step-note{
-    font-size: 13.5px; color: var(--muted); margin-bottom: 22px; position: relative; z-index: 1;
-  }
-
   /* ── VERTICAL PICKER ────────────────────────────────────────── */
   .vertical-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; z-index: 1; }
   @media(max-width: 600px){ .vertical-grid{ grid-template-columns: 1fr; } }
@@ -232,8 +230,7 @@ fbq('track', 'PageView');
   }
   .vertical-card:hover{ border-color: var(--accent); }
   .vertical-card.selected{ border-color: var(--accent); background: rgba(212, 97, 42, 0.07); box-shadow: 0 0 0 3px var(--accent-glow); }
-  .vertical-card .v-name{ font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-  .vertical-card .v-desc{ font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .vertical-card .v-name{ font-size: 15px; font-weight: 800; color: var(--text); }
 
   /* ── FORM FIELDS (step 2) ───────────────────────────────────── */
   .lead-form{
@@ -273,13 +270,25 @@ fbq('track', 'PageView');
   }
   .value-bullets li::before{ content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-top: 8px; flex-shrink: 0; }
 
-  .btn-spin-wrap{
-    display: inline-block; padding: 2px; border-radius: 13px; position: relative;
-    background: conic-gradient(from var(--spin-angle, 0deg), transparent 0%, var(--accent) 12%, var(--accent-2) 20%, transparent 35%);
-    animation: spinBorder 2.8s linear infinite;
+  /* ── CTA border-beam (same effect as a13i-accelerator's .a13-cta) ── */
+  @property --ba{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  @keyframes border-beam-rotate{ to{ --ba: 360deg; } }
+  .step-continue, .cta-btn{ position: relative; isolation: isolate; overflow: hidden; }
+  .step-continue::before, .cta-btn::before{
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(from var(--ba,0deg), transparent 0deg, transparent 270deg, var(--accent-2) 310deg, #FFD9C4 330deg, transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    animation: border-beam-rotate 4s linear infinite;
+    pointer-events: none;
   }
-  @keyframes spinBorder{ to{ --spin-angle: 360deg; } }
-  @property --spin-angle{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  .cta-arrow{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; background: var(--accent-2);
+    border-radius: 7px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    color: #fff; flex-shrink: 0; line-height: 1; position: relative; z-index: 1;
+  }
   .cta-btn{
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     background: var(--accent); color: #fff;
@@ -289,6 +298,9 @@ fbq('track', 'PageView');
   }
   .cta-btn:hover{ background: var(--accent-2); box-shadow: 0 8px 32px var(--accent-glow); }
   .cta-btn:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce){
+    .step-continue::before, .cta-btn::before{ animation: none; }
+  }
 
   footer{
     border-top: 1px solid var(--border); padding: 22px 32px; text-align: center;
@@ -297,7 +309,6 @@ fbq('track', 'PageView');
   }
 
   @media (prefers-reduced-motion: reduce){
-    .btn-spin-wrap{ animation: none; background: var(--accent); }
     .eyebrow .dot{ animation: none; }
     html{ scroll-behavior: auto; }
   }
@@ -324,8 +335,8 @@ fbq('track', 'PageView');
   <div class="step is-active" data-step="1">
     <header class="hero">
       <h1>
-        <span style="display:block">Recibí el <span class="h1-underline-wrap">mapa de oportunidades<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
-        <span style="display:block">y accionables de IA <span class="h1-highlight">para tu eCommerce.</span></span>
+        <span style="display:block">Recibí gratis tu mapa de <span class="h1-underline-wrap">accionables<svg class="h1-underline-svg" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path class="stroke-main" d="M3,12 C14,7 22,16 33,11 C44,6 50,15 62,10 C76,4 84,15 98,9 C112,3 120,14 134,10 C146,7 152,13 163,9 C174,6 182,12 197,7"/><path class="stroke-pass2" d="M4,14 C18,9 26,17 40,12 C56,6 66,16 82,10 C98,4 108,15 124,10 C140,5 150,13 165,9 C176,6 186,11 196,8"/></svg></span></span>
+        <span style="display:block">para tu <span class="h1-highlight">eCommerce</span>… en menos de 30 segundos</span>
       </h1>
     </header>
 
@@ -334,9 +345,7 @@ fbq('track', 'PageView');
       <div class="vertical-grid" id="verticalGrid"></div>
       <div class="step-nav">
         <button class="step-back" disabled>← Atrás</button>
-        <div class="btn-spin-wrap">
-          <button class="step-continue" id="contBtn1" onclick="nextStep()" style="margin-left:0;" disabled>Continuar →</button>
-        </div>
+        <button class="step-continue" id="contBtn1" onclick="nextStep()" style="margin-left:0;" disabled>Continuar <span class="cta-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
 
@@ -350,8 +359,7 @@ fbq('track', 'PageView');
   <!-- STEP 2: DATOS + WHATSAPP -->
   <div class="step" data-step="2">
     <div class="step-card">
-      <div class="step-question">Contame un poco de tu empresa</div>
-      <p class="step-note">Con esto te mando el documento completo por WhatsApp.</p>
+      <div class="step-question">¿A dónde te envío tu mapa de accionables de IA personalizado?</div>
 
       <div class="lead-form">
         <div class="lead-field">
@@ -374,9 +382,7 @@ fbq('track', 'PageView');
 
       <div class="step-nav">
         <button class="step-back" onclick="prevStep()">← Atrás</button>
-        <div class="btn-spin-wrap">
-          <button class="cta-btn" id="waBtn" onclick="submitLead()">Recibir el mapa por WhatsApp →</button>
-        </div>
+        <button class="cta-btn" id="waBtn" onclick="submitLead()">Recibir el mapa por WhatsApp <span class="cta-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
   </div>
@@ -387,10 +393,10 @@ fbq('track', 'PageView');
 
 <script>
   const VERTICALS = [
-    { id: 'moda',   name: 'Moda y Belleza',                       desc: 'Indumentaria, calzado, cosmética, accesorios.' },
-    { id: 'retail', name: 'Electrónica, Retail y Marketplaces',    desc: 'Electrónica, hogar, retail generalista, marketplaces.' },
-    { id: 'cpg',    name: 'Supermercados, B2B y CPG',             desc: 'Supermercados, distribución B2B, consumo masivo.' },
-    { id: 'travel', name: 'Travel, Educación y Servicios Online', desc: 'Turismo, cursos online, suscripciones de servicio.' },
+    { id: 'moda',   name: 'Moda y Belleza' },
+    { id: 'retail', name: 'Electrónica, Retail y Marketplaces' },
+    { id: 'cpg',    name: 'Supermercados, B2B y CPG' },
+    { id: 'travel', name: 'Travel, Educación y Servicios Online' },
   ];
 
   const state = { vertical: null };
@@ -403,7 +409,6 @@ fbq('track', 'PageView');
     grid.innerHTML = VERTICALS.map(v => `
       <div class="vertical-card${state.vertical === v.id ? ' selected' : ''}" data-v="${v.id}" onclick="selectVertical('${v.id}')">
         <div class="v-name">${v.name}</div>
-        <div class="v-desc">${v.desc}</div>
       </div>
     `).join('');
   }
