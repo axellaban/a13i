@@ -6,12 +6,15 @@ Repo `axellaban/a13i`. Deploy `a13i-partner.vercel.app`. Rol: DFY + lead magnets
 
 ```
 /                → conversión: casos + bio + aplicación + Calendly (portada)
-/calculadora     → lead magnet 1, solo por link directo
-/ops-canvas      → lead magnet 2, solo por link directo
-/quick-wins-ai   → lead magnet 3, solo por link directo (agregado 2026-07-05)
 /thankyou        → post-agenda
-wa-redirect.html → invisible: arma el mensaje de WhatsApp y dispara webhook n8n
+optin.html       → stub de redirect legacy, apunta cross-domain a a13i-accelerator.vercel.app/calculadora
 ```
+
+## Migración de lead magnets a `a13i-accelerator` (2026-07-06)
+
+`/calculadora`, `/ops-canvas`, `/quick-wins-ai` y `wa-redirect.html` (+ assets `av-01..04.webp`) se movieron al repo `axellaban/a13i-accelerator` (deploy `a13i-accelerator.vercel.app`) para que el funnel real matchee lo documentado en `02-oferta.md`: contenido gratis → lead magnet → DWY (accelerator) → DFY (este repo). Efecto secundario: accelerator pasa a recibir tráfico externo real, lo cual contradice la nota de `05-decisiones.md` de que era "no público, sin tráfico apuntándole" — ese doc necesita actualizarse.
+
+Links cross-repo después de la migración: `sesion.html` → calculadora vía `https://a13i-accelerator.vercel.app/calculadora`; `wa-redirect.html` (ahora en accelerator) → este repo vía `https://a13i-partner.vercel.app/`; `optin.html` (se queda acá por compatibilidad de links viejos) → redirige a la nueva URL de accelerator. `axel.jpg` y `og-image.jpg` quedaron duplicados en ambos repos (siguen usándose en `sesion.html`/`thankyou.html` acá, y en las páginas movidas allá).
 
 ## Estado del root (verificado en producción 2026-07-04)
 

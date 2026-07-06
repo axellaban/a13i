@@ -5,21 +5,18 @@ Sitio de conversión y lead magnets para el programa DFY de A13I (Sistema de Aut
 ## Páginas
 
 - `sesion.html` (root `/`) — página de conversión: casos + bio + bloque de aplicación + Calendly inline. Es la página que recibe el tráfico principal.
-- `calculadora.html` (`/calculadora`) — lead magnet 1, Calculadora de Costo Operativo. Solo alcanzable por link directo.
-- `ops-canvas.html` (`/ops-canvas`) — lead magnet 2, Ops Canvas para eCommerce. Solo alcanzable por link directo.
-- `quick-wins-ai.html` (`/quick-wins-ai`) — lead magnet 3, Mapa de Oportunidades de IA (32 iniciativas, 4 verticales × 4 áreas). La página solo pide vertical, nombre de la empresa y facturación, y lo manda a WhatsApp con esos datos. El PDF con las 32 iniciativas no vive en este repo: Axel lo arma y lo manda a mano por WhatsApp aparte. Solo alcanzable por link directo.
 - `thankyou.html` (`/thankyou`) — página post-agenda, con el mismo bloque de formulario + Calendly que `sesion.html`.
-- `wa-redirect.html` — invisible, sin ruta propia: arma el mensaje de WhatsApp con los datos de la calculadora y dispara el webhook antes de abrir `wa.me`.
-- `optin.html` — stub de redirect a `calculadora.html` (compatibilidad con links viejos, no es parte del funnel activo).
+- `optin.html` — stub de redirect (compatibilidad con links viejos) que ahora apunta cross-domain a `https://a13i-accelerator.vercel.app/calculadora`, ya que la calculadora se mudó a ese repo (ver abajo).
+
+> **2026-07-06 — Lead magnets migrados a `a13i-accelerator`.** `calculadora.html`, `ops-canvas.html`, `quick-wins-ai.html` y `wa-redirect.html` (con sus assets `av-01..04.webp`) se movieron al repo `a13i-accelerator` (`axellaban/a13i-accelerator`, deploy `a13i-accelerator.vercel.app`) para alinear el funnel con lo documentado en `02-oferta.md`: contenido gratis → lead magnet → DWY (accelerator) → DFY (este repo, partner). `sesion.html` linkea a la calculadora con la URL absoluta `https://a13i-accelerator.vercel.app/calculadora`; `wa-redirect.html` (ahora en accelerator) linkea de vuelta a este repo con `https://a13i-partner.vercel.app/`. `axel.jpg` y `og-image.jpg` siguen viviendo en ambos repos (se duplicaron) porque `sesion.html`/`thankyou.html` también los usan.
 
 ## Flujo real
 
 ```
-Contenido / Ads → sesion.html (aplicación + Calendly)
-Lead magnets (calculadora / ops-canvas) → wa-redirect.html → WhatsApp → sesion.html o thankyou.html → Calendly → Llamada
+Contenido / Ads → lead magnets (a13i-accelerator) → wa-redirect.html (accelerator) → WhatsApp → sesion.html o thankyou.html (este repo) → Calendly → Llamada
 ```
 
-No es un funnel lineal de 3 páginas: `sesion.html` y `thankyou.html` corren en paralelo, cada una con su propio bloque de aplicación + Calendly inline.
+`sesion.html` y `thankyou.html` corren en paralelo, cada una con su propio bloque de aplicación + Calendly inline.
 
 ---
 
@@ -37,14 +34,14 @@ git clone https://github.com/axellaban/a13i
 
 | Valor a reemplazar | Archivo(s) | Dónde buscarlo |
 |---|---|---|
-| Meta Pixel ID (`1274224524679737`) | `sesion.html`, `calculadora.html`, `ops-canvas.html`, `quick-wins-ai.html`, `thankyou.html`, `wa-redirect.html` | `fbq('init', '...')` en el `<script>` del `<head>` |
-| GA4 Measurement ID (`G-FV5WCTFBC3`) | las 5 páginas | `gtag('config', '...')` en el `<head>` |
-| Webhook opt-in / primer touch | `calculadora.html` | `fetch('…/webhook/kona-optin', ...)` |
-| Webhook calculadora | `wa-redirect.html` | `fetch('…/webhook/kona-calculadora', ...)` |
+| Meta Pixel ID (`1274224524679737`) | `sesion.html`, `thankyou.html` (y las páginas movidas a `a13i-accelerator`) | `fbq('init', '...')` en el `<script>` del `<head>` |
+| GA4 Measurement ID (`G-FV5WCTFBC3`) | `sesion.html`, `thankyou.html` (y las páginas movidas) | `gtag('config', '...')` en el `<head>` |
+| Webhook opt-in / primer touch | `calculadora.html` (ahora en `a13i-accelerator`) | `fetch('…/webhook/kona-optin', ...)` |
+| Webhook calculadora | `wa-redirect.html` (ahora en `a13i-accelerator`) | `fetch('…/webhook/kona-calculadora', ...)` |
 | Webhook formulario de aplicación | `sesion.html`, `thankyou.html` | `fetch('…/webhook/kona-form', ...)` |
 | Webhook Calendly (UUID) | `sesion.html`, `thankyou.html` | `fetch('…/webhook/6032da9b-...', ...)` |
 | URL de Calendly | `sesion.html`, `thankyou.html` | `Calendly.initInlineWidget({ url: '...' })` |
-| Número de WhatsApp | `wa-redirect.html` | `const WA_NUMBER = '...'` |
+| Número de WhatsApp | `wa-redirect.html` (ahora en `a13i-accelerator`) | `const WA_NUMBER = '...'` |
 
 Los nombres de webhook (`kona-optin`, `kona-calculadora`, `kona-form`) son slugs internos heredados del nombre de proyecto original; la marca pública ya es A13I en todas las páginas. Cambiarlos exige tocar los workflows de n8n, no solo el HTML — no se tocó en esta pasada.
 

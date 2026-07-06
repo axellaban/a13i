@@ -1,9 +1,6 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/sesion.html" },
-    { "source": "/calculadora", "destination": "/calculadora.html" },
-    { "source": "/ops-canvas", "destination": "/ops-canvas.html" },
-    { "source": "/quick-wins-ai", "destination": "/quick-wins-ai.html" },
     { "source": "/thankyou", "destination": "/thankyou.html" }
   ],
   "headers": [

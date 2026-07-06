@@ -1,5 +1,7 @@
 # CLAUDE.md — A13I Partner
 
+> **⚠️ 2026-07-06: `calculadora.html`, `ops-canvas.html`, `quick-wins-ai.html` and `wa-redirect.html` moved to `axellaban/a13i-accelerator`.** Everything below that references those 4 files as living in this repo is stale — treat it as historical/behavioral documentation of the pages (still accurate for how they work), not as a statement of where they live now. This repo (`a13i-partner`) now only contains `sesion.html`, `thankyou.html`, and the `optin.html` redirect stub (which now points cross-domain to `a13i-accelerator.vercel.app/calculadora`). See `arquitectura-sitio.md` for the up-to-date route list and migration notes.
+
 ## Project Overview
 
 **A13I Partner** is the conversion site + lead magnets repo for A13I's DFY program (Sistema de Autonomía Operativa). Spanish-language, static HTML/CSS/Vanilla JS, no build tooling, no package manager, no framework. Deployed to Vercel. Business context (ICP, offer, voice, decisions) lives one level up at `../01-estrategia.md` through `../05-decisiones.md` — read those before making copy or strategy calls here. This file is scoped to the technical/code side of this repo only.
