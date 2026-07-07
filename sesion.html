@@ -797,74 +797,69 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     font-size: 12.5px; color: var(--muted); line-height: 1.55;
   }
 
-  /* ── ROADMAP ── */
-  .roadmap-section { margin-bottom: 48px; }
-  .roadmap-eyebrow {
+  /* ── PROCESS (3 steps vertical) ── */
+  .process-section { margin-bottom: 48px; }
+  .process-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px; font-weight: 600;
     letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--accent-2); margin-bottom: 18px;
   }
-  .roadmap-eyebrow .dot {
+  .process-eyebrow .dot {
     width: 6px; height: 6px; border-radius: 50%;
     background: var(--accent); box-shadow: 0 0 8px var(--accent);
     animation: pulse 2s ease-in-out infinite;
   }
-  .roadmap-title {
+  .process-title {
     font-size: clamp(22px, 3.2vw, 28px);
     font-weight: 900; letter-spacing: -0.02em;
-    color: var(--text); margin-bottom: 8px;
+    color: var(--text); margin-bottom: 32px;
   }
-  .roadmap-sub {
-    font-size: 14.5px; color: var(--muted); line-height: 1.65; margin-bottom: 28px;
-  }
-  .roadmap-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  .process-steps {
+    display: flex; flex-direction: column;
     gap: 0;
     position: relative;
   }
-  /* Connector line */
-  .roadmap-steps::before {
+  /* Vertical connector */
+  .process-steps::before {
     content: '';
     position: absolute;
-    top: 22px;
-    left: calc(12.5% + 8px);
-    right: calc(12.5% + 8px);
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--border-2) 40%, var(--border-2) 60%, var(--accent));
+    top: 0; bottom: 0;
+    left: 23px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--border-2) 50%, var(--border-2));
     z-index: 0;
   }
-  .rm-step {
-    display: flex; flex-direction: column;
-    align-items: center; text-align: center;
+  .ps-step {
+    display: flex; gap: 24px;
     position: relative; z-index: 1;
-    padding: 0 8px;
+    padding-bottom: 36px;
   }
-  .rm-dot {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--text);
-    color: #fff;
+  .ps-step:last-child { padding-bottom: 0; }
+  .ps-num {
+    width: 48px; height: 48px;
+    border-radius: 50%; flex-shrink: 0;
+    background: var(--card);
+    border: 2px solid var(--border-2);
     display: flex; align-items: center; justify-content: center;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; font-weight: 700;
-    margin-bottom: 14px;
-    box-shadow: 0 2px 8px rgba(26,20,16,0.18);
-    transition: background .2s, box-shadow .2s;
+    font-size: 15px; font-weight: 700;
+    color: var(--dim);
+    transition: border-color .2s, color .2s, box-shadow .2s;
   }
-  .rm-step:first-child .rm-dot {
-    background: var(--accent);
-    box-shadow: 0 2px 8px rgba(212,97,42,0.3), 0 0 16px rgba(212,97,42,0.15);
+  .ps-step:first-child .ps-num {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 12px rgba(212,97,42,0.18);
   }
-  .rm-label {
-    font-size: 13px; font-weight: 700;
-    color: var(--text); margin-bottom: 4px;
-    line-height: 1.3;
+  .ps-body { padding-top: 6px; }
+  .ps-label {
+    font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--text); margin-bottom: 6px;
   }
-  .rm-desc {
-    font-size: 11.5px; color: var(--dim); line-height: 1.45;
+  .ps-desc {
+    font-size: 14.5px; color: var(--muted); line-height: 1.7;
   }
 
   /* ── RESPONSIVE ── */
@@ -873,8 +868,6 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     h1 { font-size: 32px; }
     .hero-cta { display: block; text-align: center; width: 100%; }
     .solutions-grid { grid-template-columns: 1fr; }
-    .roadmap-steps { grid-template-columns: 1fr 1fr; gap: 20px 0; }
-    .roadmap-steps::before { display: none; }
     .cal-btn { display: block; text-align: center; width: 100%; white-space: normal; }
     .cal-banner { padding: 28px 16px; }
     .cal-body { padding: 16px 8px; }
@@ -1061,31 +1054,31 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   </div>
 
-  <!-- CÓMO TRABAJAMOS — ROADMAP -->
-  <div class="roadmap-section">
-    <div class="roadmap-eyebrow"><span class="dot"></span>Cómo trabajamos</div>
-    <div class="roadmap-title">De diagnóstico a equipo capacitado en 4 pasos</div>
-    <p class="roadmap-sub">Nada de descubrimiento eterno. Cada paso tiene un entregable concreto.</p>
-    <div class="roadmap-steps">
-      <div class="rm-step">
-        <div class="rm-dot">01</div>
-        <div class="rm-label">Mapeo Operativo</div>
-        <div class="rm-desc">Sesión de 30 min. Identificamos dónde la IA mueve números reales.</div>
+  <!-- CÓMO TRABAJAMOS -->
+  <div class="process-section">
+    <div class="process-eyebrow"><span class="dot"></span>Cómo trabajamos</div>
+    <div class="process-title">Nuestro día a día se resume en tres cosas...</div>
+    <div class="process-steps">
+      <div class="ps-step">
+        <div class="ps-num">1</div>
+        <div class="ps-body">
+          <div class="ps-label">Identificar</div>
+          <p class="ps-desc">Todo empieza con claridad. Primero entendemos cómo trabaja tu equipo de verdad — dónde se pierde tiempo, qué frena las cosas, por qué se apila el trabajo. A partir de ahí, encontramos el 5% de oportunidades que vale la pena construir.</p>
+        </div>
       </div>
-      <div class="rm-step">
-        <div class="rm-dot">02</div>
-        <div class="rm-label">Arquitectura y Desarrollo</div>
-        <div class="rm-desc">Diseñamos el sistema a medida de tu operación y lo construimos.</div>
+      <div class="ps-step">
+        <div class="ps-num">2</div>
+        <div class="ps-body">
+          <div class="ps-label">Desarrollar</div>
+          <p class="ps-desc">Una vez que sabemos qué importa, nos movemos rápido y nos ponemos a construir. Planificamos y desarrollamos soluciones que se integran a tus sistemas actuales — hechas bien, para que funcionen exactamente como tienen que funcionar desde el día uno.</p>
+        </div>
       </div>
-      <div class="rm-step">
-        <div class="rm-dot">03</div>
-        <div class="rm-label">Integración Llave en Mano</div>
-        <div class="rm-desc">Lo conectamos a tus herramientas reales. Funciona desde el día 1.</div>
-      </div>
-      <div class="rm-step">
-        <div class="rm-dot">04</div>
-        <div class="rm-label">Capacitación del Equipo</div>
-        <div class="rm-desc">Tu equipo entiende el sistema, lo opera y lo escala sin depender de nosotros.</div>
+      <div class="ps-step">
+        <div class="ps-num">3</div>
+        <div class="ps-body">
+          <div class="ps-label">Adoptar</div>
+          <p class="ps-desc">Después lo hacemos real. Trabajamos codo a codo con tu equipo — capacitando, ajustando, ayudándolos a integrar los nuevos sistemas en su trabajo diario. Para cuando nos corremos, ya no es un proyecto — es simplemente cómo se trabaja.</p>
+        </div>
       </div>
     </div>
   </div>
