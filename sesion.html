@@ -197,12 +197,12 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   }
   .bridge-wa-btn:hover { background: var(--ui); border-color: var(--accent); }
 
-  /* ── PAGE HEADER (hero centrado, patrón accelerator) ── */
+  /* ── PAGE HEADER (hero left-aligned) ── */
   .page-header {
     margin-bottom: 48px;
     padding-bottom: 48px;
     border-bottom: 1px solid var(--border);
-    text-align: center;
+    text-align: left;
   }
 
   .eyebrow {
@@ -226,13 +226,12 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .kicker {
     font-size: 13px; font-weight: 600; color: var(--dim);
     letter-spacing: 0.01em; margin-bottom: 14px;
-    max-width: 480px; margin-left: auto; margin-right: auto;
   }
 
   h1 {
     font-size: clamp(32px, 5.5vw, 58px);
-    font-weight: 900; letter-spacing: -0.03em; line-height: 1.0;
-    color: var(--text); margin-bottom: 16px;
+    font-weight: 900; letter-spacing: -0.03em; line-height: 1.05;
+    color: var(--text); margin-bottom: 20px;
   }
   h1 .accent {
     display: block;
@@ -249,13 +248,16 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .hl-orange { color: var(--accent-2); font-weight: 900; }
 
   .page-sub {
-    font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px;
-    margin-left: auto; margin-right: auto;
+    font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 620px;
   }
 
   .hero-value-prop {
+    margin: 28px 0 0;
+    padding: 16px 20px;
+    background: var(--card-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
     font-size: 15px; color: var(--dim); line-height: 1.6;
-    margin: 24px auto 0; max-width: 480px;
   }
   .hero-value-prop strong {
     color: var(--text); font-weight: 700;
@@ -263,21 +265,38 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   .hero-cta {
     display: inline-block; margin-top: 32px;
-    padding: 18px 36px;
-    background: #2E1A0E; border-radius: 13px;
+    padding: 20px 36px;
+    background: var(--accent); border-radius: 13px;
     color: #fff; font-family: 'Inter', sans-serif;
-    font-size: 16px; font-weight: 700;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.01em;
     text-decoration: none; cursor: pointer;
+    position: relative; overflow: hidden;
     transition: background .18s, transform .15s, box-shadow .18s;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(20,12,6,0.25), 0 4px 8px rgba(20,12,6,0.20);
+    box-shadow: 0 2px 4px rgba(212,97,42,0.25), 0 6px 16px rgba(212,97,42,0.18);
   }
-  .hero-cta:hover { background: #3a2416; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 8px rgba(20,12,6,0.3), 0 8px 20px rgba(20,12,6,0.22); }
+  .hero-cta:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(212,97,42,0.3), 0 12px 28px rgba(212,97,42,0.22); }
+  .hero-cta:active { transform: translateY(0); }
+  .hero-cta .beam {
+    pointer-events: none;
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--ba, 0deg),
+      transparent 0deg, transparent 270deg,
+      #fff 310deg, #ffcdb2 330deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: border-beam-rotate 3.5s linear infinite;
+  }
 
   /* ── ABOUT / CRED ── */
   .about-card {
     display: flex; align-items: center; gap: 16px;
-    justify-content: center;
-    margin: 32px auto 0; max-width: 480px;
+    margin: 36px 0 0; max-width: 480px;
     text-align: left;
   }
   .about-av {
@@ -292,7 +311,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     background: var(--card-2); border: 1px solid var(--border);
     border-left: 3px solid var(--accent);
     border-radius: 0 12px 12px 0;
-    padding: 16px 20px; margin: 14px auto 0; max-width: 480px;
+    padding: 16px 20px; margin: 14px 0 0; max-width: 480px;
     text-align: left;
   }
   .cred-text { font-size: 13px; color: var(--muted); line-height: 1.75; }
@@ -734,6 +753,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   @media(max-width:600px) {
     .wrap { padding: 48px 12px 80px; }
     h1 { font-size: 32px; }
+    .hero-cta { display: block; text-align: center; width: 100%; }
     .cal-btn { display: block; text-align: center; width: 100%; white-space: normal; }
     .cal-banner { padding: 28px 16px; }
     .cal-body { padding: 16px 8px; }
@@ -758,8 +778,8 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   <!-- PAGE HEADER -->
   <div class="page-header">
     <h1>
-      <span style="display:block">Implementamos IA que</span>
-      <span style="display:block"><span class="hl-orange" id="hlUnderline">mueve la aguja</span> en tu <span id="hlHighlight">eCommerce</span></span>
+      Implementamos <span id="hlUnderline" class="hl-orange">IA</span> que<br>
+      <span id="hlHighlight">mueve la aguja</span> en tu eCommerce
     </h1>
     <p class="page-sub">Ayudamos a empresas a identificar oportunidades de IA que realmente transformarán su negocio; después, las desarrollamos, las implementamos y capacitamos a tu equipo para que las utilice.</p>
 
@@ -767,7 +787,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       Dejá de pagar por el experimento. <strong>Empezá a pagar por resultados.</strong>
     </div>
 
-    <a href="#appForm" class="hero-cta" onclick="document.getElementById('appForm').scrollIntoView({behavior:'smooth',block:'start'});return false;">Agendá sesión de mapeo operativo →</a>
+    <a href="#appForm" class="hero-cta" onclick="document.getElementById('appForm').scrollIntoView({behavior:'smooth',block:'start'});return false;"><span class="beam" aria-hidden="true"></span>Agendá sesión de mapeo operativo →</a>
 
     <div class="about-card">
       <div class="about-av">
