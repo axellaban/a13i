@@ -253,6 +253,26 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     margin-left: auto; margin-right: auto;
   }
 
+  .hero-value-prop {
+    font-size: 15px; color: var(--dim); line-height: 1.6;
+    margin: 24px auto 0; max-width: 480px;
+  }
+  .hero-value-prop strong {
+    color: var(--text); font-weight: 700;
+  }
+
+  .hero-cta {
+    display: inline-block; margin-top: 32px;
+    padding: 18px 36px;
+    background: #2E1A0E; border-radius: 13px;
+    color: #fff; font-family: 'Inter', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-decoration: none; cursor: pointer;
+    transition: background .18s, transform .15s, box-shadow .18s;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(20,12,6,0.25), 0 4px 8px rgba(20,12,6,0.20);
+  }
+  .hero-cta:hover { background: #3a2416; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 8px rgba(20,12,6,0.3), 0 8px 20px rgba(20,12,6,0.22); }
+
   /* ── ABOUT / CRED ── */
   .about-card {
     display: flex; align-items: center; gap: 16px;
@@ -737,15 +757,17 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
 
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="eyebrow">
-      <span class="dot"></span>
-      Implementación de IA para dueños de eCommerce con equipo operativo.
-    </div>
     <h1>
-      <span style="display:block">Operaciones <span id="hlUnderline">reales</span>.</span>
-      <span style="display:block"><span class="hl-orange">Transformaciones</span> <span id="hlHighlight">reales</span>.</span>
+      <span style="display:block">Implementamos IA que</span>
+      <span style="display:block"><span class="hl-orange">mueve la aguja</span> en tu eCommerce</span>
     </h1>
-    <p class="page-sub">Qué proceso era, qué rompía y qué resultado dio. Cuál se parece más a tu operación.</p>
+    <p class="page-sub">Ayudamos a empresas a identificar oportunidades de IA que realmente transformarán su negocio; después, las desarrollamos, las implementamos y capacitamos a tu equipo para que las utilice.</p>
+
+    <div class="hero-value-prop">
+      Dejá de pagar por el experimento. <strong>Empezá a pagar por resultados.</strong>
+    </div>
+
+    <a href="#appForm" class="hero-cta" onclick="document.getElementById('appForm').scrollIntoView({behavior:'smooth',block:'start'});return false;">Agendá sesión de mapeo operativo →</a>
 
     <div class="about-card">
       <div class="about-av">
