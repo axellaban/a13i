@@ -380,16 +380,33 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     margin-bottom: 8px;
   }
   .fit-sub { font-size: 14.5px; color: var(--muted); margin-bottom: 28px; }
-  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 28px; }
-  @media(max-width:640px){ .fit-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width:640px){ .fit-grid { grid-template-columns: 1fr; gap: 16px; } }
+  .fit-card {
+    background: var(--card);
+    border: 1px solid var(--border-2);
+    border-radius: 18px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 12px #1f14100d;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .fit-card:hover {
+    border-color: color-mix(in oklab, var(--c) 30%, var(--border-2));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -6px rgba(212,97,42,0.06);
+  }
+  .fit-card.yes { --c: var(--green); border-top: 3px solid var(--green); }
+  .fit-card.no { --c: var(--accent-2); border-top: 3px solid var(--accent); }
   .fit-col-label {
     display: inline-block;
     font-weight: 800; font-size: 13px;
     padding: 4px 10px; border-radius: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
-  .fit-col-label.yes { background: rgba(30,142,90,0.12); color: var(--green); }
-  .fit-col-label.no { background: rgba(212,97,42,0.1); color: var(--accent-2); }
+  .fit-col-label.yes { background: rgba(30,142,90,0.1); color: var(--green); }
+  .fit-col-label.no { background: rgba(212,97,42,0.08); color: var(--accent-2); }
+
   .fit-item { display: flex; gap: 10px; margin-bottom: 16px; }
   .fit-item:last-child { margin-bottom: 0; }
   .fit-icon {
@@ -618,29 +635,39 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
   .radio-opt.sel .radio-dot::after { content: ''; position: absolute; inset: 3px; background: var(--accent); border-radius: 50%; }
   .radio-text { font-size: 14px; color: var(--muted); }
   .radio-opt.sel .radio-text { color: var(--text); }
-
   /* Submit button */
   .submit-btn {
     width: 100%; padding: 20px 24px;
-    background: #2E1A0E; border: none; border-radius: 13px;
+    background: var(--accent); border: none; border-radius: 13px;
     color: #fff; font-family: 'Inter', sans-serif;
     font-size: 16px; font-weight: 700; letter-spacing: 0.01em;
     cursor: pointer;
-    transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
     position: relative; overflow: hidden;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(20,12,6,0.25), 0 4px 8px rgba(20,12,6,0.20);
+    transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+    box-shadow: 0 2px 4px rgba(212,97,42,0.25), 0 6px 16px rgba(212,97,42,0.18);
     margin-top: 4px; margin-bottom: 64px;
   }
-  .submit-btn::before {
-    content: '';
-    position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transition: left 0.4s ease;
-  }
-  .submit-btn:hover { background: #3a2416; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 8px rgba(20,12,6,0.3), 0 8px 20px rgba(20,12,6,0.22); }
-  .submit-btn:hover::before { left: 100%; }
+  .submit-btn:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(212,97,42,0.3), 0 12px 28px rgba(212,97,42,0.22); }
   .submit-btn:active { transform: translateY(0); }
   .submit-btn:disabled { background: var(--faint); cursor: not-allowed; transform: none; box-shadow: none; }
+  .submit-btn .beam {
+    pointer-events: none;
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--ba, 0deg),
+      transparent 0deg, transparent 270deg,
+      #fff 310deg, #ffcdb2 330deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: border-beam-rotate 3.5s linear infinite;
+  }
+
+
 
   /* ── CALENDLY SECTION ── */
   #calendly-section { display: none; margin-bottom: 80px; animation: fadeInUp 0.5s ease; }
@@ -1120,14 +1147,14 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
     <div class="fit-title">¿Esto es para vos?</div>
     <p class="fit-sub">Cuatro pruebas de cada lado. Si el "sí" te representa más, reservá la llamada.</p>
     <div class="fit-grid">
-      <div>
+      <div class="fit-card yes">
         <span class="fit-col-label yes">Sí, si...</span>
         <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Ya operás.</strong>Tenés facturación real y equipo haciendo el trabajo manual, no una idea en papel.</span></div>
         <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Querés implementación, no un curso.</strong>Buscás que alguien construya el sistema con vos, no aprender a hacerlo solo.</span></div>
         <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Te importa el número.</strong>Horas ahorradas, errores reducidos, plata recuperada — no una demo linda.</span></div>
         <div class="fit-item"><span class="fit-icon yes">✓</span><span class="fit-text"><strong>Estás dispuesto a mostrar cómo opera tu negocio hoy</strong>, con sus problemas reales, sin filtro.</span></div>
       </div>
-      <div>
+      <div class="fit-card no">
         <span class="fit-col-label no">No, si...</span>
         <div class="fit-item"><span class="fit-icon no">✕</span><span class="fit-text"><strong>Buscás aprender a construirlo vos mismo.</strong>Esto es implementación 1:1, no un programa de builders.</span></div>
         <div class="fit-item"><span class="fit-icon no">✕</span><span class="fit-text"><strong>Todavía no tenés operación corriendo.</strong>Sin proceso real en marcha, no hay qué automatizar todavía.</span></div>
@@ -1136,6 +1163,7 @@ src="https://www.facebook.com/tr?id=1274224524679737&ev=PageView&noscript=1"/></
       </div>
     </div>
   </div>
+
 
   <!-- Guarantee -->
   <div class="guarantee">
