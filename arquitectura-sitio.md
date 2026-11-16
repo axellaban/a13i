@@ -8,7 +8,10 @@ Repo `axellaban/a13i`. Deploy `a13i-partner.vercel.app`. Rol: DFY + lead magnets
 /                → conversión: casos + bio + aplicación + Calendly (portada)
 /thankyou        → post-agenda
 optin.html       → stub de redirect legacy, apunta cross-domain a a13i-accelerator.vercel.app/calculadora
+/jezabel/        → portfolio de Dalila Jezabel Arzubi (artista visual). Sitio independiente, sin relación con el funnel: sin Pixel/GA4, sin webhooks. Ver jezabel/README.md
 ```
+
+`/jezabel/` es un sitio estático aparte (template "Portfolio for Creatives", GPL-3.0) que vive en su carpeta con sus propios `styles/`, `js/` e `includes/`. Usa rutas relativas, así que necesita la barra final: `jezabel/index.html` redirige `/jezabel` → `/jezabel/` por JS. No mezclar sus assets con los de la raíz.
 
 ## Migración de lead magnets a `a13i-accelerator` (2026-07-06)
 

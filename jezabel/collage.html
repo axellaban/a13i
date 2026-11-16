@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Collage · Dalila Jezabel Arzubi</title>
+    <meta name="description" content="Collage: A partir de revistas de los 90 · 2019. Obra de Dalila Jezabel Arzubi, artista visual de San Luis, Argentina." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="assets/marca/favicon.svg" />
+    <meta property="og:title" content="Collage · Dalila Jezabel Arzubi" />
+    <meta property="og:description" content="Collage: A partir de revistas de los 90 · 2019. Obra de Dalila Jezabel Arzubi, artista visual de San Luis, Argentina." />
+    <meta property="og:image" content="https://a13i-partner.vercel.app/jezabel/assets/obras/portada-guardiana.jpg" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="./lightbox2/dist/css/lightbox.min.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/jezabel.css" />
+  </head>
+
+  <body class="pagina-serie" id="top">
+    <!-- Encabezado compartido: se edita en includes/header.html -->
+    <div id="header-placeholder"></div>
+
+    <header class="serie-cabecera">
+      <p class="serie-numero">Serie 5 de 6</p>
+      <h1 class="serie-titulo">Collage</h1>
+      <p class="serie-bajada">A partir de revistas de los 90 · 2019</p>
+    </header>
+
+    <main class="obras">
+
+        <article class="obra reveal">
+          <a href="assets/obras/el-mundo-en-una-particula-2019.jpg" class="obra-imagen" data-lightbox="collage" data-title="“El mundo en una partícula”, 2019. Collage a partir de revistas de los 90.">
+            <figure class="marco">
+              <img src="assets/obras/el-mundo-en-una-particula-2019.jpg" width="492" height="380" loading="lazy" alt="El mundo en una partícula (2019). Collage con un niño que sostiene una piedra en las manos, rodeado de paisajes y símbolos." />
+            </figure>
+          </a>
+          <div class="ficha">
+            <h2 class="ficha-titulo"><strong>“El mundo en una partícula”</strong>, 2019</h2>
+            <p class="ficha-tecnica">Collage a partir de revistas de los 90.</p>
+          </div>
+        </article>
+
+        <article class="obra reveal">
+          <a href="assets/obras/caminos-de-la-conciencia-2019.jpg" class="obra-imagen" data-lightbox="collage" data-title="“Caminos de la conciencia”, 2019. Collage a partir de revistas de los 90.">
+            <figure class="marco">
+              <img src="assets/obras/caminos-de-la-conciencia-2019.jpg" width="418" height="418" loading="lazy" alt="Caminos de la conciencia (2019). Collage con una pirámide de vidrio, terrazas de cultivo y un cielo de colores." />
+            </figure>
+          </a>
+          <div class="ficha">
+            <h2 class="ficha-titulo"><strong>“Caminos de la conciencia”</strong>, 2019</h2>
+            <p class="ficha-tecnica">Collage a partir de revistas de los 90.</p>
+          </div>
+        </article>
+
+        <article class="obra reveal">
+          <a href="assets/obras/antiguos-habitantes-2019.jpg" class="obra-imagen" data-lightbox="collage" data-title="“Antiguos habitantes”, 2019. Collage a partir de revistas de los 90.">
+            <figure class="marco">
+              <img src="assets/obras/antiguos-habitantes-2019.jpg" width="618" height="820" loading="lazy" alt="Antiguos habitantes (2019). Collage con dinosaurios sobre ruinas antiguas y selva." />
+            </figure>
+          </a>
+          <div class="ficha">
+            <h2 class="ficha-titulo"><strong>“Antiguos habitantes”</strong>, 2019</h2>
+            <p class="ficha-tecnica">Collage a partir de revistas de los 90.</p>
+          </div>
+        </article>
+    </main>
+
+    <nav class="serie-navegacion" aria-label="Otras series">
+      <a href="texturas.html" class="anterior"><span>← Serie anterior</span><strong>Texturas</strong></a>
+      <a href="proyectos.html" class="siguiente"><span>Serie siguiente →</span><strong>Proyectos</strong></a>
+    </nav>
+
+    <!-- Menú flotante que aparece al bajar -->
+    <div id="bottomMenu" class="bottomMenu hide">
+      <a href="proyectos.html">Siguiente serie →</a>
+    </div>
+
+    <!-- Pie compartido (contacto): se edita en includes/footer.html -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Carga el encabezado y el pie compartidos -->
+    <script>
+      fetch("includes/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("includes/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+          document.getElementById("copyright-years").textContent += new Date().getFullYear();
+        });
+    </script>
+
+    <script src="./js/bottom-menu.js" defer></script>
+    <script src="./js/scroll-reveal.js" defer></script>
+    <script src="./lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+    <script>
+      lightbox.option({ albumLabel: "Obra %1 de %2", wrapAround: true, fadeDuration: 300, imageFadeDuration: 300 });
+    </script>
+  </body>
+</html>

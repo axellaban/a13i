@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Texturas · Dalila Jezabel Arzubi</title>
+    <meta name="description" content="Texturas: Óleo sobre cartón corrugado intervenido · 2014. Obra de Dalila Jezabel Arzubi, artista visual de San Luis, Argentina." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="assets/marca/favicon.svg" />
+    <meta property="og:title" content="Texturas · Dalila Jezabel Arzubi" />
+    <meta property="og:description" content="Texturas: Óleo sobre cartón corrugado intervenido · 2014. Obra de Dalila Jezabel Arzubi, artista visual de San Luis, Argentina." />
+    <meta property="og:image" content="https://a13i-partner.vercel.app/jezabel/assets/obras/portada-guardiana.jpg" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="./lightbox2/dist/css/lightbox.min.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/jezabel.css" />
+  </head>
+
+  <body class="pagina-serie" id="top">
+    <!-- Encabezado compartido: se edita en includes/header.html -->
+    <div id="header-placeholder"></div>
+
+    <header class="serie-cabecera">
+      <p class="serie-numero">Serie 4 de 6</p>
+      <h1 class="serie-titulo">Texturas</h1>
+      <p class="serie-bajada">Óleo sobre cartón corrugado intervenido · 2014</p>
+    </header>
+
+    <main class="obras">
+
+        <article class="obra reveal">
+          <a href="assets/obras/hombre-2014.jpg" class="obra-imagen" data-lightbox="texturas" data-title="“Hombre”, 2014. Óleo sobre soporte texturado (cartón corrugado intervenido).">
+            <figure class="marco">
+              <img src="assets/obras/hombre-2014.jpg" width="432" height="768" loading="lazy" alt="Hombre (2014). Rostro de un hombre con las manos cruzadas frente a la boca, pintado sobre cartón texturado." />
+            </figure>
+          </a>
+          <div class="ficha">
+            <h2 class="ficha-titulo"><strong>“Hombre”</strong>, 2014</h2>
+            <p class="ficha-tecnica">Óleo sobre soporte texturado (cartón corrugado intervenido).</p>
+          </div>
+        </article>
+
+        <article class="obra reveal">
+          <a href="assets/obras/nino-2014.jpg" class="obra-imagen" data-lightbox="texturas" data-title="“Niño”, 2014. Óleo sobre soporte texturado (cartón corrugado intervenido).">
+            <figure class="marco">
+              <img src="assets/obras/nino-2014.jpg" width="724" height="519" loading="lazy" alt="Niño (2014). Rostro de un niño en tonos ocres y tierra sobre cartón texturado." />
+            </figure>
+          </a>
+          <div class="ficha">
+            <h2 class="ficha-titulo"><strong>“Niño”</strong>, 2014</h2>
+            <p class="ficha-tecnica">Óleo sobre soporte texturado (cartón corrugado intervenido).</p>
+          </div>
+        </article>
+    </main>
+
+    <nav class="serie-navegacion" aria-label="Otras series">
+      <a href="pinturas-al-oleo.html" class="anterior"><span>← Serie anterior</span><strong>Pinturas al óleo</strong></a>
+      <a href="collage.html" class="siguiente"><span>Serie siguiente →</span><strong>Collage</strong></a>
+    </nav>
+
+    <!-- Menú flotante que aparece al bajar -->
+    <div id="bottomMenu" class="bottomMenu hide">
+      <a href="collage.html">Siguiente serie →</a>
+    </div>
+
+    <!-- Pie compartido (contacto): se edita en includes/footer.html -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Carga el encabezado y el pie compartidos -->
+    <script>
+      fetch("includes/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("includes/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+          document.getElementById("copyright-years").textContent += new Date().getFullYear();
+        });
+    </script>
+
+    <script src="./js/bottom-menu.js" defer></script>
+    <script src="./js/scroll-reveal.js" defer></script>
+    <script src="./lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+    <script>
+      lightbox.option({ albumLabel: "Obra %1 de %2", wrapAround: true, fadeDuration: 300, imageFadeDuration: 300 });
+    </script>
+  </body>
+</html>

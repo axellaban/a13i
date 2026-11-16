@@ -1,0 +1,681 @@
+/*
+ * =============================================
+ * JEZABEL — ESTILOS PROPIOS DEL PORTFOLIO
+ * =============================================
+ * Se carga DESPUÉS de style.css (la base del template
+ * "Portfolio for Creatives") y sólo agrega lo que el
+ * template no trae: la portada azul petróleo, las fichas
+ * de obra en zigzag como en el PDF y las páginas de serie.
+ *
+ * Para cambiar colores o tipografías de todo el sitio,
+ * tocá las variables de abajo.
+ * =============================================
+ */
+
+:root {
+  --petroleo: #508491; /* fondo de portada, sobre mí y contacto */
+  --petroleo-oscuro: #3e6b77;
+  --papel: #f4f6fc; /* fondo de las páginas de obra */
+  --tinta: #16161f; /* textos */
+  --tinta-suave: #3b3b4a;
+  --blanco: #ffffff;
+  --espaciado-letras: 0.08em; /* el aire entre letras típico del PDF */
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-weight: 300;
+  letter-spacing: var(--espaciado-letras);
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.45;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-heading);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+/* ------------------------------- */
+/* Encabezado y menú               */
+/* ------------------------------- */
+
+.site-header {
+  min-height: 0;
+}
+
+.site-header .nav-branding {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.site-header .nav-branding-logo {
+  width: auto;
+}
+
+.wordmark {
+  font-family: var(--font-family-heading);
+  font-size: 1.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wordmark a:link,
+.wordmark a:visited {
+  color: var(--tinta);
+}
+
+.site-header a.nav-link-primary {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* En las páginas con fondo petróleo el menú va en blanco */
+.pagina-petroleo .wordmark a:link,
+.pagina-petroleo .wordmark a:visited,
+.pagina-petroleo .site-header a.nav-link-primary {
+  color: var(--blanco);
+}
+
+.pagina-petroleo .site-header a.nav-link-primary:hover {
+  color: var(--papel);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+/* ------------------------------- */
+/* Marco blanco de las obras       */
+/* ------------------------------- */
+
+.marco {
+  display: inline-block;
+  max-width: 100%;
+  background: var(--blanco);
+  padding: 6px;
+  box-shadow:
+    0 1px 2px rgba(22, 22, 31, 0.08),
+    0 14px 32px -14px rgba(22, 22, 31, 0.35);
+  transition: transform var(--duration-normal) ease;
+}
+
+.marco img {
+  display: block;
+  max-height: 80vh;
+  width: auto;
+}
+
+a:hover .marco {
+  transform: translateY(-3px);
+}
+
+/* ------------------------------- */
+/* Adorno ondulado (como el PDF)   */
+/* ------------------------------- */
+
+.ornamento {
+  display: block;
+  width: 12rem;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  color: currentColor;
+  opacity: 0.9;
+}
+
+/* ------------------------------- */
+/* PORTADA (index.html)            */
+/* ------------------------------- */
+
+.pagina-petroleo {
+  background: var(--petroleo);
+  color: var(--blanco);
+}
+
+.portada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 1rem 4rem;
+  gap: 2rem;
+}
+
+.portada-nombre {
+  font-family: "Josefin Slab", serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.25rem;
+}
+
+.portada-rol {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  letter-spacing: 0.16em;
+  margin-bottom: 1.5rem;
+}
+
+.portada-titulo {
+  color: var(--blanco);
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.portada-seleccion {
+  font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+  letter-spacing: 0.16em;
+  margin-bottom: 0;
+}
+
+.portada .marco img {
+  max-height: 72vh;
+}
+
+.portada-contacto {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  letter-spacing: 0.12em;
+}
+
+.portada-contacto a:link,
+.portada-contacto a:visited {
+  color: var(--blanco);
+}
+
+.portada-contacto a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+/* ------------------------------- */
+/* Grilla de series (index.html)   */
+/* ------------------------------- */
+
+.seccion-obra {
+  background: var(--papel);
+  color: var(--tinta);
+  padding: 4rem 1rem 5rem;
+}
+
+.seccion-titulo {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.75rem;
+}
+
+.seccion-bajada {
+  text-align: center;
+  max-width: 40ch;
+  margin: 0 auto 3rem;
+}
+
+.series-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.serie-card a {
+  display: block;
+  color: var(--tinta);
+  text-align: center;
+}
+
+.serie-card .marco {
+  display: block;
+}
+
+.serie-card .marco img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  max-height: none;
+}
+
+.serie-card h3 {
+  margin: 1.25rem 0 0.35rem;
+  font-size: 1.6rem;
+  color: var(--tinta);
+}
+
+.serie-card p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+.serie-card a:hover h3 {
+  color: var(--petroleo-oscuro);
+}
+
+/* ------------------------------- */
+/* PÁGINAS DE SERIE                */
+/* ------------------------------- */
+
+.serie-cabecera {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.serie-numero {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--petroleo-oscuro);
+  margin-bottom: 0.75rem;
+}
+
+.serie-titulo {
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  margin-bottom: 0.75rem;
+}
+
+.serie-bajada {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.obras {
+  padding: 0 1rem 2rem;
+}
+
+/* Cada obra: imagen + ficha, alternando lados (zigzag) */
+.obra {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto 4.5rem;
+}
+
+.obra-imagen {
+  text-align: center;
+}
+
+.ficha-titulo {
+  font-family: "Josefin Slab", serif;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.1em;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  color: var(--tinta);
+}
+
+.ficha-titulo strong {
+  font-weight: 700;
+}
+
+.ficha-subtitulo {
+  margin-bottom: 0.75rem;
+}
+
+.ficha-tecnica {
+  margin-bottom: 0;
+}
+
+/* Obra destacada: sola, centrada y grande (como las páginas de una obra del PDF) */
+.obra--destacada {
+  justify-items: center;
+  text-align: center;
+}
+
+/* ------------------------------- */
+/* Proyectos (portadas de disco y libro) */
+/* ------------------------------- */
+
+.proyecto {
+  max-width: 1100px;
+  margin: 0 auto 5rem;
+}
+
+.proyecto .obra {
+  margin-bottom: 2rem;
+}
+
+.proceso-titulo {
+  font-family: "Josefin Slab", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.95rem;
+  color: var(--petroleo-oscuro);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.proceso {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.proceso .marco {
+  display: block;
+  padding: 4px;
+}
+
+.proceso .marco img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  max-height: none;
+}
+
+/* ------------------------------- */
+/* Navegación entre series         */
+/* ------------------------------- */
+
+.serie-navegacion {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  border-top: 1px solid rgba(22, 22, 31, 0.12);
+}
+
+.serie-navegacion a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 48%;
+}
+
+.serie-navegacion a:link,
+.serie-navegacion a:visited {
+  color: var(--tinta);
+}
+
+.serie-navegacion .siguiente {
+  margin-left: auto;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.serie-navegacion span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--petroleo-oscuro);
+}
+
+.serie-navegacion strong {
+  font-family: var(--font-family-heading);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.35rem;
+}
+
+.serie-navegacion a:hover strong {
+  color: var(--petroleo-oscuro);
+}
+
+.bottomMenu {
+  width: auto;
+  height: auto;
+  padding: 0.6rem 1rem;
+  background: var(--petroleo);
+  box-shadow: 0 6px 18px -6px rgba(22, 22, 31, 0.4);
+}
+
+.bottomMenu a:link,
+.bottomMenu a:visited {
+  color: var(--blanco);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* ------------------------------- */
+/* SOBRE MÍ                        */
+/* ------------------------------- */
+
+.sobre-mi {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.sobre-mi h1,
+.sobre-mi h2 {
+  color: var(--blanco);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  margin-bottom: 2rem;
+}
+
+.sobre-mi p,
+.sobre-mi li {
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.bloque {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.retrato-circular {
+  width: min(18rem, 70vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 6px solid var(--blanco);
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.texto-destacado p {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.pagina-petroleo .marco {
+  box-shadow: 0 14px 32px -14px rgba(0, 0, 0, 0.45);
+}
+
+.lista-cv {
+  list-style: disc;
+  padding-left: 1.4rem;
+}
+
+.lista-cv li {
+  margin-bottom: 0.35rem;
+}
+
+.separador {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  margin: 1rem 0 4rem;
+}
+
+/* ------------------------------- */
+/* Pie de página / Contacto        */
+/* ------------------------------- */
+
+.footer-global {
+  color: var(--blanco);
+  padding-top: 4rem;
+}
+
+.footer-global h2 {
+  color: var(--blanco);
+  font-size: 2rem;
+}
+
+.footer-global a:link,
+.footer-global a:visited {
+  color: var(--blanco);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 0.25em;
+}
+
+.footer-global a:hover {
+  text-decoration-color: var(--blanco);
+}
+
+.footer-global .footer-item {
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.footer-fineprint {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.footer-full-width {
+  padding-bottom: 2rem;
+}
+
+/* ------------------------------- */
+/* Lightbox (ver obra en grande)   */
+/* ------------------------------- */
+
+.lightbox .lb-data .lb-caption {
+  font-family: "Josefin Slab", serif;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  font-weight: 400;
+}
+
+/* ------------------------------- */
+/* Tablet y escritorio             */
+/* ------------------------------- */
+
+@media (min-width: 768px) {
+  .series-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .obra {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 3.5rem;
+  }
+
+  /* Zigzag: en las obras pares la imagen pasa a la derecha y la ficha se alinea a la derecha */
+  .obra:nth-of-type(even) .obra-imagen {
+    order: 2;
+  }
+
+  .obra:nth-of-type(even) .ficha {
+    text-align: right;
+  }
+
+  .obra--destacada {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .obra--destacada .ficha,
+  .obra--destacada:nth-of-type(even) .ficha {
+    text-align: center;
+  }
+
+  .obra--destacada:nth-of-type(even) .obra-imagen {
+    order: 0;
+  }
+
+  .proceso {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .bloque {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 3.5rem;
+  }
+
+  .bloque--invertido {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+
+  .bloque--invertido > :first-child {
+    order: 2;
+  }
+}
+
+@media (min-width: 1100px) {
+  .series-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Enlaces sobre fondo petróleo (Sobre mí, 404) */
+.pagina-petroleo a.enlace-claro:link,
+.pagina-petroleo a.enlace-claro:visited {
+  color: var(--blanco);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 0.25em;
+}
+
+.pagina-petroleo a.enlace-claro:hover {
+  text-decoration-color: var(--blanco);
+}
+
+/* Las fotos dentro de los bloques de "Sobre mí" no se estiran: el marco abraza la foto */
+.bloque > .marco {
+  justify-self: center;
+  width: fit-content;
+}
+
+.fotos-pareja {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.fotos-pareja .marco {
+  display: block;
+}
+
+.fotos-pareja .marco img {
+  width: 100%;
+  max-height: none;
+}
+
+/* Proceso: miniaturas centradas aunque sean 4 o 5 */
+.proceso {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.proceso li {
+  width: calc(50% - 0.5rem);
+}
+
+@media (min-width: 768px) {
+  .proceso li {
+    width: calc(20% - 0.8rem);
+  }
+}

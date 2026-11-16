@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Página no encontrada · Dalila Jezabel Arzubi</title>
+    <meta name="description" content="Esta página no existe." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="assets/marca/favicon.svg" />
+    <meta property="og:title" content="Página no encontrada · Dalila Jezabel Arzubi" />
+    <meta property="og:description" content="Esta página no existe." />
+    <meta property="og:image" content="https://a13i-partner.vercel.app/jezabel/assets/obras/portada-guardiana.jpg" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/jezabel.css" />
+  </head>
+
+  <body class="pagina-petroleo" id="top">
+    <!-- Encabezado compartido: se edita en includes/header.html -->
+    <div id="header-placeholder"></div>
+
+    <main class="sobre-mi" style="text-align: center; min-height: 50vh">
+      <h1>Esta página no existe</h1>
+      <p><a href="index.html" class="enlace-claro">Volver a la portada</a></p>
+    </main>
+
+    <!-- Pie compartido (contacto): se edita en includes/footer.html -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Carga el encabezado y el pie compartidos -->
+    <script>
+      fetch("includes/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("includes/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+          document.getElementById("copyright-years").textContent += new Date().getFullYear();
+        });
+    </script>
+
+    <script src="./js/bottom-menu.js" defer></script>
+    <script src="./js/scroll-reveal.js" defer></script>
+  </body>
+</html>

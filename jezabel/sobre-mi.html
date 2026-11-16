@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sobre mí · Dalila Jezabel Arzubi</title>
+    <meta name="description" content="Dalila Jezabel Arzubi, profesora de Artes Visuales con orientación en Cerámica. Dibujo, pintura y artesanía desde San Luis, Argentina." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="assets/marca/favicon.svg" />
+    <meta property="og:title" content="Sobre mí · Dalila Jezabel Arzubi" />
+    <meta property="og:description" content="Dalila Jezabel Arzubi, profesora de Artes Visuales con orientación en Cerámica. Dibujo, pintura y artesanía desde San Luis, Argentina." />
+    <meta property="og:image" content="https://a13i-partner.vercel.app/jezabel/assets/obras/portada-guardiana.jpg" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/jezabel.css" />
+  </head>
+
+  <body class="pagina-petroleo pagina-sobre-mi" id="top">
+    <!-- Encabezado compartido: se edita en includes/header.html -->
+    <div id="header-placeholder"></div>
+
+    <main class="sobre-mi">
+      <svg class="ornamento" viewBox="0 0 240 24" aria-hidden="true"><path d="M2 14 C 40 14, 60 8, 82 12 S 96 22, 104 13 S 112 4, 120 12 S 132 22, 140 13 S 150 4, 158 12 S 200 14, 238 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="104" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="158" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <h1>Sobre mí</h1>
+
+      <div class="bloque">
+        <img src="assets/fotos/jezabel-retrato.jpg" width="624" height="624" class="retrato-circular" loading="eager" alt="Jezabel sonriendo junto a un lago, entre árboles" />
+        <div>
+          <p>Soy Jezabel, profesora de Artes Visuales con orientación en Cerámica. Me dedico al dibujo, la pintura y la artesanía.</p>
+          <p>Mi especialidad son los retratos, el realismo y los universos mágicos.</p>
+        </div>
+      </div>
+
+      <div class="bloque bloque--invertido">
+        <figure class="marco">
+          <img src="assets/fotos/dibujando-en-vivo.jpg" width="217" height="383" loading="lazy" alt="Jezabel dibujando un retrato en vivo sobre un atril, de noche" />
+        </figure>
+        <div class="texto-destacado">
+          <p>Mi pasión es la textura de lo manual, sumergirme en los detalles finos y en la creación de trazos inspirados en la naturaleza onírica, orgánica y misteriosa.</p>
+          <p>Utilizo diversas técnicas: grafito, acuarelas, óleos, etc.</p>
+          <p>Trabajo en proyectos editoriales, discográficos, arte personal, encargos y colaboraciones.</p>
+        </div>
+      </div>
+
+      <p>Hablo español, inglés y portugués.</p>
+
+      <hr class="separador" />
+
+      <div class="bloque bloque--invertido">
+        <figure class="marco">
+          <img src="assets/fotos/con-escultura-ceramica.jpg" width="387" height="516" loading="lazy" alt="Jezabel en el pasto junto a una escultura blanca de cerámica" />
+        </figure>
+        <div>
+          <h2>Formación</h2>
+          <ul class="lista-cv">
+            <li>Dibujo, pintura, arte impreso, vitrofusión, cobre esmaltado, escultura y cerámica en UNAV.</li>
+            <li>Técnica superior en cerámica y profesorado en Artes Visuales en IMCAEV.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="fotos-pareja">
+          <figure class="marco">
+            <img src="assets/fotos/pintando-en-el-taller.jpg" width="612" height="816" loading="lazy" alt="Jezabel pintando con acuarelas en su mesa de trabajo" />
+          </figure>
+          <figure class="marco">
+            <img src="assets/fotos/montaje-de-muestra.jpg" width="384" height="512" loading="lazy" alt="Jezabel colgando sus dibujos en el montaje de una exposición" />
+          </figure>
+        </div>
+        <div>
+          <h2>Experiencia</h2>
+          <ul class="lista-cv">
+            <li>Docente de terciarios y talleres particulares.</li>
+            <li>Proyectos artísticos, colaboraciones y encargos personalizados.</li>
+            <li>Exposiciones y pintura en vivo.</li>
+          </ul>
+          <p><a href="#contacto" class="enlace-claro">Escribime para encargos y colaboraciones ↓</a></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Menú flotante que aparece al bajar -->
+    <div id="bottomMenu" class="bottomMenu hide">
+      <a href="index.html#obra">Ver obra →</a>
+    </div>
+
+    <!-- Pie compartido (contacto): se edita en includes/footer.html -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Carga el encabezado y el pie compartidos -->
+    <script>
+      fetch("includes/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("includes/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+          document.getElementById("copyright-years").textContent += new Date().getFullYear();
+        });
+    </script>
+
+    <script src="./js/bottom-menu.js" defer></script>
+    <script src="./js/scroll-reveal.js" defer></script>
+  </body>
+</html>
